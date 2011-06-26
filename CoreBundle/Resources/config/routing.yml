@@ -1,0 +1,10 @@
+homepage:
+    pattern:  /1
+    defaults: { _controller: ChewbaccaCoreBundle:Default:index }
+test:
+    pattern:  /2
+    defaults: { _controller: ChewbaccaCoreBundle:Default:tree }
+    
+sections:
+    pattern:  /sections
+    defaults: { _controller: ChewbaccaCoreBundle:Default:sections }
