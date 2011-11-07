@@ -3,8 +3,11 @@
 namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 /** 
  *  @ORM\Entity 
+ *  @ORM\HasLifecycleCallbacks()
+ * 
  *  @ORM\InheritanceType("SINGLE_TABLE")
  *  @ORM\DiscriminatorColumn(name="discr", type="string")
  *  @ORM\DiscriminatorMap({"brand" = "Brand", "mltd_brand" = "Acme\Lacroco\StoreBundle\Entity\MltdBrand"})
@@ -20,12 +23,16 @@ use Doctrine\ORM\Mapping as ORM;
     protected $id;#
 
     /**
-     * @var string $name
+     * @var string $title
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
-    protected $name;
+    protected $title;
 
+    /**
+     * @ORM\OneToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product", mappedBy="brand")
+     */
+    protected $products;
 
     /**
      * Get id
@@ -38,24 +45,121 @@ use Doctrine\ORM\Mapping as ORM;
     }
 
     /**
-     * Set name
+     * @var datetime $created
      *
-     * @param string $name
+     * @ORM\Column(name="created", type="datetime")
      */
-    public function setName($name)
+    protected $created;
+	/**
+	 * @ORM\prePersist
+	 */
+	public function setCreatedValue()
+	{
+	    $this->created = new \DateTime();
+	}
+
+    /**
+     * @var datetime $updated
+     *
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    protected $updated;
+	/**
+	 * @ORM\preUpdate
+	 */
+	public function setUpdatedValue()
+	{
+	    $this->updated = new \DateTime();
+	}
+
+
+    /**
+     * Set created
+     *
+     * @param datetime $created
+     * @return Brand
+     */
+    public function setCreated($created)
     {
-        $this->name = $name;
+        $this->created = $created;
+        return $this;
     }
 
     /**
-     * Get name
+     * Get created
+     *
+     * @return datetime 
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param datetime $updated
+     * @return Brand
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return datetime 
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+    public function __construct()
+    {
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add products
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products
+     */
+    public function addProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products)
+    {
+        $this->products[] = $products;
+    }
+
+    /**
+     * Get products
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * Set title
+     *
+     * @param string $title
+     * @return Brand
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+        return $this;
+    }
+
+    /**
+     * Get title
      *
      * @return string 
      */
-    public function getName()
+    public function getTitle()
     {
-        return $this->name;
+        return $this->title;
     }
-
 }
-
