@@ -10,7 +10,7 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return $this->render('ChewbaccaCoreBundle:Default:index.html.twig');
+        return $this->render('AcmeLacrocoStoreBundle:Default:index.html.twig');
     }
 
 	public function sectionsAction()

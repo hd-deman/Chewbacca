@@ -1,5 +1,5 @@
 homepage:
-    pattern:  /1
+    pattern:  /
     defaults: { _controller: ChewbaccaCoreBundle:Default:index }
     
 sections:

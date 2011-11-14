@@ -1,0 +1,58 @@
+<?php
+
+namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/** 
+ *  @ORM\Entity 
+ **/
+ class Set{
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product", inversedBy="sets")
+     * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $product;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+
+    /**
+     * Set product
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product
+     * @return Set
+     */
+    public function setProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product)
+    {
+        $this->product = $product;
+        return $this;
+    }
+
+    /**
+     * Get product
+     *
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product 
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+}
