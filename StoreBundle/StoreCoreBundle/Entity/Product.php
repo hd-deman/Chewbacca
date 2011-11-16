@@ -58,7 +58,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Chewbacca\StoreBundle\StoreCoreBundle\Entity\Brand", inversedBy="product")
+     * @ORM\ManyToOne(targetEntity="Chewbacca\StoreBundle\StoreCoreBundle\Entity\Brand", inversedBy="products")
      * @ORM\JoinColumn(name="brand_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $brand;
