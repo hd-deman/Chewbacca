@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * 
  *  @ORM\InheritanceType("SINGLE_TABLE")
  *  @ORM\DiscriminatorColumn(name="discr", type="string")
- *  @ORM\DiscriminatorMap({"product" = "Product", "mltd_product" = "Acme\Lacroco\StoreBundle\Entity\MltdProduct"})
+ *  @ORM\DiscriminatorMap({"product" = "Product", "mltd_product" = "\Acme\Lacroco\StoreBundle\Entity\MltdProduct"})
  **/
  class Product{
     /**
@@ -58,13 +58,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Chewbacca\StoreBundle\StoreCoreBundle\Entity\Brand", inversedBy="products")
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Brand", inversedBy="products")
      * @ORM\JoinColumn(name="brand_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $brand;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Chewbacca\CoreBundle\Entity\Category", inversedBy="products")
+     * @ORM\ManyToMany(targetEntity="\Chewbacca\CoreBundle\Entity\Category", inversedBy="products")
      * @ORM\JoinTable(name="products_categories",
      *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
      *      inverseJoinColumns={@ORM\JoinColumn(name="category_id", referencedColumnName="id", onDelete="CASCADE")}
@@ -315,26 +315,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getTitle()
     {
         return $this->title;
-    }
-
-    /**
-     * Add sets
-     *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Set $sets
-     */
-    public function addSet(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Set $sets)
-    {
-        $this->sets[] = $sets;
-    }
-
-    /**
-     * Get sets
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getSets()
-    {
-        return $this->sets;
     }
 
     /**

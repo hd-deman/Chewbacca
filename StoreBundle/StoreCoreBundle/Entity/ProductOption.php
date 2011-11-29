@@ -25,9 +25,10 @@ use Doctrine\ORM\Mapping as ORM;
     protected $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption", mappedBy="product_option")
+     * @ORM\OneToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet", mappedBy="product_option")
      */
     protected $product_sets;
+
     public function __construct()
     {
         $this->product_sets = new \Doctrine\Common\Collections\ArrayCollection();
@@ -68,9 +69,9 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Add product_sets
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption $productSets
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSets
      */
-    public function addProductOption(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption $productSets)
+    public function addProductSet(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSets)
     {
         $this->product_sets[] = $productSets;
     }
