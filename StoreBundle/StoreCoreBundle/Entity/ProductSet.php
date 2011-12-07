@@ -36,6 +36,13 @@ use Doctrine\ORM\Mapping as ORM;
     protected $product_option;
 
     /**
+     * @var integer $stock
+     *
+     * @ORM\Column(name="stock", type="integer")
+     */
+	protected $stock;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -133,5 +140,27 @@ use Doctrine\ORM\Mapping as ORM;
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Set stock
+     *
+     * @param integer $stock
+     * @return ProductSet
+     */
+    public function setStock($stock)
+    {
+        $this->stock = $stock;
+        return $this;
+    }
+
+    /**
+     * Get stock
+     *
+     * @return integer 
+     */
+    public function getStock()
+    {
+        return $this->stock;
     }
 }
