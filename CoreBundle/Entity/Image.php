@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  *  @ORM\InheritanceType("SINGLE_TABLE")
  *  @ORM\DiscriminatorColumn(name="discr", type="string")
- *  @ORM\DiscriminatorMap({"image" = "Image", "product_image" = "Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage"})
+ *  @ORM\DiscriminatorMap({"image" = "Image", "product_image" = "Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage", "mltd_product_image" = "Acme\Lacroco\StoreBundle\Entity\MltdProductImage"})
  */
 
  class Image{
@@ -106,7 +106,7 @@ use Symfony\Component\Validator\Constraints as Assert;
         return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
     }
 
-    protected function getUploadRootDir()
+    public function getUploadRootDir()
     {
         // the absolute directory path where uploaded documents should be saved
         return __DIR__.'/../../../../web/'.$this->getUploadDir();
@@ -115,7 +115,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     protected function getUploadDir()
     {
         // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
-        return 'uploads/images';
+        return 'data_files/images';
     }
 
     /**

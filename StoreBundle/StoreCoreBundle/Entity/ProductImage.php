@@ -6,7 +6,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Chewbacca\CoreBundle\Entity\Image as Image;
 
 /** 
- *  @ORM\Entity 
+ *  @ORM\Entity
+ * 
  **/
  class ProductImage extends Image{
     /**
@@ -25,6 +26,13 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     protected $product;
 
     /**
+     * @var integer $priority
+     *
+     * @ORM\Column(name="priority", type="integer")
+     */
+    protected $priority;
+
+    /**
      * Get id
      *
      * @return integer 
@@ -34,6 +42,11 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
         return $this->id;
     }
 
+    protected function getUploadDir()
+    {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'data_files/product_images';
+    }
 
     /**
      * Set product
@@ -191,5 +204,27 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer $priority
+     * @return ProductImage
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer 
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 }
