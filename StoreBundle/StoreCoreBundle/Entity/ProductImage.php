@@ -20,7 +20,7 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product", inversedBy="product_sets")
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product", inversedBy="product_images")
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $product;

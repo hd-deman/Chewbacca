@@ -77,6 +77,10 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     protected $product_sets;
 
+    /**
+     * @ORM\OneToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage", mappedBy="product")
+     */
+    protected $product_images;
 
     /**
      * @var datetime $created
@@ -109,6 +113,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->product_sets = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->product_images = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -335,5 +340,25 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getProductSets()
     {
         return $this->product_sets;
+    }
+
+    /**
+     * Add product_images
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage $productImages
+     */
+    public function addProductImage(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage $productImages)
+    {
+        $this->product_images[] = $productImages;
+    }
+
+    /**
+     * Get product_images
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProductImages()
+    {
+        return $this->product_images;
     }
 }

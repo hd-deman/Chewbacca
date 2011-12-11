@@ -103,7 +103,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
     public function getWebPath()
     {
-        return null === $this->path ? null : $this->getUploadDir().'/'.$this->path;
+        return null === $this->path ? null : '/'.$this->getUploadDir().'/'.$this->path;
     }
 
     public function getUploadRootDir()
