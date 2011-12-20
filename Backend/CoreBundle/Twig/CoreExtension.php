@@ -1,5 +1,5 @@
 <?php
-namespace Chewbacca\CoreBundle\Twig;
+namespace Chewbacca\Backend\CoreBundle\Twig;
 
 class CoreExtension extends \Twig_Extension {
 

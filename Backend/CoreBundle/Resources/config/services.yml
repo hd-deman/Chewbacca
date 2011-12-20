@@ -1,0 +1,7 @@
+parameters:
+#    chewbacca_backend_core.example.class: Chewbacca\Backend\CoreBundle\Example
+
+services:
+#    chewbacca_backend_core.example:
+#        class: %chewbacca_backend_core.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
