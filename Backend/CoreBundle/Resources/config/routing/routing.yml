@@ -2,6 +2,10 @@ homepage:
     pattern:  /
     defaults: { _controller: ChewbaccaBackendCoreBundle:Default:index }
     
-sections:
-    pattern:  /sections
-    defaults: { _controller: ChewbaccaBackendCoreBundle:Default:sections }
+categories:
+    pattern:  /categories
+    defaults: { _controller: ChewbaccaBackendCoreBundle:Category:index }
+
+categories_new:
+    pattern:  /categories_new
+    defaults: { _controller: ChewbaccaBackendCoreBundle:Category:new }

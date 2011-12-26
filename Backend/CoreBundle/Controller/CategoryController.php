@@ -4,22 +4,45 @@ namespace Chewbacca\Backend\CoreBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Chewbacca\CoreBundle\Entity\Category;
-
-class DefaultController extends Controller
+use Doctrine\ORM\Query\Expr;
+class CategoryController extends Controller
 {
-    public function indexAction()
-    {
-        return $this->render('AcmeLacrocoStoreBundle:Default:index.html.twig');
-    }
-
-	public function sectionsAction()
-    {
-    	$em = $this->get('doctrine.orm.entity_manager');
+	public function indexAction()
+	{
+		$em = $this->get('doctrine.orm.entity_manager');
 		$repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
+		$qb = $em->createQueryBuilder();
+
+		$roots = $repo->getRootNodesQueryBuilder()
+			->innerJoin('node.nature', 'n')
+			->andWhere($qb->expr()->eq('n.title', ':title'))
+			->setParameter('title', 'mltd')
+			->getQuery()
+			->getResult();
+
+		$category = new Category();
+		#$task->setTask('Write a blog post');
+		#$task->setDueDate(new \DateTime('tomorrow'));
+		
+		$category_form = $this->createFormBuilder($category)
+			->add('title', 'text')
+			#->add('dueDate', 'date')
+			->getForm();
+
+		return $this->render('ChewbaccaBackendCoreBundle:Categories:roots.html.twig', array(
+			'roots' => $roots,
+			'form' => $category_form->createView())
+		);
+	}
+
+	public function treeAction(Reqiest $request){
+		$em = $this->get('doctrine.orm.entity_manager');
+		$repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
+		$qb = $em->createQueryBuilder();
 
 
 
-
+/*
 $food = new Category();
 $food->setTitle('Food');
  
@@ -46,9 +69,8 @@ $em->persist($apple);
 $em->persist($vegetables);
 $em->persist($carrots);
 $em->flush();
+*/
 
-
-// create a task and give it some dummy data for this example
 		$category = new Category();
 		#$task->setTask('Write a blog post');
 		#$task->setDueDate(new \DateTime('tomorrow'));
@@ -61,9 +83,9 @@ $em->flush();
 
 		$root = $repo->getRootNodes();
 		$food = $repo->findOneByTitle('Food');
-		echo $repo->childCount($food);
+		#echo $repo->childCount($food);
 		// prints: 3
-		echo $repo->childCount($food, true/*direct*/);
+		#echo $repo->childCount($food, true/*direct*/);
 		// prints: 2
 		$children = $repo->children($root[0]);
 		/*foreach($children as $child){
@@ -88,8 +110,36 @@ $em->flush();
 		// will sort the children by title
 		$carrots = $repo->findOneByTitle('Carrots');
 		$path = $repo->getPath($carrots);
-		return $this->render('ChewbaccaBackendCoreBundle:Default:sections.html.twig', array(
-			'tree' => $path,
+		var_dump($repo->getRootNodesQueryBuilder()
+			->innerJoin('node.nature', 'n' #, 'ON', 'node.root = n.id and n.title=:title'
+				/*$qb->expr()->andx(
+					$qb->expr()->eq('node.root', 'n.id'),
+					$qb->expr()->eq('n.title', ':title')
+				)*/
+			)->andWhere($qb->expr()->eq('n.title', ':title'))
+			->setParameter('title', 'mltd')
+			->getDQL());
+			#die();
+		$roots = $repo->getRootNodesQueryBuilder()
+			->innerJoin('node.nature', 'n' #, 'ON', 'node.root = n.id and n.title=:title'
+				/*$qb->expr()->andx(
+					$qb->expr()->eq('node.root', 'n.id'),
+					$qb->expr()->eq('n.title', ':title')
+				)*/
+			)->andWhere($qb->expr()->eq('n.title', ':title'))
+			->setParameter('title', 'mltd')
+			->getQuery()
+			->getResult();
+
+		$roots_path = array();
+		foreach($roots as $root){
+			echo 'x';
+			#var_dump($root);
+			$roots_path[] = $repo->children($root);
+		}
+
+		return $this->render('ChewbaccaBackendCoreBundle:Default:categories.html.twig', array(
+			'tree' => $roots_path,
 			'form' => $category_form->createView())
 		);
 	}

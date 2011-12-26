@@ -23,9 +23,19 @@
 		})(document.documentElement,'className');
 
 	</script>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" />
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
 
+<!--<script type="text/javascript" src="http://mjsarfatti.com/sandbox/nestedSortable/jquery-ui-1.8.11.custom.min.js"></script>
+<script type="text/javascript" src="http://mjsarfatti.com/sandbox/nestedSortable/jquery-1.5.2.min.js"></script>
+
+-->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+	{% javascripts
+	    '@ChewbaccaBackendCoreBundle/Resources/public/js/*'
+	%}
+	<script type="text/javascript" src="{{ asset_url }}"></script>
+	{% endjavascripts %}
 	<style type="text/css">
 
 		html {
@@ -107,6 +117,11 @@
 
 <!-- =================================================================================================================== -->
 <body>
+<form action="{ path('task_new') }" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+
+    <input type="submit" />
+</form>
 <section id="demo">
 {{ tree|tree("sortable") }}
 
@@ -130,9 +145,7 @@
 
 <!-- END #documentation -->
 
-<script type="text/javascript" src="{{ asset('bundles/chewbacca/core/js/jquery-1.5.2.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/chewbacca/core/js/jquery-ui-1.8.11.custom.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bundles/chewbacca/core/js/jquery.ui.nestedSortable.js') }}"></script>
+ss
 
 <script>
 
@@ -159,7 +172,7 @@
 		})
 
 		$('#toHierarchy').click(function(e){
-			hiered = $('ol.sortable').nestedSortable('toHierarchy');
+			hiered = $('ol.sortable').nestedSortable('toHierarchy', {startDepthCount: 0});
 			hiered = dump(hiered);
 			(typeof($('#toHierarchyOutput')[0].textContent) != 'undefined') ?
 			$('#toHierarchyOutput')[0].textContent = hiered : $('#toHierarchyOutput')[0].innerText = hiered;
@@ -174,7 +187,7 @@
 
 	});
 
-	function save_tree(arr,level) {
+	function dump(arr,level) {
 		var dumped_text = "";
 		if(!level) level = 0;
 
@@ -198,5 +211,21 @@
 		}
 		return dumped_text;
 	}
+
+	/*** Analytics ***/
+	var _gaq = [['_setAccount', 'UA-5771039-1'], ['_trackPageview']];
+	(function(d, t) {
+		var g = d.createElement(t),
+			s = d.getElementsByTagName(t)[0];
+		g.async = true;
+		g.src = '//www.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g, s);
+	})(document, 'script');
+	/*** END Analytics ***/
+
+	/*** Piwik I ***/
+	var pkBaseURL = "http://mjsarfatti.com/piwik/";
+	document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js'%3E%3C/script%3E"));
+	/*** END Piwik I ***/
 
 </script>

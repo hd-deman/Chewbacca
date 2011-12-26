@@ -79,6 +79,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
     /**
      * @ORM\OneToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage", mappedBy="product")
+	 * @ORM\OrderBy({"priority" = "ASC"})
      */
     protected $product_images;
 
