@@ -72,6 +72,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     private $children;
 
+	/**
+	 * @ORM\ManyToOne(targetEntity="\Chewbacca\CoreBundle\Entity\Nature", inversedBy="categories")
+	 * @ORM\JoinColumn(name="root", referencedColumnName="id", onDelete="CASCADE")
+	 */
+    private $nature;
 
     /**
      * @ORM\ManyToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product", mappedBy="categories")

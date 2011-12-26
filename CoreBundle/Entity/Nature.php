@@ -26,6 +26,14 @@ use Doctrine\ORM\Mapping as ORM;
     private $title;
 
     /**
+     * @ORM\OneToMany(targetEntity="\Chewbacca\CoreBundle\Entity\Category", mappedBy="nature") 
+     */
+    private $categories;
+
+    public function __construct() {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+    /**
      * Get id
      *
      * @return integer 
