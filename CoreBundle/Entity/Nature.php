@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 
  class Nature{
+	public function __toString(){
+		return $this->title;
+	}
     /**
      * @var integer $id
      *
@@ -41,6 +44,18 @@ use Doctrine\ORM\Mapping as ORM;
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     * @param intager $id
+     * @return Nature
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**

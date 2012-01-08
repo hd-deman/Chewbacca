@@ -1,11 +1,27 @@
 homepage:
     pattern:  /
     defaults: { _controller: ChewbaccaBackendCoreBundle:Default:index }
-    
-categories:
-    pattern:  /categories
+
+categories_roots_new:
+    pattern:  /categories/roots/new
+    defaults: { _controller: ChewbaccaBackendCoreBundle:Category:newRoot }
+
+categories_roots:
+    pattern:  /categories/roots/{nature_title}
     defaults: { _controller: ChewbaccaBackendCoreBundle:Category:index }
 
 categories_new:
-    pattern:  /categories_new
+    pattern:  /categories/new
     defaults: { _controller: ChewbaccaBackendCoreBundle:Category:new }
+
+categories_save_tree:
+    pattern:  /categories/save_tree/{root_slug}
+    defaults: { _controller: ChewbaccaBackendCoreBundle:Category:treeSave }
+
+categories_delete:
+    pattern:  /categories/delete/{node_id}
+    defaults: { _controller: ChewbaccaBackendCoreBundle:Category:nodeDelete }
+
+categories:
+    pattern:  /categories/{root_slug}
+    defaults: { _controller: ChewbaccaBackendCoreBundle:Category:tree }

@@ -1,11 +1,11 @@
 {% extends 'ChewbaccaBackendCoreBundle:Default:base.html.twig' %}
 {% block body %}
-<form action="{ path('task_new') }" method="post" {{ form_enctype(form) }}>
+<form action="{{ path('categories_roots_new') }}" method="post" {{ form_enctype(form) }}>
     {{ form_widget(form) }}
     <input type="submit" value="Добавить" />
 </form>
 	{% for root in roots %}
-		<li><a href="{{ root.id	 }}">{{ root.title }}</a></li>
+		<li><a href="{{ path('categories', { 'root_slug': root.slug }) }}">{{ root.title }}</a></li>
 	{% endfor %}
 {% endblock %}
 {% block title %}My cool blog posts{% endblock %}

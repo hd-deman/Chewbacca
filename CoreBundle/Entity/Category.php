@@ -4,6 +4,7 @@ namespace Chewbacca\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /** 
  *  @ORM\Entity(repositoryClass="Gedmo\Tree\Entity\Repository\NestedTreeRepository")
@@ -25,56 +26,66 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @var string $title
      *
      * @ORM\Column(name="title", type="string", length=255)
+	 * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=255, unique=true)
-     */
+     * @Assert\Blank()
+	 */
     private $slug;
 
 
     /**
      * @Gedmo\TreeLeft
      * @ORM\Column(name="lft", type="integer")
-     */
+     * @Assert\Blank()
+	 */
     private $lft;
 
     /**
      * @Gedmo\TreeLevel
      * @ORM\Column(name="lvl", type="integer")
-     */
+     * @Assert\Blank()
+	 */
     private $lvl;
 
     /**
      * @Gedmo\TreeRight
      * @ORM\Column(name="rgt", type="integer")
-     */
+     * @Assert\Blank()
+	 */
     private $rgt;
 
     /**
      * @Gedmo\TreeRoot
      * @ORM\Column(name="root", type="integer", nullable=true)
-     */
+     * @Assert\Blank()
+	 */
     private $root;
 
     /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL")
-     */
+     * @Assert\Type(type="\Chewbacca\CoreBundle\Entity\Category")
+	 */
     private $parent;
 
     /**
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
      * @ORM\OrderBy({"lft" = "ASC"})
-     */
+     * @Assert\NotBlank()
+	 */
     private $children;
 
 	/**
 	 * @ORM\ManyToOne(targetEntity="\Chewbacca\CoreBundle\Entity\Nature", inversedBy="categories")
-	 * @ORM\JoinColumn(name="root", referencedColumnName="id", onDelete="CASCADE")
+	 * @ORM\JoinColumn(name="nature_id", referencedColumnName="id", onDelete="CASCADE")
+     *
+     * @Assert\Type(type="\Chewbacca\CoreBundle\Entity\Nature")
 	 */
     private $nature;
 
@@ -107,6 +118,18 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     * @param intager $id
+     * @return Category
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**
@@ -279,5 +302,27 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * Set nature
+     *
+     * @param \Chewbacca\CoreBundle\Entity\Nature $nature
+     * @return Nature
+     */
+    public function setNature(\Chewbacca\CoreBundle\Entity\Nature $nature)
+    {
+        $this->nature = $nature;
+        return $this;
+    }
+
+    /**
+     * Get nature
+     *
+     * @return \Chewbacca\CoreBundle\Entity\Nature
+     */
+    public function getNature()
+    {
+        return $this->nature;
     }
 }
