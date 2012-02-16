@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * @var string $title
      *
-     * @ORM\Column(name="title", type="string", length=120)
+     * @ORM\Column(name="title", type="string", unique=true, length=120)
      */
     protected $title;
 
