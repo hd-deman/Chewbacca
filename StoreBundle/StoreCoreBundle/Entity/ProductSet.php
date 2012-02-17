@@ -5,7 +5,9 @@ namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /** 
- *  @ORM\Entity 
+ *  @ORM\Entity
+ *  @Table(uniqueConstraints={@UniqueConstraint(name="search_idx", columns={"product_id", "size_id", "option_id"})})
+ * 
  **/
  class ProductSet{
     /**
@@ -18,19 +20,19 @@ use Doctrine\ORM\Mapping as ORM;
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product", inversedBy="product_sets",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product", inversedBy="product_sets", cascade={"persist"})
      * @ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $product;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSize", inversedBy="product_sets",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSize", inversedBy="product_sets", cascade={"persist"})
      * @ORM\JoinColumn(name="size_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $product_size;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption", inversedBy="product_sets",cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption", inversedBy="product_sets", cascade={"persist"})
      * @ORM\JoinColumn(name="option_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $product_option;
