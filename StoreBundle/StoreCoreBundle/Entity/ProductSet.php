@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /** 
  *  @ORM\Entity
- *  @Table(uniqueConstraints={@UniqueConstraint(name="search_idx", columns={"product_id", "size_id", "option_id"})})
+ *  @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="search_idx", columns={"product_id", "size_id", "option_id"})})
  * 
  **/
  class ProductSet{
