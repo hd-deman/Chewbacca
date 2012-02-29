@@ -11,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * 
  *  @ORM\InheritanceType("SINGLE_TABLE")
  *  @ORM\DiscriminatorColumn(name="discr", type="string")
- *  @ORM\DiscriminatorMap({"product" = "Product", "mltd_product" = "\Acme\Lacroco\StoreBundle\Entity\MltdProduct"})
+ *  @ORM\DiscriminatorMap({"product" = "Product", "mltd_product" = "\Lacroco\StoreBundle\Entity\MltdProduct"})
  **/
  class Product{
     /**

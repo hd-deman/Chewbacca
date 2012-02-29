@@ -11,7 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * 
  *  @ORM\InheritanceType("SINGLE_TABLE")
  *  @ORM\DiscriminatorColumn(name="discr", type="string")
- *  @ORM\DiscriminatorMap({"image" = "Image", "product_image" = "Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage", "mltd_product_image" = "Acme\Lacroco\StoreBundle\Entity\MltdProductImage"})
+ *  @ORM\DiscriminatorMap({"image" = "Image", "product_image" = "Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage", "mltd_product_image" = "Lacroco\StoreBundle\Entity\MltdProductImage"})
  */
 
  class Image{
