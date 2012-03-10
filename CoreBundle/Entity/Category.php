@@ -325,4 +325,8 @@ use Symfony\Component\Validator\Constraints as Assert;
     {
         return $this->nature;
     }
+
+    public function getTitleWithIndent(){
+        return str_repeat('—', $this->getLvl()-1)." ".$this->getTitle();
+    }
 }

@@ -95,28 +95,23 @@ class CategoryController extends Controller
 		}
 
 		$category = new Category();
-		$category->setNature($em->getReference("ChewbaccaCoreBundle:Nature", $root->getNature()->getId() ));
+
 		if ($request->getMethod() == 'POST') {
-			$data = $request->request->get('category');
-			$category->setParent($em->getReference("ChewbaccaCoreBundle:Category", $data['parent.id'] ));
-		}else{
-			$category->setParent($root);
+
 		}
 		/*$category_form = $this->createFormBuilder($category)
 			->add('title', 'text')
 			->getForm();*/
-		$tree = $repo->children($root);
-		$tree_choices[$root->getId()] = 'корнвой раздел';
-		foreach ($tree as $k => $value) {
-			$tree_choices[$value->getId()] = str_repeat('- ', $value->getLvl()-1).$value->getTitle();
-		}
-		$form = $this->createForm(new CategoryType($tree_choices),$category);
+		$form = $this->createForm(new CategoryType($root), $category);
 
 		if ($request->getMethod() == 'POST') {
 			$form->bindRequest($request);
 			if ($form->isValid()) {
-				#$category = $form->getData();
-				#$em->persist($category->getNature());
+				$data = $request->request->get('category');
+				if(!$data['parent']){
+						$category->setParent($root);
+				}
+				$category->setNature($em->getReference("ChewbaccaCoreBundle:Nature", $root->getNature()->getId() ));
 				$em->persist($root);
 				$em->persist($category);
 				$em->flush();
@@ -173,7 +168,9 @@ class CategoryController extends Controller
 		if (!$node) {
 			throw $this->createNotFoundException('The node does not exist');
 		}
+		$root_id = $node->getParent()->getRoot();
 		$repo->removeFromTree($node);
+		return $this->redirect($this->generateUrl('categories', array('root_slug' => $root_id)));
 	}
 }
 

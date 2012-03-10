@@ -79,4 +79,24 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->title;
     }
+
+    /**
+     * Add categories
+     *
+     * @param Chewbacca\CoreBundle\Entity\Category $categories
+     */
+    public function addCategory(\Chewbacca\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
 }

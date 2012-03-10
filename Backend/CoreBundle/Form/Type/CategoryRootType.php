@@ -10,7 +10,7 @@ class CategoryRootType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
 		$builder->add('title');
-		$builder->add('nature.id', 'hidden');
+		#$builder->add('nature.id', 'hidden');
     }
 
     public function getName()
