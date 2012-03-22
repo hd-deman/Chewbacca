@@ -84,6 +84,11 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $product_images;
 
     /**
+     * @ORM\OneToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryPrice", mappedBy="product")
+     */
+    protected $delivery_prices;
+
+    /**
      * @var datetime $created
      *
      * @ORM\Column(name="created", type="datetime")
@@ -361,5 +366,25 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getProductImages()
     {
         return $this->product_images;
+    }
+
+    /**
+     * Add delivery_prices
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryPrice $deliveryPrices
+     */
+    public function addDeliveryPrice(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryPrice $deliveryPrices)
+    {
+        $this->delivery_prices[] = $deliveryPrices;
+    }
+
+    /**
+     * Get delivery_prices
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getDeliveryPrices()
+    {
+        return $this->delivery_prices;
     }
 }

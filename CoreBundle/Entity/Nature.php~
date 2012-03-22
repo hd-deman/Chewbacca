@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 
  class Nature{
+	public function __toString(){
+		return $this->title;
+	}
     /**
      * @var integer $id
      *
@@ -26,6 +29,14 @@ use Doctrine\ORM\Mapping as ORM;
     private $title;
 
     /**
+     * @ORM\OneToMany(targetEntity="\Chewbacca\CoreBundle\Entity\Category", mappedBy="nature") 
+     */
+    private $categories;
+
+    public function __construct() {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+	}
+    /**
      * Get id
      *
      * @return integer 
@@ -33,6 +44,18 @@ use Doctrine\ORM\Mapping as ORM;
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set id
+     *
+     * @param intager $id
+     * @return Nature
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**
@@ -55,5 +78,25 @@ use Doctrine\ORM\Mapping as ORM;
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Add categories
+     *
+     * @param Chewbacca\CoreBundle\Entity\Category $categories
+     */
+    public function addCategory(\Chewbacca\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+    }
+
+    /**
+     * Get categories
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategories()
+    {
+        return $this->categories;
     }
 }
