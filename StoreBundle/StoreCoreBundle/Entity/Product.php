@@ -33,14 +33,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * @var string $price
      *
-     * @ORM\Column(name="price", type="decimal")
+     * @ORM\Column(name="price", type="decimal", scale=2)
      */
     protected $price;
 
     /**
      * @var string $sale_price
      *
-     * @ORM\Column(name="sale_price", type="decimal")
+     * @ORM\Column(name="sale_price", type="decimal", scale=2)
      */
     protected $sale_price = 0;
 
@@ -387,4 +387,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     {
         return $this->delivery_prices;
     }
+
+	public function getStorePrice(){
+		if($this->delivery_prices){
+			return $this->getPrice()+$this->delivery_prices[0]->getPrice();
+		}else{
+			//@TODO throw exception
+			return false;
+		}
+	}
 }
