@@ -64,6 +64,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $brand;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\ExchangeRatesBundle\Entity\Currency")
+     * @ORM\JoinColumn(name="currency_id", referencedColumnName="id", onDelete="SET NULL")
+     */
+    protected $currency;
+
+
+    /**
      * @ORM\ManyToMany(targetEntity="\Chewbacca\CoreBundle\Entity\Category", inversedBy="products")
      * @ORM\JoinTable(name="products_categories",
      *      joinColumns={@ORM\JoinColumn(name="product_id", referencedColumnName="id", onDelete="CASCADE")},
@@ -396,4 +403,26 @@ use Gedmo\Mapping\Annotation as Gedmo;
 			return false;
 		}
 	}
+
+    /**
+     * Set currency
+     *
+     * @param Chewbacca\ExchangeRatesBundle\Entity\Currency $currency
+     * @return Product
+     */
+    public function setCurrency(\Chewbacca\ExchangeRatesBundle\Entity\Currency $currency = null)
+    {
+        $this->currency = $currency;
+        return $this;
+    }
+
+    /**
+     * Get currency
+     *
+     * @return Chewbacca\ExchangeRatesBundle\Entity\Currency 
+     */
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
 }
