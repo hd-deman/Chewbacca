@@ -1,0 +1,7 @@
+parameters:
+#    chewbacca_exchange_rates.example.class: Chewbacca\ExchangeRatesBundle\Example
+
+services:
+#    chewbacca_exchange_rates.example:
+#        class: %chewbacca_exchange_rates.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
