@@ -396,8 +396,23 @@ use Gedmo\Mapping\Annotation as Gedmo;
     }
 
 	public function getStorePrice(){
-		if($this->delivery_prices){
-			return $this->getPrice()+$this->delivery_prices[0]->getPrice();
+		if($this->delivery_prices && $this->currency){
+            $add1 = 49;
+            $add2 = 99;     
+            $myup = ($this->getPrice()/100)*20;
+            $store_price = ceil(($this->getPrice()+$this->delivery_prices[0]->getPrice()+$myup)*$this->currency->getRate());
+            $price_o = $store_price%100;
+            $price_v = $store_price-$price_o;
+            if($price_o<50){
+                $price_o = 100+$add1;
+            }else{
+                $price_o = 100+$add2;
+            }
+            $store_price = $price_v+$price_o;
+           # echo 'price: '.$this->getPrice()*$this->currency->getRate().' ('.$this->getPrice().')';
+           # echo 'delivery price: '.$this->delivery_prices[0]->getPrice()*$this->currency->getRate().' ('.$this->delivery_prices[0]->getPrice().')';
+           # echo 'no extra price: '.($this->delivery_prices[0]->getPrice()+$this->getPrice())*$this->currency->getRate().' ('.$this->getPrice()+$this->delivery_prices[0]->getPrice().')';
+            return $store_price;
 		}else{
 			//@TODO throw exception
 			return false;
