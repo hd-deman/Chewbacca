@@ -1,0 +1,3 @@
+ChewbaccaCartBundle_homepage:
+    pattern:  /
+    defaults: { _controller: ChewbaccaCartBundle:Cart:show }

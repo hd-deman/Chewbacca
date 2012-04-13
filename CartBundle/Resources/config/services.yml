@@ -1,0 +1,7 @@
+parameters:
+#    chewbacca_cart.example.class: Chewbacca\CartBundle\Example
+
+services:
+#    chewbacca_cart.example:
+#        class: %chewbacca_cart.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
