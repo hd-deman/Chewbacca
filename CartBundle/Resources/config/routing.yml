@@ -1,3 +1,19 @@
-ChewbaccaCartBundle_homepage:
+chewbacca_cart:
     pattern:  /
     defaults: { _controller: ChewbaccaCartBundle:Cart:show }
+
+chewbacca_cart_save:
+    pattern: /save
+    defaults: { _controller: ChewbaccaCartBundle:Cart:save }
+
+chewbacca_cart_clear:
+    pattern: /clear
+    defaults: { _controller: ChewbaccaCartBundle:Cart:clear }
+
+chewbacca_cart_item_add:
+    pattern: /item/add
+    defaults: { _controller: ChewbaccaCartBundle:Cart:addItem }
+
+chewbacca_cart_item_remove:
+    pattern: /item/remove
+    defaults: { _controller: ChewbaccaCartBundle:Cart:removeItem }

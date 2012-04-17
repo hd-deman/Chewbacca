@@ -127,7 +127,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->product_sets = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->product_images = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->cart_items = new \Doctrine\Common\Collections\ArrayCollection(); 
     }
+
     
     /**
      * Get id
@@ -311,6 +313,26 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function getCategories()
     {
         return $this->categories;
+    }
+
+    /**
+     * Add cart_items
+     *
+     * @param Chewbacca\CartBundle\Entity\CartItem $cartItems
+     */
+    public function addCartItem(\Chewbacca\CartBundle\Entity\CartItem $cartItem)
+    {
+        $this->cart_items[] = $cartItem;
+    }
+
+    /**
+     * Get cart_items
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCartItems()
+    {
+        return $this->cart_items;
     }
 
     /**

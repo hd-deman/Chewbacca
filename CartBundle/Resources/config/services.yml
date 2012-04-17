@@ -1,7 +1,47 @@
 parameters:
-#    chewbacca_cart.example.class: Chewbacca\CartBundle\Example
+    chewbacca_cart.cart_manager.class: Chewbacca\CartBundle\Entity\CartManager
+    chewbacca_cart.item_manager.class: Chewbacca\CartBundle\Entity\ItemManager
+    chewbacca_cart.provider.class: Chewbacca\CartBundle\Provider\CartProvider
+    chewbacca_cart.storage.class: Chewbacca\CartBundle\Storage\SessionCartStorage
+    chewbacca_cart.resolver.class: Chewbacca\CartBundle\Resolver\ItemResolver
+    chewbacca_cart.operator.class: Chewbacca\CartBundle\Operator\CartOperator
+
+    chewbacca_cart.form.type.cart.class: Chewbacca\CartBundle\Form\Type\CartFormType
+    chewbacca_cart.form.type.item.class: Chewbacca\CartBundle\Form\Type\ItemType
 
 services:
-#    chewbacca_cart.example:
-#        class: %chewbacca_cart.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    chewbacca_cart.cart_manager:
+        class: %chewbacca_cart.cart_manager.class%
+        arguments: [@doctrine.orm.entity_manager, Chewbacca\CartBundle\Entity\Cart]
+
+    chewbacca_cart.item_manager:
+        class: %chewbacca_cart.item_manager.class%
+        arguments: [@doctrine.orm.entity_manager, Chewbacca\CartBundle\Entity\CartItem]
+
+    chewbacca_cart.storage:
+        class: %chewbacca_cart.storage.class%
+        arguments: [@session]
+
+    chewbacca_cart.provider:
+        class: %chewbacca_cart.provider.class%
+        arguments: [@chewbacca_cart.storage, @chewbacca_cart.cart_manager]
+
+    chewbacca_cart.resolver:
+        class: %chewbacca_cart.resolver.class%
+        arguments: [@chewbacca_cart.item_manager, @chewbacca_store_core.product_set_manager, @form.factory]
+
+    chewbacca_cart.operator:
+        class: %chewbacca_cart.operator.class%
+        arguments: [@chewbacca_cart.cart_manager]
+
+    chewbacca_cart.form.type.cart:
+        class: %chewbacca_cart.form.type.cart.class%
+        arguments: [Chewbacca\CartBundle\Entity\Cart]
+        tags:
+          - { name: form.type, alias: chewbacca_cart }
+
+    chewbacca_cart.form.type.item:
+        class: %chewbacca_cart.form.type.item.class%
+        arguments: [Chewbacca\CartBundle\Entity\CartItem]
+        tags:
+          - { name: form.type, alias: chewbacca_cart_item }

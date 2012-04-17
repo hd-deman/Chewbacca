@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id; 
+    protected $id;
 
     /**
      * @ORM\ManyToOne(targetEntity="\Chewbacca\CartBundle\Entity\Cart", inversedBy="cart_items", cascade={"persist"})
@@ -29,7 +29,14 @@ use Doctrine\ORM\Mapping as ORM;
      * @ORM\JoinColumn(name="product_set_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $product_set;
- 
+
+    /**
+     * @var integer $quantity
+     *
+     * @ORM\Column(name="quantity", type="integer")
+     */
+    protected $quantity = 1;
+
     /**
      * Get id
      *
@@ -46,7 +53,7 @@ use Doctrine\ORM\Mapping as ORM;
      * @param Chewbacca\CartBundle\Entity\Cart $cart
      * @return CartItem
      */
-    public function setCart(\Chewbacca\CartBundle\Entity\Cart $cart = null)
+    public function setCart(\Chewbacca\CartBundle\Entity\Cart $cart)
     {
         $this->cart = $cart;
         return $this;
@@ -60,5 +67,59 @@ use Doctrine\ORM\Mapping as ORM;
     public function getCart()
     {
         return $this->cart;
+    }
+
+    /**
+     * Set product_set
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSet
+     * @return CartItem
+     */
+    public function setProductSet(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSet)
+    {
+        $this->product_set = $productSet;
+        return $this;
+    }
+
+    /**
+     * Get product_set
+     *
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet 
+     */
+    public function getProductSet()
+    {
+        return $this->product_set;
+    }
+
+    /**
+     * Set quantity
+     *
+     * @param integer $quantity
+     * @return CartItem
+     */
+    public function setQuantity($quantity)
+    {
+        $this->quantity = $quantity;
+        return $this;
+    }
+
+    /**
+     * Get quantity
+     *
+     * @return integer 
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    public function incrementQuantity($amount = 1)
+    {
+        $this->quantity += $amount;
+    }
+
+    public function equals(CartItem $item)
+    {
+        return $this->getProductSet()->getId() === $item->getProductSet()->getId();
     }
 }

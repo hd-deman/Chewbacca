@@ -119,3 +119,4 @@ class CartManager extends BaseCartManager
         return $this->findBy($criteria);
     }
 }
+    

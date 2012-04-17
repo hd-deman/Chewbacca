@@ -3,9 +3,9 @@
 namespace Chewbacca\CartBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Chewbacca\CartBundle\Entity\CartManager;
-use Chewbacca\CartBundle\Provider\CartProvider;
-use Chewbacca\CartBundle\Storage\SessionCartStorage;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class CartController extends Controller
 {
@@ -17,15 +17,13 @@ class CartController extends Controller
      */
     public function showAction()
     {
-    	$CartManager = new CartManager($this->getDoctrine()->getEntityManager(), 'Chewbacca\CartBundle\Entity\Cart');
-    	$CartProvider = new CartProvider(new SessionCartStorage($this->get('session')), $CartManager);
-        $cart = $CartProvider->getCart();
-        #$form = $this->container->get('form.factory')->create('sylius_cart');
-        #$form->setData($cart);
+    	$cart = $this->container->get('chewbacca_cart.provider')->getCart();
+        $form = $this->container->get('form.factory')->create('chewbacca_cart');
+        $form->setData($cart);
 
 		return $this->render('ChewbaccaCartBundle:Cart:show.html.twig', array(
-            #'cart' => $cart,
-            #'form' => $form->createView()
+            'cart' => $cart,
+            'form' => $form->createView()
         ));
     }
 
@@ -38,16 +36,15 @@ class CartController extends Controller
      */
     public function addItemAction(Request $request)
     {
-        $cart = $this->container->get('sylius_cart.provider')->getCart();
-        $item = $this->container->get('sylius_cart.resolver')->resolveItemToAdd($request);
+        $cart = $this->container->get('chewbacca_cart.provider')->getCart();
+        $item = $this->container->get('chewbacca_cart.resolver')->resolveItemToAdd($request);
 
         if (!$item) {
             throw new NotFoundHttpException('Requested item could not be added to cart');
         }
 
-        $this->container->get('event_dispatcher')->dispatch(SyliusCartEvents::ITEM_ADD, new CartOperationEvent($cart, $item));
 
-        $cartOperator = $this->container->get('sylius_cart.operator');
+        $cartOperator = $this->container->get('chewbacca_cart.operator');
         $cartOperator->addItem($cart, $item);
         $cartOperator->refresh($cart);
 
@@ -56,7 +53,7 @@ class CartController extends Controller
             $cartOperator->save($cart);
         }
 
-        return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
+        #return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
     }
 
 }

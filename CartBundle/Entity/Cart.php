@@ -40,14 +40,17 @@ use Doctrine\ORM\Mapping as ORM;
     protected $value = 0.00;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Chewbacca\CartBundle\Entity\CartItem", mappedBy="cart")
+     * @ORM\OneToMany(targetEntity="\Chewbacca\CartBundle\Entity\CartItem", mappedBy="cart", cascade={"persist"})
      */
     protected $cart_items;
+
+    protected $products;
 
 
     public function __construct()
     {
         $this->cart_items = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->products = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -143,9 +146,13 @@ use Doctrine\ORM\Mapping as ORM;
      *
      * @param Chewbacca\CartBundle\Entity\CartItem $cartItems
      */
-    public function addCartItem(\Chewbacca\CartBundle\Entity\CartItem $cartItems)
+    public function addCartItem(\Chewbacca\CartBundle\Entity\CartItem $cartItem)
     {
-        $this->cart_items[] = $cartItems;
+    	$product = $cartItem->getProductSet()->getProduct();
+        $this->cart_items[] = $cartItem;
+		$cartItem->setCart($this);
+		$this->addProduct($product);
+		$product->CartItem($cartItem);
     }
 
     /**
@@ -157,4 +164,39 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->cart_items;
     }
+
+    /**
+     * Add product
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product
+     */
+    public function addProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product)
+    {
+		$this->products[] = $product;
+    }
+
+    /**
+     * Get product
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    public function isEmpty()
+    {
+        return 0 === $this->countCartItems();
+    }
+
+    public function countCartItems()
+    {
+    	$count = 0;
+    	foreach ($this->cart_items as $item) {
+			$count+=$item->getQuantity();
+		}
+        return $count;
+    }
+
 }

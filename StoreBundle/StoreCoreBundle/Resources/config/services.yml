@@ -1,0 +1,12 @@
+parameters:
+    chewbacca_store_core.product_manager.class: Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductManager
+    chewbacca_store_core.product_set_manager.class: Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSetManager
+
+services:
+    chewbacca_store_core.product_manager:
+        class: %chewbacca_store_core.product_manager.class%
+        arguments: [@doctrine.orm.entity_manager, Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product]
+
+    chewbacca_store_core.product_set_manager:
+        class: %chewbacca_store_core.product_set_manager.class%
+        arguments: [@doctrine.orm.entity_manager, Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet]
