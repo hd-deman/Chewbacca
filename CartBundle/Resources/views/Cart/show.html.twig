@@ -1,49 +1,89 @@
 {% extends 'LacrocoStoreBundle:Default:layout.html.twig' %}
+
 {% block title %}Корзина покупок{% endblock %}
-{% block body %}
-<div class="page-header">
-<h1>Your cart. <small>What we have here, hm?</small></h1>
-</div>
+
+{% block h1 %}Корзина покупок. <small>Здесь все что вы хотели?</small>{% endblock %}
+{% block content %}
+
 
 {% if not cart.empty %}
 <div class="alert alert-info">
 <strong>{{ cart.totalItems }}</strong> items, <strong>{{ cart.value }}</strong> &euro;...
 </div>
-
-{{ form_errors(form) }}
-
+{% if form_errors(form) %}
+    <div class="alert alert-error">
+    {{ form_errors(form) }}
+    </div>
+{% endif %}
 <form method="post" action="{{ path('chewbacca_cart_save') }}">
 {% for product in cart.products %}
 <div class="well">
-    <h3>{{ product.title }}</h3>
-    {{ product.description }}
-    <hr />
-    <div class="pull-left">
-    <ul class="unstyled">
-        {% for item in product.cartItems %}
-        <li><strong>{{ item.productSet.Id }}</strong>: {{ item.productSet.Id }}</li>
-        {% endfor %}
-    </ul>
+    <div class="row-fluid">
+        <div class="pull-left">
+            <a class="product-img">
+                <img src="{{ product.getMltdProductImages[0].getWebPath | apply_filter('lacroco_polaroid_smallest') }}" alt="{{ product.getTitle }}" />
+            </a>
+        </div>
+        <div class="offset1">
+            <h3>{{ product.title }}</h3>
+            {{ product.description }}
+            {% for item in form.cart_items %}
+                {% if item.get('value').productSet.product.Id == product.id %}
+                    <hr />
+                    <strong>{{ item.get('value').productSet.productSize.title }} / {{ item.get('value').productSet.getProductOption.title }}</strong>
+                    <div class="cart-item-actions pull-right">
+                        <div class="btn-group item-quantity">
+                          <button class="btn btn-mini dropdown-toggle btn-primary" data-toggle="dropdown">{{ item.vars.value.quantity }} шт. <span class="caret"></span></button>
+                          <ul class="dropdown-menu pull-right">
+                            {%set quantity = 1 %}
+                            {% for quantity in [1, 2, 3, 4] %}
+                                <li><a href="#" data-item-quantity="{{ quantity }}">{{ quantity }} шт.</a></li>
+                                {% set quantity = quantity + 1 %}
+                            {% endfor %}
+                            <li class="divider"></li>
+                            <li><a href="{{ path('chewbacca_cart_item_remove', {'id': item.get('value').id}) }}" data-item-quantity="0">удалить</a></li>
+                          </ul>
+                          {{ form_widget(form.cart_items[loop.index0].quantity) }}
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
     </div>
-    <div class="cart-actions pull-right">
-    Set <strong>quantity</strong>... {{ form_widget(form.items[loop.index0].quantity, {'attr': {'class': 'span2 center-text'}}) }}
-     or
-    <a href="{{ path('chewbacca_cart_item_remove', {'id': item.id}) }}" class="btn btn-danger">remove...</a>
-    </div>
-    <br /> <br /> <br />
 </div>
 {% endfor %}
+
 {{ form_rest(form) }}
-<input type="submit" class="btn btn-primary btn-large" value="save">
-<div class="pull-right">
-<a href="#" class="btn btn-success btn-large">order it!</a>
-<a href="{{ path('chewbacca_cart_clear') }}" class="btn btn-danger btn-large">clear cart</a>
+<div class="btn-toolbar">
+
+    <input id="cart-submit" type="submit" class="btn btn-large disabled" value="Обновить">
+    <a href="{{ path('chewbacca_cart_clear') }}" class="btn btn-large">Отчистить корзину</a>
+    <a href="{{ path('chewbacca_order_proccess') }}" class="pull-right btn btn-danger btn-large">Оформить</a>
+
 </div>
 </form>
+<script>
+    $(document).ready(function(){
+        $('.item-quantity li a').click(function(){
+            item_quantity_btn_group = $(this).parent().parent().parent();
+            var quantity = $(this).data('item-quantity');
+            if(quantity){
+                $(item_quantity_btn_group).find('.btn').html($(this).text()+' <span class="caret"></span>');
+                $(item_quantity_btn_group).find('input').val(quantity);
+                /*$('#product-sets-value').data('value', $(this).data('product-set-id'));
+                $('#product-sets-value').text($(this).text());*/
+                $(item_quantity_btn_group).find('.btn').removeClass('btn-primary').addClass('btn-success');
+                $('#cart-submit').removeClass('disabled');
+                $(item_quantity_btn_group).removeClass('open');
+                return false;
+            }
+        });
+    });
+</script>
 {% else %}
 <div class="alert alert-info">
     <h4 class="alert-heading">{{ 'alert.heading.info'|trans({}, 'SandboxCoreBundle') }}.</h4>
     Your cart is empty.
 </div>
 {% endif %}
-{% endblock %}
+{% endblock %} 

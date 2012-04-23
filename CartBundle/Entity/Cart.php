@@ -40,7 +40,7 @@ use Doctrine\ORM\Mapping as ORM;
     protected $value = 0.00;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Chewbacca\CartBundle\Entity\CartItem", mappedBy="cart", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\Chewbacca\CartBundle\Entity\CartItem", mappedBy="cart", cascade={"all"})
      */
     protected $cart_items;
 
@@ -148,11 +148,8 @@ use Doctrine\ORM\Mapping as ORM;
      */
     public function addCartItem(\Chewbacca\CartBundle\Entity\CartItem $cartItem)
     {
-    	$product = $cartItem->getProductSet()->getProduct();
         $this->cart_items[] = $cartItem;
 		$cartItem->setCart($this);
-		$this->addProduct($product);
-		$product->CartItem($cartItem);
     }
 
     /**
@@ -166,13 +163,34 @@ use Doctrine\ORM\Mapping as ORM;
     }
 
     /**
+     * Check is cart_item added
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function hasCartItem(\Chewbacca\CartBundle\Entity\CartItem $item)
+    {
+        return $this->cart_items->contains($item);
+    }
+
+    /**
+     * Remove CartItem
+     */
+    public function removeCartItem(\Chewbacca\CartBundle\Entity\CartItem $item)
+    {
+        if ($this->hasCartItem($item)) {
+            $this->cart_items->removeElement($item);
+            $item->setCart(null);
+        }
+    }
+
+    /**
      * Add product
      *
      * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product
      */
     public function addProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product)
     {
-		$this->products[] = $product;
+		$this->products[$product->getId()] = $product;
     }
 
     /**
@@ -182,6 +200,13 @@ use Doctrine\ORM\Mapping as ORM;
      */
     public function getProducts()
     {
+        if(!$this->products && $this->cart_items){
+            foreach($this->getCartItems() as $cartItem){
+                $product = $cartItem->getProductSet()->getProduct();
+                $this->addProduct($product);
+                $product->addCartItem($cartItem);
+            }
+        }
         return $this->products;
     }
 

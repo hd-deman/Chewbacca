@@ -95,6 +95,26 @@ class CartManager extends BaseCartManager
         return $this->repository->find($id);
     }
 
+   public function findCartWithItems($id)
+    {
+        $qb = $this->repository->createQueryBuilder('cart');
+        return $qb
+            ->select('cart, item, p_set, p', 'img', 'cur', 'delivery_price')
+            ->leftJoin('cart.cart_items', 'item')
+            ->leftJoin('item.product_set', 'p_set')
+            ->leftJoin('p_set.product', 'p')
+            ->innerJoin('p.product_images', 'img')
+            ->innerJoin('p.currency', 'cur')
+            ->leftJoin('p.delivery_prices', 'delivery_price')
+            ->where($qb->expr()->eq('img.priority',0))
+            ->andWhere('cart.id = ?1')
+            ->andWhere('delivery_price.country = :country_id')
+            ->setParameter('country_id', 1)
+            ->setParameter(1, $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -69,7 +69,7 @@ class ItemResolver implements ItemResolverInterface
                 $item->setProductSet($product_set);
 
                 if ('POST' === $request->getMethod()) {
-                    $form = $this->formFactory->create('sylius_cart_item');
+                    $form = $this->formFactory->create('chewbacca_cart_item');
                     $form->setData($item);
                     $form->bindRequest($request);
 

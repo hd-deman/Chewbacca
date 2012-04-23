@@ -48,13 +48,17 @@ class CartProvider implements CartProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCart()
+    public function getCart($with_items = false)
     {
         if (null == $this->cart) {
             $cartIdentifier = $this->storage->getCurrentCartIdentifier();
 
             if ($cartIdentifier) {
-                $cart = $this->cartManager->findCart($cartIdentifier);
+                if($with_items){
+                    $cart = $this->cartManager->findCartWithItems($cartIdentifier);
+                 }else{
+                    $cart = $this->cartManager->findCart($cartIdentifier);
+                 }
 
                 if ($cart) {
                     $this->cart = $cart;

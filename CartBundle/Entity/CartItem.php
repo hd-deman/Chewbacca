@@ -53,7 +53,7 @@ use Doctrine\ORM\Mapping as ORM;
      * @param Chewbacca\CartBundle\Entity\Cart $cart
      * @return CartItem
      */
-    public function setCart(\Chewbacca\CartBundle\Entity\Cart $cart)
+    public function setCart(\Chewbacca\CartBundle\Entity\Cart $cart = null)
     {
         $this->cart = $cart;
         return $this;

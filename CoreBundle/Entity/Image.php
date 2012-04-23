@@ -84,7 +84,7 @@ use Symfony\Component\Validator\Constraints as Assert;
      */
     protected $updated;
 	/**
-	 * @ORM\PrePersist
+	 * @ORM\preUpdate
 	 */
 	public function setUpdatedValue()
 	{
