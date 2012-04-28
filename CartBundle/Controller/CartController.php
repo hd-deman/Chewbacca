@@ -37,7 +37,7 @@ class CartController extends Controller
      */
     public function addItemAction(Request $request)
     {
-        $cart = $this->container->get('chewbacca_cart.provider')->getCart();
+        $cart = $this->container->get('chewbacca_cart.provider')->getCart(true);
         $item = $this->container->get('chewbacca_cart.resolver')->resolveItemToAdd($request);
 
         if (!$item) {

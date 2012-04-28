@@ -20,10 +20,35 @@ use Doctrine\ORM\Mapping as ORM;
     protected $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\UserBundle\Entity\User", inversedBy="orders", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $user;
+
+    /**
+     * @var integer $id
+     *
+     * @ORM\Column(name="total_items", type="integer")
+     */
+    protected $total_items = 0;
+
+    /**
+     * @var string $amount
+     *
+     * @ORM\Column(name="amount", type="decimal", scale=2)
+     */
+    protected $amount = 0.00;
+
+    /**
      * @var boolean $closed
      * @ORM\Column(name="closed", type="boolean")
      */
     protected $closed = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\Chewbacca\OrdersBundle\Entity\OrderItem", mappedBy="order", cascade={"all"})
+     */
+    protected $order_items;
 
     /**
      * @var datetime $created
@@ -31,6 +56,7 @@ use Doctrine\ORM\Mapping as ORM;
      * @ORM\Column(name="created", type="datetime")
      */
     protected $created;
+
 	/**
 	 * @ORM\prePersist
 	 */
@@ -45,6 +71,7 @@ use Doctrine\ORM\Mapping as ORM;
      * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
     protected $updated;
+
 	/**
 	 * @ORM\preUpdate
 	 */
@@ -74,7 +101,7 @@ use Doctrine\ORM\Mapping as ORM;
         $this->closed = $closed;
         return $this;
     }
-
+	
     /**
      * Get closed
      *
@@ -127,5 +154,95 @@ use Doctrine\ORM\Mapping as ORM;
     public function getUpdated()
     {
         return $this->updated;
+    }
+
+    /**
+     * Set total_items
+     *
+     * @param integer $totalItems
+     * @return Order
+     */
+    public function setTotalItems($totalItems)
+    {
+        $this->total_items = $totalItems;
+        return $this;
+    }
+
+    /**
+     * Get total_items
+     *
+     * @return integer 
+     */
+    public function getTotalItems()
+    {
+        return $this->total_items;
+    }
+
+    /**
+     * Set amount
+     *
+     * @param decimal $amount
+     * @return Order
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return decimal 
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set user
+     *
+     * @param FOSUserBundle\Model\User $user
+     * @return Order
+     */
+    public function setUser(\FOSUserBundle\Model\User $user = null)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return FOSUserBundle\Model\User 
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+    public function __construct()
+    {
+        $this->order_items = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add order_items
+     *
+     * @param Chewbacca\OrdersBundle\Entity\OrderItem $orderItems
+     */
+    public function addOrderItem(\Chewbacca\OrdersBundle\Entity\OrderItem $orderItems)
+    {
+        $this->order_items[] = $orderItems;
+    }
+
+    /**
+     * Get order_items
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getOrderItems()
+    {
+        return $this->order_items;
     }
 }

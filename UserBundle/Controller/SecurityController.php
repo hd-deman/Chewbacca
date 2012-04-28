@@ -6,7 +6,7 @@ use Symfony\Component\Security\Core\SecurityContext;
 use FOS\UserBundle\Controller\SecurityController as BaseController;
 class SecurityController extends BaseController
 {
-    public function loginAction()
+    public function loginAction($layout = true)
     {
         $request = $this->container->get('request');
         /* @var $request \Symfony\Component\HttpFoundation\Request */
@@ -32,10 +32,22 @@ class SecurityController extends BaseController
 
         $csrfToken = $this->container->get('form.csrf_provider')->generateCsrfToken('authenticate');
 
-        return $this->container->get('templating')->renderResponse('ChewbaccaUserBundle:Security:login.html.'.$this->container->getParameter('fos_user.template.engine'), array(
+        if ($request->attributes->has('login_position')) {
+            $login_position = $request->attributes->get('login_position');
+        }else{
+            $login_position = 'right';
+        }
+        if($layout){
+            $tpl_name = 'FOSUserBundle:Security:login_'.$login_position;
+        }else{
+            $tpl_name = 'FOSUserBundle:Security:login_content';
+        }
+
+        return $this->container->get('templating')->renderResponse($tpl_name.'.html.'.$this->container->getParameter('fos_user.template.engine'), array(
             'last_username' => $lastUsername,
             'error'         => $error,
             'csrf_token' => $csrfToken,
+            'login_position' => $login_position,
         ));
     }
 }

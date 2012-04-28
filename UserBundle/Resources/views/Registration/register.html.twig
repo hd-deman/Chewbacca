@@ -14,7 +14,7 @@
 			<div class="page-header">
 				<h1>Войдите.<br /><small>Если у вас уже есть аккаунт.</small></h1>
 			</div>
-			{% render "ChewbaccaUserBundle:Security:login" %}
+			{% render "ChewbaccaUserBundle:Security:login" with {'layout': false} %}
 		</div>
 	</div>
 {% endblock %}
