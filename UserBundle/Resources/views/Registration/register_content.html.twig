@@ -1,0 +1,14 @@
+{% form_theme form theme %}
+{% if form_errors(form) %}
+    <div class="alert alert-error">
+    {{ form_errors(form) }}
+    </div>
+{% endif %}
+<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+    {{ form_rest(form) }}
+    <div>
+    	<button type="submit" class="btn btn-large btn-primary">
+    		{{ 'registration.submit'|trans({}, 'FOSUserBundle') }}
+    	</button>
+    </div>
+</form>

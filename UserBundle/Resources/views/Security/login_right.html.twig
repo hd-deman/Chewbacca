@@ -1,0 +1,21 @@
+{% extends 'LacrocoStoreBundle:Default:layout.html.twig' %}
+
+{% block title %}Вход на сайте{% endblock %}
+
+{% block body %}
+	<div class="row-fluid">
+		<div class="span6">
+			<div class="page-header">
+				<h1>Зарегистрируйтесь.<br /><small>Eсли вы у нас впервые.</small></h1>
+			</div>
+			{% render "ChewbaccaUserBundle:Registration:register" with {'layout': false}  %}
+		</div>
+		
+		<div class="span6">
+			<div class="page-header">
+				<h1>Войдите.<br /><small>Если у вас уже есть аккаунт.</small></h1>
+			</div>
+			{% include "FOSUserBundle:Security:login_content.html.twig" %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,14 @@
+parameters:
+    chewbacca_orders.manager.order.class: Chewbacca\OrdersBundle\Entity\OrderManager
+    chewbacca_orders.manager.item.class: Chewbacca\OrdersBundle\Entity\ItemManager
+
+services:
+    chewbacca_orders.manager.order:
+        class: %chewbacca_orders.manager.order.class%
+        arguments: [@doctrine.orm.entity_manager, Chewbacca\OrdersBundle\Entity\Order]
+        calls:
+          - [ setItemManager, [ @chewbacca_orders.manager.item ] ]
+
+    chewbacca_orders.manager.item:
+        class: %chewbacca_orders.manager.item.class%
+        arguments: [@doctrine.orm.entity_manager, Chewbacca\OrdersBundle\Entity\Item]
