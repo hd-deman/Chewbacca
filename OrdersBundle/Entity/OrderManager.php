@@ -60,10 +60,12 @@ class OrderManager extends BaseOrderManager
     public function createOrder(Cart $cart)
     {
         $class = $this->getClass();
-        return new $class;
+        $order = new $class;
     	foreach($cart->getCartItems() as $cart_item){
-    		$order_item = $itemManager->createItem($cart_item);
+    		$order_item = $this->itemManager->createItem($cart_item);
+            $order->addOrderItem($order_item);
     	}
+        return $order;
     }
 
     /**

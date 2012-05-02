@@ -1,6 +1,7 @@
 parameters:
     chewbacca_orders.manager.order.class: Chewbacca\OrdersBundle\Entity\OrderManager
     chewbacca_orders.manager.item.class: Chewbacca\OrdersBundle\Entity\ItemManager
+    chewbacca_orders.form.type.order.class: Chewbacca\OrdersBundle\Form\Type\OrderFormType
 
 services:
     chewbacca_orders.manager.order:
@@ -11,4 +12,10 @@ services:
 
     chewbacca_orders.manager.item:
         class: %chewbacca_orders.manager.item.class%
-        arguments: [@doctrine.orm.entity_manager, Chewbacca\OrdersBundle\Entity\Item]
+        arguments: [@doctrine.orm.entity_manager, Chewbacca\OrdersBundle\Entity\OrderItem]
+
+    chewbacca_orders.form.type.order:
+        class: %chewbacca_orders.form.type.order.class%
+        arguments: [Chewbacca\OrdersBundle\Entity\Order]
+        tags:
+          - { name: form.type, alias: chewbacca_order }

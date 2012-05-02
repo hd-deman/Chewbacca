@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 
 use Chewbacca\CartBundle\Entity\CartItem;
+
 use Chewbacca\OrdersBundle\Model\ItemInterface;
 use Chewbacca\OrdersBundle\Model\ItemManager as BaseItemManager;
 
@@ -50,9 +51,18 @@ class ItemManager extends BaseItemManager
     {
         $class = $this->getClass();
         $item = new $class;
+        $title = $CartItem->getProductSet()->getProduct()->getTitle();
+        if($CartItem->getProductSet()->getProductSize()){
+            $title.= ' '.$CartItem->getProductSet()->getProductSize()->getTitle();
+        }
+        if($CartItem->getProductSet()->getProductOption()){
+            $title.= '/'.$CartItem->getProductSet()->getProductOption()->getTitle();
+        }
+
+        $item->setTitle($title);
 		$item->setProductSet($CartItem->getProductSet());
 		$item->setPrice($CartItem->getProductSet()->getProduct()->getStorePrice());
-
+        $item->setQuantity($CartItem->getQuantity());
 		return $item;
     }
 

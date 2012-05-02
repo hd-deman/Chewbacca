@@ -4,5 +4,21 @@
 
 {% block h1 %}Оформление заказа. <small>Это займет всего несколько мгновений.</small>{% endblock %}
 {% block content %}
-sadasd
+<form method="post" action="{{ path('chewbacca_order_save') }}">
+
+	{% if form_errors(form) %}
+	    <div class="alert alert-error">
+	    {{ form_errors(form) }}
+	    </div>
+	{% endif %}
+
+	{{ form_rest(form) }}
+
+<div class="btn-toolbar">
+	<a href="{{ path('chewbacca_cart') }}" class="btn btn-large">Обратно в корзину</a>
+    <input id="cart-submit" type="submit" class="btn btn-danger btn-large" value="Оформить">
+</div>
+</form>
+
+
 {% endblock %}

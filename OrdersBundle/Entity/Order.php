@@ -51,6 +51,12 @@ use Doctrine\ORM\Mapping as ORM;
     protected $order_items;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\OrdersBundle\Entity\DeliveryAddress", inversedBy="orders", cascade={"persist"})
+     * @ORM\JoinColumn(name="delivery_address_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $delivery_address;
+
+    /**
      * @var datetime $created
      *
      * @ORM\Column(name="created", type="datetime")
@@ -234,6 +240,9 @@ use Doctrine\ORM\Mapping as ORM;
     public function addOrderItem(\Chewbacca\OrdersBundle\Entity\OrderItem $orderItems)
     {
         $this->order_items[] = $orderItems;
+        $orderItems->setOrder($this);
+        $this->setTotalItems( $this->getTotalItems()+1);
+        $this->setAmount($this->getAmount() + $orderItems->getPrice());
     }
 
     /**
@@ -244,5 +253,27 @@ use Doctrine\ORM\Mapping as ORM;
     public function getOrderItems()
     {
         return $this->order_items;
+    }
+
+    /**
+     * Set delivery_address
+     *
+     * @param Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddress
+     * @return Order
+     */
+    public function setDeliveryAddress(\Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddress = null)
+    {
+        $this->delivery_address = $deliveryAddress;
+        return $this;
+    }
+
+    /**
+     * Get delivery_address
+     *
+     * @return Chewbacca\OrdersBundle\Entity\DeliveryAddress 
+     */
+    public function getDeliveryAddress()
+    {
+        return $this->delivery_address;
     }
 }

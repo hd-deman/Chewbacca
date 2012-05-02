@@ -1,3 +1,7 @@
 chewbacca_order_proccess:
     pattern:  /
     defaults: { _controller: ChewbaccaOrdersBundle:Order:proccess }
+
+chewbacca_order_save:
+    pattern:  /save
+    defaults: { _controller: ChewbaccaOrdersBundle:Order:save }

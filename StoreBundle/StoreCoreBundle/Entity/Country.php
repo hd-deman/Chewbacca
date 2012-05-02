@@ -25,6 +25,10 @@ use Doctrine\ORM\Mapping as ORM;
     protected $title;
 
     /**
+     * @ORM\OneToMany(targetEntity="\Chewbacca\OrdersBundle\Entity\DeliveryAddress", mappedBy="country", cascade={"all"})
+     */
+    protected $delivery_addresses;
+    /**
      * Get id
      *
      * @return integer 
@@ -54,5 +58,29 @@ use Doctrine\ORM\Mapping as ORM;
     public function getTitle()
     {
         return $this->title;
+    }
+    public function __construct()
+    {
+        $this->delivery_addresses = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+    
+    /**
+     * Add delivery_addresses
+     *
+     * @param Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses
+     */
+    public function addDeliveryAddress(\Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses)
+    {
+        $this->delivery_addresses[] = $deliveryAddresses;
+    }
+
+    /**
+     * Get delivery_addresses
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getDeliveryAddresses()
+    {
+        return $this->delivery_addresses;
     }
 }

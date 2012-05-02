@@ -35,7 +35,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * @var string $title
      *
-     * @ORM\Column(name="title", type="string", unique=true, length=255)
+     * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title;
 
@@ -77,8 +77,9 @@ use Doctrine\ORM\Mapping as ORM;
 
     /**
      * Get quantity
-     *
+     * 
      * @return integer 
+     * @ORM\prePersist
      */
     public function getQuantity()
     {
