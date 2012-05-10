@@ -1,0 +1,17 @@
+parameters:
+    chewbacca_payment.qiwi_server.class: Chewbacca\PaymentBundle\QiwiPayment\IShopServerWSService
+    chewbacca_payment.qiwi_server.options.trace: true
+
+    chewbacca_payment.qiwi_payment.class: Chewbacca\PaymentBundle\QiwiPayment\QiwiPayment
+
+services:
+    chewbacca_payment.qiwi_server:
+        class: %chewbacca_payment.qiwi_server.class%
+        arguments: [IShopServerWS.wsdl, {kernel: @kernel, trace: %chewbacca_payment.qiwi_server.options.trace%}]
+    chewbacca_payment.qiwi_payment:
+        class: %chewbacca_payment.qiwi_payment.class%
+        arguments: [IShopServerWS.wsdl, {kernel: @kernel, trace: %chewbacca_payment.qiwi_server.options.trace%}]
+        calls:
+            - [ setLogin, [ %chebacca_payment.qiwi.login% ] ]
+            - [ setPassword, [ %chebacca_payment.qiwi.password% ] ]
+            - [ setServer, [ @chewbacca_payment.qiwi_server ] ]
