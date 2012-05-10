@@ -49,7 +49,7 @@ class OrderController extends Controller
 
         if ($form->isValid()) {
             $this->container->get('chewbacca_orders.manager.order')->persistOrder($order);
-            return new RedirectResponse($this->container->get('router')->generate('chewbacca_payment_proccess'));
+            return new RedirectResponse($this->container->get('router')->generate('chewbacca_payment_proccess', array('order_id' => $order->getId())));
         }
 
 		return $this->render('ChewbaccaOrdersBundle:Frontend:proccess.html.twig', array(

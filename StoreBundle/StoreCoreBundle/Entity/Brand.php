@@ -3,6 +3,7 @@
 namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /** 
  *  @ORM\Entity 
@@ -28,6 +29,12 @@ use Doctrine\ORM\Mapping as ORM;
      * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title;
+
+    /**
+     * @Gedmo\Slug(fields={"title"}, unique=true)
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
 
     /**
      * @ORM\OneToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product", mappedBy="brand")
@@ -161,5 +168,27 @@ use Doctrine\ORM\Mapping as ORM;
     public function getTitle()
     {
         return $this->title;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Brand
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }
