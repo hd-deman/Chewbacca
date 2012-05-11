@@ -3,11 +3,11 @@ namespace Chewbacca\OrdersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  *  @ORM\HasLifecycleCallbacks()
  *  @ORM\Table(name="chewb_orders")
- * 
+ *
  **/
  class Order{
     /**
@@ -89,7 +89,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -107,11 +107,11 @@ use Doctrine\ORM\Mapping as ORM;
         $this->closed = $closed;
         return $this;
     }
-	
+
     /**
      * Get closed
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getClosed()
     {
@@ -133,7 +133,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get created
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreated()
     {
@@ -155,7 +155,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get updated
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdated()
     {
@@ -177,7 +177,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get total_items
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotalItems()
     {
@@ -199,7 +199,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get amount
      *
-     * @return decimal 
+     * @return decimal
      */
     public function getAmount()
     {
@@ -209,10 +209,10 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set user
      *
-     * @param FOSUserBundle\Model\User $user
+     * @param FOS\UserBundle\Model\User $user
      * @return Order
      */
-    public function setUser(\FOSUserBundle\Model\User $user = null)
+    public function setUser(\FOS\UserBundle\Model\User $user = null)
     {
         $this->user = $user;
         return $this;
@@ -221,7 +221,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get user
      *
-     * @return FOSUserBundle\Model\User 
+     * @return FOS\UserBundle\Model\User
      */
     public function getUser()
     {
@@ -231,7 +231,7 @@ use Doctrine\ORM\Mapping as ORM;
     {
         $this->order_items = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Add order_items
      *
@@ -248,7 +248,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get order_items
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getOrderItems()
     {
@@ -270,7 +270,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get delivery_address
      *
-     * @return Chewbacca\OrdersBundle\Entity\DeliveryAddress 
+     * @return Chewbacca\OrdersBundle\Entity\DeliveryAddress
      */
     public function getDeliveryAddress()
     {
