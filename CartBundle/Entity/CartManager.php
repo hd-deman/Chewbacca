@@ -79,6 +79,7 @@ class CartManager extends BaseCartManager
             ->where('c.locked = false AND c.expiresAt < ?1')
             ->setParameter(1, new \DateTime("now"))
             ->getQuery()
+            ->useResultCache(false)
             ->getResult()
         ;
 
@@ -112,6 +113,7 @@ class CartManager extends BaseCartManager
             ->setParameter('country_id', 1)
             ->setParameter(1, $id)
             ->getQuery()
+            ->useResultCache(false)
             ->getOneOrNullResult();
     }
 
@@ -139,4 +141,3 @@ class CartManager extends BaseCartManager
         return $this->findBy($criteria);
     }
 }
-    
