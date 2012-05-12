@@ -5,10 +5,10 @@ namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  *  @ORM\HasLifecycleCallbacks()
- * 
+ *
  *  @ORM\InheritanceType("SINGLE_TABLE")
  *  @ORM\DiscriminatorColumn(name="discr", type="string")
  *  @ORM\DiscriminatorMap({"product" = "Product", "mltd_product" = "\Lacroco\StoreBundle\Entity\MltdProduct"})
@@ -25,7 +25,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
     /**
      * @var string $title
-	 * 
+	 *
      * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title;
@@ -45,7 +45,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $sale_price = 0;
 
     /**
-     * @Gedmo\Slug(fields={"title"}, unique=true)
+     * @Gedmo\Slug(fields={"title", "id"})
      * @ORM\Column(length=255, unique=true)
      */
     private $slug;
@@ -127,14 +127,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->product_sets = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->product_images = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->cart_items = new \Doctrine\Common\Collections\ArrayCollection(); 
+		$this->cart_items = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -156,7 +156,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get price
      *
-     * @return decimal 
+     * @return decimal
      */
     public function getPrice()
     {
@@ -178,7 +178,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get sale_price
      *
-     * @return decimal 
+     * @return decimal
      */
     public function getSalePrice()
     {
@@ -200,7 +200,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -222,7 +222,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -244,7 +244,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get created
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreated()
     {
@@ -266,7 +266,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get updated
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdated()
     {
@@ -288,7 +288,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get brand
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Brand 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Brand
      */
     public function getBrand()
     {
@@ -308,7 +308,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get categories
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getCategories()
     {
@@ -328,7 +328,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get cart_items
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getCartItems()
     {
@@ -350,7 +350,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -370,7 +370,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get product_sets
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getProductSets()
     {
@@ -390,7 +390,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get product_images
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getProductImages()
     {
@@ -410,7 +410,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get delivery_prices
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getDeliveryPrices()
     {
@@ -420,7 +420,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 	public function getStorePrice(){
 		if($this->delivery_prices && $this->currency){
             $add1 = 49;
-            $add2 = 99;     
+            $add2 = 99;
             $myup = ($this->getPrice()/100)*20;
             $store_price = ceil(($this->getPrice()+$this->delivery_prices[0]->getPrice()+$myup)*$this->currency->getRate());
             $price_o = $store_price%100;
@@ -456,7 +456,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get currency
      *
-     * @return Chewbacca\ExchangeRatesBundle\Entity\Currency 
+     * @return Chewbacca\ExchangeRatesBundle\Entity\Currency
      */
     public function getCurrency()
     {
