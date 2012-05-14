@@ -1,6 +1,8 @@
 <?php
 
 namespace Chewbacca\StoreBundle\StoreCoreBundle\Model;
+
+use Chewbacca\StoreBundle\StoreCoreBundle\Model\Product;
 #use Chewbacca\StoreBundle\StoreCoreBundle\SorterInterface;
 
 /**
@@ -21,7 +23,7 @@ interface ProductManagerInterface
      *
      * @param SorterInterface $sorter
      */
-    function createPaginator(/*SorterInterface */$sorter = null);
+    function createPaginator($queryBuilder = null);
 
     /**
      * Persists product.

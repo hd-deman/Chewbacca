@@ -59,17 +59,8 @@ class ProductManager extends BaseProductManager
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(/*SorterInterface */$sorter = null)
+    public function createPaginator($queryBuilder = null)
     {
-        $queryBuilder = $this->entityManager->createQueryBuilder()
-            ->select('p')
-            ->from($this->class, 'p')
-        ;
-
-        if (null !== $sorter) {
-            $sorter->sort($queryBuilder);
-        }
-
         return new Pagerfanta(new DoctrineORMAdapter($queryBuilder->getQuery()));
     }
 
