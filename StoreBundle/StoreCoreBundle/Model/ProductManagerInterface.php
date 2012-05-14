@@ -2,7 +2,7 @@
 
 namespace Chewbacca\StoreBundle\StoreCoreBundle\Model;
 
-use Chewbacca\StoreBundle\StoreCoreBundle\Model\Product;
+use Chewbacca\StoreBundle\StoreCoreBundle\Model\Product as ProductEntity;
 #use Chewbacca\StoreBundle\StoreCoreBundle\SorterInterface;
 
 /**
@@ -30,14 +30,14 @@ interface ProductManagerInterface
      *
      * @param Product $product
      */
-    function persistProduct(Product $product);
+    function persistProduct(ProductEntity $product);
 
     /**
      * Deletes product.
      *
      * @param Product $product
      */
-    function removeProduct(Product $product);
+    function removeProduct(ProductEntity $product);
 
     /**
      * Finds product by id.

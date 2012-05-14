@@ -6,7 +6,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Chewbacca\StoreBundle\StoreCoreBundle\Model\Product;
+use Chewbacca\StoreBundle\StoreCoreBundle\Model\Product as ProductEntity;
 use Chewbacca\StoreBundle\StoreCoreBundle\Model\ProductManager as BaseProductManager;
 #use Chewbacca\StoreBundle\StoreCoreBundle\Sorting\SorterInterface;
 
@@ -67,7 +67,7 @@ class ProductManager extends BaseProductManager
     /**
      * {@inheritdoc}
      */
-    public function persistProduct(Product $product)
+    public function persistProduct(ProductEntity $product)
     {
         $this->entityManager->persist($product);
         $this->entityManager->flush();
@@ -76,7 +76,7 @@ class ProductManager extends BaseProductManager
     /**
      * {@inheritdoc}
      */
-    public function removeProduct(Product $product)
+    public function removeProduct(ProductEntity $product)
     {
         $this->entityManager->remove($product);
         $this->entityManager->flush();
