@@ -1,0 +1,10 @@
+<ul class="breadcrumb">
+{% for crumb in breadcrumbs %}
+  <li class="active">
+    <a href="{{ crumb.url }}">{{ crumb.title }}</a>
+    {% if not loop.last %}
+    <span class="divider">/</span>
+    {% endif %}
+  </li>
+{% endfor %}
+</ul>
