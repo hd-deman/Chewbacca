@@ -20,8 +20,10 @@ class OrderController extends Controller
 		if(!($cart->getTotalItems() && $cart->getValue())){
 			return new RedirectResponse($this->container->get('router')->generate('chewbacca_cart'));
 		}
-		
+		$user = $this->container->get('security.context')->getToken()->getUser();
 		$order = $this->container->get('chewbacca_orders.manager.order')->createOrder($cart);
+		$order->setUser($user);
+
 		$form = $this->container->get('form.factory')->create('chewbacca_order');
         $form->setData($order);
 
@@ -41,7 +43,9 @@ class OrderController extends Controller
     public function saveAction(Request $request)
     {
 		$cart = $this->container->get('chewbacca_cart.provider')->getCart();
+		$user = $this->container->get('security.context')->getToken()->getUser();
 		$order = $this->container->get('chewbacca_orders.manager.order')->createOrder($cart);
+		$order->setUser($user);
 
         $form = $this->container->get('form.factory')->create('chewbacca_order', $order);
         #$form->setData($order);

@@ -30,7 +30,15 @@
             {% for item in form.cart_items %}
                 {% if item.get('value').productSet.product.Id == product.id %}
                     <hr />
-                    <strong>{{ item.get('value').productSet.productSize.title }} / {{ item.get('value').productSet.getProductOption.title }}</strong>
+                    <strong>
+                    	{% if item.get('value').productSet.productSize %}
+                    		{{ item.get('value').productSet.productSize.title }}
+                    	{% endif %}
+                    	{% if item.get('value').productSet.productSize and item.get('value').productSet.getProductOption %} / {% endif %}
+                    	{% if item.get('value').productSet.getProductOption %}
+                    		{{ item.get('value').productSet.getProductOption.title }}
+                    	{% endif %}
+                    </strong>
                     <div class="cart-item-actions pull-right">
                         <div class="btn-group item-quantity">
                           <button class="btn btn-mini dropdown-toggle btn-primary" data-toggle="dropdown">{{ item.vars.value.quantity }} шт. <span class="caret"></span></button>
@@ -87,4 +95,4 @@
     Your cart is empty.
 </div>
 {% endif %}
-{% endblock %} 
+{% endblock %}
