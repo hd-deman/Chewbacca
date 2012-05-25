@@ -12,7 +12,7 @@ class PaymentController extends Controller
 {
     /**
      * @Route("/hello/{name}")
-     *  
+     *
      */
     public function proccessAction($order_id)
     {
@@ -24,9 +24,8 @@ class PaymentController extends Controller
         if (!$order) {
             throw new NotFoundHttpException('Order entity not found');
         }
-        /*$qiwi_payment = $this->container->get('chewbacca_payment.qiwi_payment');
-        $code = $qiwi_payment->createBill($order);*/
-        $code = 0;
+        $qiwi_payment = $this->container->get('chewbacca_payment.qiwi_payment');
+        $code = $qiwi_payment->createBill($order);
         if($code===0){
             return $this->render('ChewbaccaPaymentBundle:PaymenQiwi:success.html.twig', array(
                 'order' => $order
