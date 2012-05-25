@@ -1,7 +1,7 @@
-<ul class="breadcrumb" itemprop="breadcrumb">
+<ul class="breadcrumb">
 {% for crumb in breadcrumbs %}
-  <li class="active">
-    <a href="{{ crumb.url }}">{{ crumb.title }}</a>
+  <li class="active" itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+    <a href="{{ crumb.url }}" itemprop="url"><span itemprop="title">{{ crumb.title }}</span></a>
     {% if not loop.last %}
     <span class="divider">/</span>
     {% endif %}
