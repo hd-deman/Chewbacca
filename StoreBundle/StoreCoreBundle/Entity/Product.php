@@ -302,7 +302,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     public function addCategory(\Chewbacca\CoreBundle\Entity\Category $categories)
     {
-        $this->categories[] = $categories;
+        $this->categories[$categories->getId()] = $categories;
     }
 
     /**
