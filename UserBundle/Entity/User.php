@@ -21,6 +21,16 @@ class User extends BaseUser
 	 */
 	protected $orders;
 
+	/**
+	 * @ORM\OneToMany(targetEntity="\Chewbacca\OrdersBundle\Entity\DeliveryAddress", mappedBy="user")
+	 */
+	protected $delivery_addresses;
+
+	/**
+	 * @ORM\OneToMany(targetEntity="\Chewbacca\UserBundle\Entity\UserPhone", mappedBy="user")
+	 */
+	protected $phone_numbers;
+
 	public function __construct()
 	{
 		parent::__construct();
@@ -55,5 +65,49 @@ class User extends BaseUser
     public function getOrders()
     {
         return $this->orders;
+    }
+
+    /**
+     * Add delivery_addresses
+     *
+     * @param Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses
+     * @return User
+     */
+    public function addDeliveryAddress(\Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses)
+    {
+        $this->delivery_addresses[] = $deliveryAddresses;
+        return $this;
+    }
+
+    /**
+     * Get delivery_addresses
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getDeliveryAddresses()
+    {
+        return $this->delivery_addresses;
+    }
+
+    /**
+     * Add phone_numbers
+     *
+     * @param Chewbacca\UserBundle\Entity\UserPhone $phoneNumbers
+     * @return User
+     */
+    public function addUserPhone(\Chewbacca\UserBundle\Entity\UserPhone $phoneNumbers)
+    {
+        $this->phone_numbers[] = $phoneNumbers;
+        return $this;
+    }
+
+    /**
+     * Get phone_numbers
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPhoneNumbers()
+    {
+        return $this->phone_numbers;
     }
 }

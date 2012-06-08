@@ -7,6 +7,7 @@ use FOS\UserBundle\Controller\RegistrationController as BaseController;
 
 class RegistrationController extends BaseController
 {
+
     public function registerAction($layout = true)
     {
         $form = $this->container->get('fos_user.registration.form');
@@ -41,7 +42,6 @@ class RegistrationController extends BaseController
 
         return $this->container->get('templating')->renderResponse($tpl_name.'.html.'.$this->getEngine(), array(
             'form' => $form->createView(),
-            'theme' => $this->container->getParameter('fos_user.template.theme'),
         ));
     }
 }
