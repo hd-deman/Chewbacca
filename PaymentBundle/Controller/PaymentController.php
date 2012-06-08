@@ -32,7 +32,7 @@ class PaymentController extends Controller
             ));
         }else{
             error_log(sprintf('qiwi payment failed: order nubmer is %s code is %s', $order->getId(), $code));
-            return $this->render('ChewbaccaPaymentBundle:Payment:fail.html.twig', array(
+            return $this->render('ChewbaccaPaymentBundle:PaymenQiwi:fail.html.twig', array(
                 'order' => $order
             ));
         }

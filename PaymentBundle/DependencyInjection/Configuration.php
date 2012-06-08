@@ -25,7 +25,7 @@ class Configuration implements ConfigurationInterface
         // more information on that topic.
         $rootNode->children()
                 ->arrayNode('qiwi')
-                    ->setInfo('qiwi payment configuration')
+                    //->setInfo('qiwi payment configuration')
                     ->canBeUnset()
                     ->treatNullLike(array('enabled' => true))
                     ->treatTrueLike(array('enabled' => true))

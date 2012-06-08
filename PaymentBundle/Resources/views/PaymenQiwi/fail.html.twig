@@ -1,0 +1,11 @@
+{% extends 'LacrocoStoreBundle:Default:layout.html.twig' %}
+
+{% block title %}Оплата заказа{% endblock %}
+
+{% block h1 %}Оплата заказа №{{ order.Id }}.{% endblock %}
+{% block content %}
+<div class="alert alert-error">
+Не удалось выставить счет.
+</div>
+
+{% endblock %}
