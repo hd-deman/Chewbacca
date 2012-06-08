@@ -43,7 +43,7 @@ class CategoryType extends AbstractType
         return 'category';
     }
 
-	public function getDefaultOptions(array $options)
+	public function getDefaultOptions()
 	{
 		return array(
 			'data_class' => 'Chewbacca\CoreBundle\Entity\Category',
@@ -63,7 +63,7 @@ class CategoryParentType extends AbstractType
         return 'category_parent';
     }
 
-	public function getDefaultOptions(array $options)
+	public function getDefaultOptions()
 	{
 		return array(
 			'data_class' => 'Chewbacca\CoreBundle\Entity\Category',
