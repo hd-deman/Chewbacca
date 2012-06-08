@@ -8,8 +8,9 @@
 
 {% if not cart.empty %}
 <div class="alert alert-info">
-<strong>{{ cart.totalItems }}</strong> items, <strong>{{ cart.value }}</strong> &euro;...
+<strong>{{ cart.totalItems }}</strong> items, <strong>{{ cart.value }}</strong> руб....
 </div>
+
 {% if form_errors(form) %}
     <div class="alert alert-error">
     {{ form_errors(form) }}
@@ -17,6 +18,7 @@
 {% endif %}
 <form method="post" action="{{ path('chewbacca_cart_save') }}">
 {% for product in cart.products %}
+
 <div class="well">
     <div class="row-fluid">
         <div class="pull-left">
@@ -28,15 +30,15 @@
             <h3>{{ product.title }}</h3>
             {{ product.description }}
             {% for item in form.cart_items %}
-                {% if item.get('value').productSet.product.Id == product.id %}
+                {% if item.vars.value.productSet.product.Id == product.id %}
                     <hr />
                     <strong>
-                    	{% if item.get('value').productSet.productSize %}
-                    		{{ item.get('value').productSet.productSize.title }}
+                    	{% if item.vars.value.productSet.productSize %}
+                    		{{ item.vars.value.productSet.productSize.title }}
                     	{% endif %}
-                    	{% if item.get('value').productSet.productSize and item.get('value').productSet.getProductOption %} / {% endif %}
-                    	{% if item.get('value').productSet.getProductOption %}
-                    		{{ item.get('value').productSet.getProductOption.title }}
+                    	{% if item.vars.value.productSet.productSize and item.vars.value.productSet.getProductOption %} / {% endif %}
+                    	{% if item.vars.value.productSet.getProductOption %}
+                    		{{ item.vars.value.productSet.getProductOption.title }}
                     	{% endif %}
                     </strong>
                     <div class="cart-item-actions pull-right">
@@ -49,7 +51,7 @@
                                 {% set quantity = quantity + 1 %}
                             {% endfor %}
                             <li class="divider"></li>
-                            <li><a href="{{ path('chewbacca_cart_item_remove', {'id': item.get('value').id}) }}" data-item-quantity="0">удалить</a></li>
+                            <li><a href="{{ path('chewbacca_cart_item_remove', {'id': item.vars.value.id}) }}" data-item-quantity="0">удалить</a></li>
                           </ul>
                           {{ form_widget(form.cart_items[loop.index0].quantity) }}
                         </div>
@@ -59,6 +61,7 @@
         </div>
     </div>
 </div>
+
 {% endfor %}
 
 {{ form_rest(form) }}
@@ -89,6 +92,7 @@
         });
     });
 </script>
+
 {% else %}
 <div class="alert alert-info">
     <h4 class="alert-heading">{{ 'alert.heading.info'|trans({}, 'SandboxCoreBundle') }}.</h4>
