@@ -3,7 +3,7 @@
 namespace Chewbacca\OrdersBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * DeliveryAddress form form.
@@ -11,27 +11,28 @@ use Symfony\Component\Form\FormBuilder;
  */
 class DeliveryAddressFormType extends AbstractType
 {
-   public function buildForm(FormBuilder $builder, array $options)
+   public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstname');
-        $builder->add('lastname');
-        $builder->add('country','entity', 
+        $builder->add('firstname', null, array('error_bubbling'=>false));
+        $builder->add('lastname', null, array('error_bubbling'=>false));
+        $builder->add('country','entity',
             array('class' => 'Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country',
                 'property' => 'Title',
                 'query_builder' => function ($repository) {
                     return $repository->createQueryBuilder('c')->orderBy('c.title', 'ASC');
                 },
-                'label' => 'Страна',
+                'error_bubbling' => false
                 )
             );
-        $builder->add('city');
-        $builder->add('postcode');
-        $builder->add('street');
+        $builder->add('city', null, array('error_bubbling'=>false));
+        $builder->add('postcode', null, array('error_bubbling'=>false));
+        $builder->add('street', null, array('error_bubbling'=>false));
     }
 
     public function getDefaultOptions()
     {
         return array(
+            'is_virtual' => false,
             'data_class' => 'Chewbacca\OrdersBundle\Entity\DeliveryAddress',
         );
     }

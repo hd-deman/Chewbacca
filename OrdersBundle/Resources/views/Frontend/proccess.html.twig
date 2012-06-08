@@ -4,7 +4,7 @@
 
 {% block h1 %}Оформление заказа. <small>Это займет всего несколько мгновений.</small>{% endblock %}
 {% block content %}
-<form method="post" action="{{ path('chewbacca_order_save') }}">
+<form method="post" action="{{ path('chewbacca_order_save') }}" class="form-horizontal" novalidate="novalidate">
 
 	{% if form_errors(form) %}
 	    <div class="alert alert-error">
@@ -12,8 +12,14 @@
 	    </div>
 	{% endif %}
 
-	{{ form_rest(form) }}
+	<fieldset>
+	<legend>{{ 'chewbacca_orders.forms.order.form.deliveryAddress.label'|trans }}</legend>
+	{{ form_row(form.deliveryAddress) }}
+	</fieldset>
+	<fieldset>
+	<legend>{{ 'chewbacca_orders.forms.order.form.deliveryAddress.label'|trans }}</legend>
 
+	</fieldset>
 <div class="btn-toolbar">
 	<a href="{{ path('chewbacca_cart') }}" class="btn btn-large">Обратно в корзину</a>
     <input id="cart-submit" type="submit" class="btn btn-danger btn-large" value="Оформить">

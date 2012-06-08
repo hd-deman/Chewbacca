@@ -1,0 +1,73 @@
+{% block form_row %}
+{% spaceless %}
+    <div class="control-group{% if errors|length > 0 %} error{% endif %}">
+        {{ form_label(form, label|default(null), { 'label_attr': { 'class': 'control-label' }}) }}
+        <div class="controls">
+            {{ form_widget(form, { 'attr': {'class': 'input-xlarge'} }) }}
+            {{ form_errors(form) }}
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock form_row %}
+
+{% block field_errors %}
+{% spaceless %}
+    <span class="help-inline">
+        {% if errors|length > 0 %}
+            {% for error in errors %}
+                {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<br />
+            {% endfor %}
+        {% endif %}
+    </span>
+{% endspaceless %}
+{% endblock field_errors %}
+
+{% block order_delivery_address_row %}
+{% spaceless %}
+<style>
+.exist_addresses .dl-horizontal dd{
+	margin-left: 30px; padding-top: 3px;
+}
+.exist_addresses .dl-horizontal dt{
+	width: 20px; padding-right: 5px;
+}
+</style>
+x{{ form_errors(form) }}s
+    {% if form.exist is defined %}
+	    <div class="exist_addresses">
+		    <dl class="dl-horizontal">
+		    	{% set create_new = false %}
+		        {% for add in form.exist %}
+		            <dt>{{ form_widget(add) }}</dt>
+		            <dd><address>{{ form_label(add) }}</address></dd>
+		            {% set create_new = add.vars.checked %}
+		        {% endfor %}
+		    </dl>
+	    </div>
+
+	    <div class="new_address{% if not create_new %} hidden{% endif %}">
+    {% else %}
+    <div>
+    {% endif %}
+   v {{ form_errors(form.new) }} d
+    {% for field in form.new %}
+
+		{{ form_row(field, {'label': 'chewbacca_orders.forms.order.form.deliveryAddress.form.new.form.'~field.vars.name~'.label'}) }}
+    {% endfor %}
+	</div>
+
+{% if form.exist is defined %}
+<script>
+	$('.exist_addresses input:radio').change(function() {
+		if ($(this).val() === 'create_new') {
+			$('.new_address').removeClass('hidden');
+			return;
+		}
+		if(!$('.new_address').hasClass('hidden') ){
+			$('.new_address').addClass('hidden');
+		}
+    });
+</script>
+{% endif %}
+{% endspaceless %}
+{% endblock %}

@@ -2,12 +2,14 @@
 namespace Chewbacca\OrdersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-/** 
- *  @ORM\Entity 
+
+/**
+ *  @ORM\Entity
  *  @ORM\HasLifecycleCallbacks()
  *  @ORM\Table(name="chewb_delivery_address")
- * 
+ *
  **/
  class DeliveryAddress{
 
@@ -21,9 +23,17 @@ use Doctrine\ORM\Mapping as ORM;
     protected $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\UserBundle\Entity\User", inversedBy="delivery_addresses", cascade={"persist"})
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $user;
+
+    /**
      * Firstname.
      *
 	 * @var string $firstname
+     *
+     * @Assert\NotBlank()
      * @ORM\Column(name="firstname", type="string", length=120)
      */
     protected $firstname;
@@ -32,11 +42,13 @@ use Doctrine\ORM\Mapping as ORM;
      * Lastname.
      *
 	 * @var string $lastname
+	 * @Assert\NotBlank()
      * @ORM\Column(name="lastname", type="string", length=120)
      */
     protected $lastname;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country", inversedBy="delivery_addresses", cascade={"persist"})
      * @ORM\JoinColumn(name="country_id", referencedColumnName="id", onDelete="CASCADE")
      */
@@ -44,8 +56,9 @@ use Doctrine\ORM\Mapping as ORM;
 
     /**
      * City.
-     *
+     * 
      * @var string $city
+     * @Assert\NotBlank()
      * @ORM\Column(name="city", type="string", length=120)
      */
     protected $city;
@@ -54,6 +67,7 @@ use Doctrine\ORM\Mapping as ORM;
      * Postcode.
      *
      * @var string $postcode
+     * @Assert\NotBlank()
      * @ORM\Column(name="postcode", type="string", length=9)
      */
     protected $postcode;
@@ -62,6 +76,7 @@ use Doctrine\ORM\Mapping as ORM;
      * Street.
      *
      * @var string $street
+     * @Assert\NotBlank()
      * @ORM\Column(name="street", type="string", length=255)
      */
     protected $street;
@@ -78,9 +93,17 @@ use Doctrine\ORM\Mapping as ORM;
     protected $orders;
 
     /**
+     * Get full address
+     *
+     * @return datetime
+     */
+    public function getFullAddress(){
+        return sprintf('%s, %s, %s, %s, %s', $this->getFirstname(), $this->getLastname(), $this->getCity(), $this->getPostcode(), $this->getStreet());
+    }
+    /**
      * Get created
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreated()
     {
@@ -90,11 +113,11 @@ use Doctrine\ORM\Mapping as ORM;
     {
         $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -116,7 +139,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get firstname
      *
-     * @return string 
+     * @return string
      */
     public function getFirstname()
     {
@@ -138,7 +161,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get lastname
      *
-     * @return string 
+     * @return string
      */
     public function getLastname()
     {
@@ -171,7 +194,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get orders
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getOrders()
     {
@@ -193,7 +216,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get street
      *
-     * @return string 
+     * @return string
      */
     public function getStreet()
     {
@@ -215,7 +238,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get city
      *
-     * @return string 
+     * @return string
      */
     public function getCity()
     {
@@ -237,7 +260,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get postcode
      *
-     * @return string 
+     * @return string
      */
     public function getPostcode()
     {
@@ -271,10 +294,32 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get country
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country
      */
     public function getCountry()
     {
         return $this->country;
+    }
+
+    /**
+     * Set user
+     *
+     * @param Chewbacca\UserBundle\Entity\User $user
+     * @return DeliveryAddress
+     */
+    public function setUser(\Chewbacca\UserBundle\Entity\User $user = null)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * Get user
+     *
+     * @return Chewbacca\UserBundle\Entity\User
+     */
+    public function getUser()
+    {
+        return $this->user;
     }
 }

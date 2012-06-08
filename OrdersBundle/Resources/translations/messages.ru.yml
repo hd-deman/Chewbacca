@@ -1,0 +1,22 @@
+chewbacca_orders:
+  forms:
+    order:
+      form:
+        deliveryAddress:
+          label: "Адрес доставки"
+          form:
+            new:
+              label: "Новый адрес"
+              form:
+                firstname:
+                  label: "Имя"
+                lastname:
+                  label: "Фамилия"
+                country:
+                  label: "Страна"
+                city:
+                  label: "Город"
+                postcode:
+                  label: "Индекс"
+                street:
+                  label: "Адрес"

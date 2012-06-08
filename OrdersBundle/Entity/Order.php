@@ -26,6 +26,12 @@ use Doctrine\ORM\Mapping as ORM;
     protected $user;
 
     /**
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\UserBundle\Entity\UserPhone", cascade={"persist"})
+     * @ORM\JoinColumn(name="phone_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    protected $phone;
+
+    /**
      * @var integer $id
      *
      * @ORM\Column(name="total_items", type="integer")
@@ -275,5 +281,27 @@ use Doctrine\ORM\Mapping as ORM;
     public function getDeliveryAddress()
     {
         return $this->delivery_address;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param Chewbacca\UserBundle\Entity\UserPhone $phone
+     * @return Order
+     */
+    public function setPhone(\Chewbacca\UserBundle\Entity\UserPhone $phone = null)
+    {
+        $this->phone = $phone;
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return Chewbacca\UserBundle\Entity\UserPhone 
+     */
+    public function getPhone()
+    {
+        return $this->phone;
     }
 }

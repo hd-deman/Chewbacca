@@ -2,7 +2,8 @@ parameters:
     chewbacca_orders.manager.order.class: Chewbacca\OrdersBundle\Entity\OrderManager
     chewbacca_orders.manager.item.class: Chewbacca\OrdersBundle\Entity\ItemManager
     chewbacca_orders.form.type.order.class: Chewbacca\OrdersBundle\Form\Type\OrderFormType
-
+    form.type.order_delivery_address.class: Chewbacca\OrdersBundle\Form\Type\OrderDeliveryAddressType
+    form.type.delivery_address.class: Chewbacca\OrdersBundle\Form\Type\DeliveryAddressFormType
 services:
     chewbacca_orders.manager.order:
         class: %chewbacca_orders.manager.order.class%
@@ -19,3 +20,15 @@ services:
         arguments: [Chewbacca\OrdersBundle\Entity\Order]
         tags:
           - { name: form.type, alias: chewbacca_order }
+
+    form.type.order_delivery_address:
+        class: %form.type.order_delivery_address.class%
+        arguments: [@doctrine.orm.entity_manager, @security.context]
+        tags:
+          - { name: form.type, alias: order_delivery_address }
+
+    form.type.delivery_address:
+        class: %form.type.delivery_address.class%
+        arguments: []
+        tags:
+          - { name: form.type, alias: delivery_address }
