@@ -61,7 +61,7 @@ class ProductManager extends BaseProductManager
      */
     public function createPaginator($queryBuilder = null)
     {
-        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder->getQuery()));
+        return new Pagerfanta(new DoctrineORMAdapter($queryBuilder->getQuery()->setResultCacheLifetime(10800)));
     }
 
     /**
