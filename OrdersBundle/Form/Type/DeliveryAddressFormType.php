@@ -1,5 +1,4 @@
 <?php
-
 namespace Chewbacca\OrdersBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -20,10 +19,9 @@ class DeliveryAddressFormType extends AbstractType
                 'property' => 'Title',
                 'query_builder' => function ($repository) {
                     return $repository->createQueryBuilder('c')->orderBy('c.title', 'ASC');
-                },
-                'error_bubbling' => false
-                )
-            );
+                }
+            )
+        );
         $builder->add('city');
         $builder->add('postcode');
         $builder->add('street');
@@ -32,7 +30,6 @@ class DeliveryAddressFormType extends AbstractType
     public function getDefaultOptions()
     {
         return array(
-        	'error_bubbling' => false,
             'data_class' => 'Chewbacca\OrdersBundle\Entity\DeliveryAddress',
         );
     }

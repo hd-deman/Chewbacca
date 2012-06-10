@@ -26,7 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
     protected $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="\Chewbacca\UserBundle\Entity\UserPhone", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="\Chewbacca\UserBundle\Entity\UserPhone", inversedBy="orders", cascade={"persist"})
      * @ORM\JoinColumn(name="phone_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $phone;

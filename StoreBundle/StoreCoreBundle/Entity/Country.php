@@ -83,4 +83,16 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->delivery_addresses;
     }
+
+    /**
+     * Add delivery_addresses
+     *
+     * @param Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses
+     * @return Country
+     */
+    public function addDeliveryAddresse(\Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses)
+    {
+        $this->delivery_addresses[] = $deliveryAddresses;
+        return $this;
+    }
 }

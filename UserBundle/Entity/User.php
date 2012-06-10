@@ -110,4 +110,28 @@ class User extends BaseUser
     {
         return $this->phone_numbers;
     }
+
+    /**
+     * Add delivery_addresses
+     *
+     * @param Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses
+     * @return User
+     */
+    public function addDeliveryAddresse(\Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses)
+    {
+        $this->delivery_addresses[] = $deliveryAddresses;
+        return $this;
+    }
+
+    /**
+     * Add phone_numbers
+     *
+     * @param Chewbacca\UserBundle\Entity\UserPhone $phoneNumbers
+     * @return User
+     */
+    public function addPhoneNumber(\Chewbacca\UserBundle\Entity\UserPhone $phoneNumbers)
+    {
+        $this->phone_numbers[] = $phoneNumbers;
+        return $this;
+    }
 }

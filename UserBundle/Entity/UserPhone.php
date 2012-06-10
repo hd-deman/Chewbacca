@@ -13,7 +13,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  class UserPhone{
     /**
      * @var integer $id
-     *
+     * 
+     * @Assert\NotBlank(groups={"check_exist"})
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -31,10 +32,20 @@ use Symfony\Component\Validator\Constraints as Assert;
      * 
      * @var string $phone_number
 	 * 
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(groups={"check_new"})
+     * @Assert\Regex(
+     *     pattern="~\+?[\d\s()-]+~",
+     *     groups={"check_new"},
+     *     message="Не верный формат номера телефона"
+     * )
      * @ORM\Column(name="phone_number", type="string", length=12)
      */
     protected $phone_number;
+
+    /**
+     * @ORM\OneToMany(targetEntity="\Chewbacca\OrdersBundle\Entity\Order", mappedBy="phone", cascade={"all"})
+     */
+    protected $orders;
 
     /**
      * Get id
@@ -54,7 +65,9 @@ use Symfony\Component\Validator\Constraints as Assert;
      */
     public function setPhoneNumber($phoneNumber)
     {
-        $this->phone_number = $phoneNumber;
+        //@TODO move this to purify phone helper
+        $phoneNumber = preg_replace('~^8~', '7', $phoneNumber);
+        $this->phone_number = preg_replace('~[^\d]+~', '', $phoneNumber);
         return $this;
     }
 

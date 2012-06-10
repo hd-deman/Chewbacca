@@ -36,16 +36,15 @@ class OrderUserPhoneTransformer implements DataTransformerInterface
 	 */
 	public function transform($userPhone)
 	{
-		$res = null;
 		if(is_object($userPhone)){
 			if($userPhone->getId()){
-				$res = array('new' => new UserPhone(), 'exist' => $userPhone->getId());
+				return array('new' => new UserPhone(), 'exist' => $userPhone->getId());
 			}else{
-				$res = array('new' => $userPhone, 'exist' => 'create_new');
+				return array('new' => $userPhone, 'exist' => 'create_new');
 			}
 		}
 
-		return $res;
+		return null;
 	}
 
 	/**
@@ -57,6 +56,9 @@ class OrderUserPhoneTransformer implements DataTransformerInterface
 	public function reverseTransform($phone)
 	{
 		if(!array_key_exists("exist", $phone) or $phone["exist"] == "create_new"){
+			if(!$phone["new"]){
+				$phone["new"] = new UserPhone();
+			}
 			return $phone["new"]->setUser($this->user);
 		}
 

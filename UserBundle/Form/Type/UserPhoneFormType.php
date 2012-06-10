@@ -1,5 +1,6 @@
 <?php
 namespace Chewbacca\UserBundle\Form\Type;
+
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -11,12 +12,13 @@ class UserPhoneFormType extends AbstractType
 {
    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('phone_number');
+        $builder->add('phone_number', null, array('max_length' => 20));
     }
 
     public function getDefaultOptions()
     {
         return array(
+            'data_class' => 'Chewbacca\UserBundle\Entity\UserPhone',
         );
     }
 

@@ -4,10 +4,10 @@ namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
+/**
  *  @ORM\Entity
  *  @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="search_idx", columns={"product_id", "size_id", "option_id"})})
- * 
+ *
  **/
  class ProductSet{
     /**
@@ -47,7 +47,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -70,7 +70,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get product
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product
      */
     public function getProduct()
     {
@@ -93,7 +93,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get product_size
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSize 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSize
      */
     public function getProductSize()
     {
@@ -115,7 +115,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get product_option
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption
      */
     public function getProductOption()
     {
@@ -137,7 +137,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get products
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product
      */
     public function getProducts()
     {
@@ -159,7 +159,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get stock
      *
-     * @return integer 
+     * @return integer
      */
     public function getStock()
     {

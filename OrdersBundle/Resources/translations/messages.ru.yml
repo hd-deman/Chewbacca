@@ -3,7 +3,13 @@ chewbacca_orders:
     order:
       form:
         phone:
-          label: "Мобильный телефон"
+          label: "Контактная информация"
+          form:
+            new:
+              label: "Новый обильный"
+              form:
+                phone_number:
+                  label: "Мобильный телефон"
         deliveryAddress:
           label: "Адрес доставки"
           form:
@@ -11,9 +17,9 @@ chewbacca_orders:
               label: "Новый адрес"
               form:
                 firstname:
-                  label: "Имя"
+                  label: "Имя получателя"
                 lastname:
-                  label: "Фамилия"
+                  label: "Фамилия получателя"
                 country:
                   label: "Страна"
                 city:

@@ -8,9 +8,6 @@ use Symfony\Component\Form\FormBuilderInterface ;
 use Symfony\Component\Form\Event\DataEvent;
 use Symfony\Component\Form\FormEvents;
 
-use Chewbacca\UserBundle\Form\Type\UserPhoneFormType;
-
-
 /**
  * Order form form.
  *
@@ -20,8 +17,8 @@ class OrderFormType extends AbstractType
    public function buildForm(FormBuilderInterface  $builder, array $options)
     {
 
-		$builder->add('deliveryAddress', 'order_delivery_address', array('error_bubbling' => false, 'validation_groups' => array('check_new')));
-        $builder->add('phone', 'order_user_phone');
+		$builder->add('deliveryAddress', 'order_delivery_address', array('validation_groups' => array('check_new')));
+        $builder->add('phone', 'order_user_phone', array('validation_groups' => array('check_new')));
         //$builder->add('phone', new UserPhoneFormType(), array('error_bubbling' => false));
 
 		$builder->addEventListener(FormEvents::PRE_BIND, function(DataEvent $event) use ($builder){
@@ -29,8 +26,12 @@ class OrderFormType extends AbstractType
 			if ($data) {
 				if(key_exists('exist', $data['deliveryAddress']) && $data['deliveryAddress']['exist'] != 'create_new'){
 					$event->getForm()->remove('deliveryAddress');
-					$event->getForm()->add($builder->create('deliveryAddress', 'order_delivery_address', array('error_bubbling' => false, 'validation_groups' => array('check_exist')))->getForm());
+					$event->getForm()->add($builder->create('deliveryAddress', 'order_delivery_address', array('validation_groups' => array('check_exist')))->getForm());
 				}
+                if(key_exists('exist', $data['phone']) && $data['phone']['exist'] != 'create_new'){
+                    $event->getForm()->remove('phone');
+                    $event->getForm()->add($builder->create('phone', 'order_user_phone', array('validation_groups' => array('check_exist')))->getForm());
+                }
 			}
 		});
     }

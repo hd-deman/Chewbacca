@@ -99,4 +99,16 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->categories;
     }
+
+    /**
+     * Add categories
+     *
+     * @param Chewbacca\CoreBundle\Entity\Category $categories
+     * @return Nature
+     */
+    public function addCategorie(\Chewbacca\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+        return $this;
+    }
 }

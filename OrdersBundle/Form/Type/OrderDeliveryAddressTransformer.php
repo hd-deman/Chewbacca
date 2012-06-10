@@ -36,16 +36,15 @@ class OrderDeliveryAddressTransformer implements DataTransformerInterface
 	 */
 	public function transform($deliveryAddress)
 	{
-		$res = null;
 		if(is_object($deliveryAddress)){
 			if($deliveryAddress->getId()){
-				$res = array('new' => new DeliveryAddress(), 'exist' => $deliveryAddress->getId());
+				return array('new' => new DeliveryAddress(), 'exist' => $deliveryAddress->getId());
 			}else{
-				$res = array('new' => $deliveryAddress, 'exist' => 'create_new');
+				return array('new' => $deliveryAddress, 'exist' => 'create_new');
 			}
 		}
 
-		return $res;
+		return null;
 	}
 
 	/**

@@ -41,7 +41,7 @@ class QiwiPayment extends BasePayment
 		$params['amount'] = $order->getAmount();
 		$params['comment'] = 'оплата заказа №'.$order->getId();
 		$params['txn'] = $order->getId();
-		$params['user'] = $order->getPhone()->getPhoneNumber();
+		$params['user'] = preg_replace('~^\+?7~', '', $order->getPhone()->getPhoneNumber());
 		#$params['lifetime'] = $lifetime;
 		return $params;
 	}

@@ -3,9 +3,12 @@
 namespace Chewbacca\OrdersBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface ;
+use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+
+
+use Chewbacca\OrdersBundle\Entity\DeliveryAddress;
 
 /**
  * DeliveryAddress form form.
@@ -57,7 +60,6 @@ class OrderDeliveryAddressType extends AbstractType
     public function getDefaultOptions()
     {
         return array(
-            #'cascade_validation' => true
             'error_mapping' => array(
                 'firstname' => 'new.firstname',
                 'lastname' => 'new.lastname',
@@ -71,6 +73,6 @@ class OrderDeliveryAddressType extends AbstractType
 
     public function getName()
     {
-        return 'order_delivery_address';
+        return 'create_new_or_select_exists';
     }
 }

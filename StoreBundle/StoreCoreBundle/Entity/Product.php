@@ -462,4 +462,16 @@ use Gedmo\Mapping\Annotation as Gedmo;
     {
         return $this->currency;
     }
+
+    /**
+     * Add categories
+     *
+     * @param Chewbacca\CoreBundle\Entity\Category $categories
+     * @return Product
+     */
+    public function addCategorie(\Chewbacca\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+        return $this;
+    }
 }

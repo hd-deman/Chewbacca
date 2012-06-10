@@ -22,7 +22,7 @@
 {% endspaceless %}
 {% endblock field_errors %}
 
-{% block order_delivery_address_row %}
+{% block create_new_or_select_exists_row %}
 {% spaceless %}
 <style>
 .exist_addresses .dl-horizontal dd{
@@ -51,7 +51,7 @@
     {% endif %}
     {{ form_errors(form.new) }}
     {% for field in form.new %}
-		{{ form_row(field, {'label': 'chewbacca_orders.forms.order.form.deliveryAddress.form.new.form.'~field.vars.name~'.label'}) }}
+		{{ form_row(field, {'label': 'chewbacca_orders.forms.order.form.'~form.vars.name~'.form.new.form.'~field.vars.name~'.label'}) }}
     {% endfor %}
 	</div>
 

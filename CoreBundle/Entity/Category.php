@@ -329,4 +329,16 @@ use Symfony\Component\Validator\Constraints as Assert;
     public function getTitleWithIndent(){
         return str_repeat('—', $this->getLvl()-1)." ".$this->getTitle();
     }
+
+    /**
+     * Add children
+     *
+     * @param Chewbacca\CoreBundle\Entity\Category $children
+     * @return Category
+     */
+    public function addChildren(\Chewbacca\CoreBundle\Entity\Category $children)
+    {
+        $this->children[] = $children;
+        return $this;
+    }
 }

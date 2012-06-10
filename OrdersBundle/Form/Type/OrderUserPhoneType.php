@@ -4,13 +4,9 @@ namespace Chewbacca\OrdersBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface ;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\Event\DataEvent;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
-use Symfony\Component\Validator\Constraints\MinLength;
-use Symfony\Component\Validator\Constraints\Collection;
 
 use Chewbacca\OrdersBundle\Entity\DeliveryAddress;
 
@@ -43,7 +39,7 @@ class OrderUserPhoneType extends AbstractType
     {
         $phones = array();
         foreach($this->user->getPhoneNumbers() as $phone){
-            $phones[$phone->getId()] = $phone->getPhonNumber();
+            $phones[$phone->getId()] = $phone->getPhoneNumber();
         }
 
         if(!empty($phones)){
@@ -72,6 +68,6 @@ class OrderUserPhoneType extends AbstractType
 
     public function getName()
     {
-        return 'order_phone_number';
+        return 'create_new_or_select_exists';
     }
 }
