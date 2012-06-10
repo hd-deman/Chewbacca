@@ -13,8 +13,8 @@ class DeliveryAddressFormType extends AbstractType
 {
    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('firstname', null, array('error_bubbling'=>false));
-        $builder->add('lastname', null, array('error_bubbling'=>false));
+        $builder->add('firstname');
+        $builder->add('lastname');
         $builder->add('country','entity',
             array('class' => 'Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country',
                 'property' => 'Title',
@@ -24,15 +24,15 @@ class DeliveryAddressFormType extends AbstractType
                 'error_bubbling' => false
                 )
             );
-        $builder->add('city', null, array('error_bubbling'=>false));
-        $builder->add('postcode', null, array('error_bubbling'=>false));
-        $builder->add('street', null, array('error_bubbling'=>false));
+        $builder->add('city');
+        $builder->add('postcode');
+        $builder->add('street');
     }
 
     public function getDefaultOptions()
     {
         return array(
-            'is_virtual' => false,
+        	'error_bubbling' => false,
             'data_class' => 'Chewbacca\OrdersBundle\Entity\DeliveryAddress',
         );
     }

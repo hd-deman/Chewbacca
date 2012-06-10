@@ -4,14 +4,21 @@ namespace Chewbacca\OrdersBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface ;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\Event\DataEvent;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
+
+use Symfony\Component\Validator\Constraints\MinLength;
+use Symfony\Component\Validator\Constraints\Collection;
+
+use Chewbacca\OrdersBundle\Entity\DeliveryAddress;
 
 /**
  * DeliveryAddress form form.
  *
  */
-class OrderDeliveryAddressType extends AbstractType
+class OrderUserPhoneType extends AbstractType
 {
     /**
      * @var ObjectManager
@@ -34,43 +41,37 @@ class OrderDeliveryAddressType extends AbstractType
 
    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $delivery_addresses = array();
-        foreach($this->user->getDeliveryAddresses() as $add){
-            $delivery_addresses[$add->getId()] = $add->getFullAddress();
+        $phones = array();
+        foreach($this->user->getPhoneNumbers() as $phone){
+            $phones[$phone->getId()] = $phone->getPhonNumber();
         }
 
-        if(!empty($delivery_addresses)){
-        	$delivery_addresses['create_new'] = 'Создать новый';
+        if(!empty($phones)){
+        	$phones['create_new'] = 'Создать новый';
         	$builder->add('exist', 'choice', array(
-        			'choices'   => $delivery_addresses,
+        			'choices'   => $phones,
         			'required'  => false,
         			'expanded'  => true,
         	));
         }
 
-        $builder->add('new', 'delivery_address', array('required' => false));
+        $builder->add('new', 'user_phone', array('required' => false));
 
-        $transformer = new OrderDeliveryAddressTransformer($this->om, $this->user);
+        $transformer = new OrderUserPhoneTransformer($this->om, $this->user);
         $builder->appendClientTransformer($transformer);
     }
 
     public function getDefaultOptions()
     {
         return array(
-            #'cascade_validation' => true
             'error_mapping' => array(
-                'firstname' => 'new.firstname',
-                'lastname' => 'new.lastname',
-                'country' => 'new.country',
-                'postcode' => 'new.postcode',
-            	'city' => 'new.city',
-                'street' => 'new.street'
+                'phone_number' => 'new.phone_number',
             )
         );
     }
 
     public function getName()
     {
-        return 'order_delivery_address';
+        return 'order_phone_number';
     }
 }

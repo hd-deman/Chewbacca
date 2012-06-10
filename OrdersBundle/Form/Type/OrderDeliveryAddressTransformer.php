@@ -29,19 +29,19 @@ class OrderDeliveryAddressTransformer implements DataTransformerInterface
 	}
 
 	/**
-	 * Transforms an object (deliveryAddress) to a string (number).
+	 * Transforms an object (deliveryAddress) to a array().
 	 *
 	 * @param  deliveryAddress|null $deliveryAddress
-	 * @return integer|deliveryAddress
+	 * @return array
 	 */
 	public function transform($deliveryAddress)
 	{
 		$res = null;
 		if(is_object($deliveryAddress)){
 			if($deliveryAddress->getId()){
-				$res = array('new' => null, 'exist' => $deliveryAddress->getId());
+				$res = array('new' => new DeliveryAddress(), 'exist' => $deliveryAddress->getId());
 			}else{
-				$res = array('new' => $deliveryAddress, 'exist' => null);
+				$res = array('new' => $deliveryAddress, 'exist' => 'create_new');
 			}
 		}
 

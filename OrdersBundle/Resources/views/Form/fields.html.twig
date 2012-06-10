@@ -12,13 +12,13 @@
 
 {% block field_errors %}
 {% spaceless %}
-    <span class="help-inline">
         {% if errors|length > 0 %}
+        	<span class="help-inline">
             {% for error in errors %}
                 {{ error.messageTemplate|trans(error.messageParameters, 'validators') }}<br />
             {% endfor %}
+            </span>
         {% endif %}
-    </span>
 {% endspaceless %}
 {% endblock field_errors %}
 
@@ -32,7 +32,7 @@
 	width: 20px; padding-right: 5px;
 }
 </style>
-x{{ form_errors(form) }}s
+{{ form_errors(form) }}
     {% if form.exist is defined %}
 	    <div class="exist_addresses">
 		    <dl class="dl-horizontal">
@@ -49,9 +49,8 @@ x{{ form_errors(form) }}s
     {% else %}
     <div>
     {% endif %}
-   v {{ form_errors(form.new) }} d
+    {{ form_errors(form.new) }}
     {% for field in form.new %}
-
 		{{ form_row(field, {'label': 'chewbacca_orders.forms.order.form.deliveryAddress.form.new.form.'~field.vars.name~'.label'}) }}
     {% endfor %}
 	</div>

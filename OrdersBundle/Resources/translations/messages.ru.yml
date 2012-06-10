@@ -2,6 +2,8 @@ chewbacca_orders:
   forms:
     order:
       form:
+        phone:
+          label: "Мобильный телефон"
         deliveryAddress:
           label: "Адрес доставки"
           form:

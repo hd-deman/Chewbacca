@@ -1,6 +1,7 @@
 parameters:
     chewbacca_user.mailer.class: Chewbacca\UserBundle\Mailer\Mailer
     chewbacca_user.registration.form.handler.class: Chewbacca\UserBundle\Form\Handler\RegistrationFormHandler
+    form.type.user_phone.class: Chewbacca\UserBundle\Form\Type\UserPhoneFormType
 
 services:
     chewbacca_user.mailer:
@@ -11,3 +12,9 @@ services:
         class: %chewbacca_user.registration.form.handler.class%
         scope: request
         arguments: [@fos_user.registration.form, @request, @fos_user.user_manager, @chewbacca_user.mailer]
+
+    form.type.user_phone:
+        class: %form.type.user_phone.class%
+        arguments: []
+        tags:
+          - { name: form.type, alias: user_phone }

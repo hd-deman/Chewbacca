@@ -4,6 +4,7 @@ parameters:
     chewbacca_orders.form.type.order.class: Chewbacca\OrdersBundle\Form\Type\OrderFormType
     form.type.order_delivery_address.class: Chewbacca\OrdersBundle\Form\Type\OrderDeliveryAddressType
     form.type.delivery_address.class: Chewbacca\OrdersBundle\Form\Type\DeliveryAddressFormType
+    form.type.order_user_phone.class: Chewbacca\OrdersBundle\Form\Type\OrderUserPhoneType
 services:
     chewbacca_orders.manager.order:
         class: %chewbacca_orders.manager.order.class%
@@ -32,3 +33,9 @@ services:
         arguments: []
         tags:
           - { name: form.type, alias: delivery_address }
+
+    form.type.order_user_phone:
+        class: %form.type.order_user_phone.class%
+        arguments: [@doctrine.orm.entity_manager, @security.context]
+        tags:
+          - { name: form.type, alias: order_user_phone }
