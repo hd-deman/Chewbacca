@@ -23,7 +23,7 @@
     <div class="row-fluid">
         <div class="pull-left">
             <a class="product-img">
-                <img src="{{ product.getMltdProductImages[0].getWebPath | apply_filter('lacroco_polaroid_smallest') }}" alt="{{ product.getTitle }}" />
+                <img src="{{ product.getMltdProductImages[0].getWebPath | imagine_filter('lacroco_product_smallest') }}" alt="{{ product.getTitle }}" />
             </a>
         </div>
         <div class="offset1">
