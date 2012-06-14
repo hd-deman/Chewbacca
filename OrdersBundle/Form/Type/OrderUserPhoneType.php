@@ -7,7 +7,6 @@ use Symfony\Component\Form\FormBuilderInterface ;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
-
 use Chewbacca\OrdersBundle\Entity\DeliveryAddress;
 
 /**
@@ -38,17 +37,17 @@ class OrderUserPhoneType extends AbstractType
    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $phones = array();
-        foreach($this->user->getPhoneNumbers() as $phone){
+        foreach ($this->user->getPhoneNumbers() as $phone) {
             $phones[$phone->getId()] = $phone->getPhoneNumber();
         }
 
-        if(!empty($phones)){
-        	$phones['create_new'] = 'Создать новый';
-        	$builder->add('exist', 'choice', array(
-        			'choices'   => $phones,
-        			'required'  => false,
-        			'expanded'  => true,
-        	));
+        if (!empty($phones)) {
+            $phones['create_new'] = 'Создать новый';
+            $builder->add('exist', 'choice', array(
+                    'choices'   => $phones,
+                    'required'  => false,
+                    'expanded'  => true,
+            ));
         }
 
         $builder->add('new', 'user_phone', array('required' => false));

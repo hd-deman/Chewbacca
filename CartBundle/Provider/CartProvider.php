@@ -54,14 +54,15 @@ class CartProvider implements CartProviderInterface
             $cartIdentifier = $this->storage->getCurrentCartIdentifier();
 
             if ($cartIdentifier) {
-                if($with_items){
+                if ($with_items) {
                     $cart = $this->cartManager->findCartWithItems($cartIdentifier);
-                 }else{
+                 } else {
                     $cart = $this->cartManager->findCart($cartIdentifier);
                  }
 
                 if ($cart) {
                     $this->cart = $cart;
+
                     return $cart;
                 }
             }

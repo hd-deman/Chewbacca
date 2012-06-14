@@ -7,7 +7,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
-
 use Chewbacca\OrdersBundle\Entity\DeliveryAddress;
 
 /**
@@ -38,17 +37,17 @@ class OrderDeliveryAddressType extends AbstractType
    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $delivery_addresses = array();
-        foreach($this->user->getDeliveryAddresses() as $add){
+        foreach ($this->user->getDeliveryAddresses() as $add) {
             $delivery_addresses[$add->getId()] = $add->getFullAddress();
         }
 
-        if(!empty($delivery_addresses)){
-        	$delivery_addresses['create_new'] = 'Создать новый';
-        	$builder->add('exist', 'choice', array(
-        			'choices'   => $delivery_addresses,
-        			'required'  => false,
-        			'expanded'  => true,
-        	));
+        if (!empty($delivery_addresses)) {
+            $delivery_addresses['create_new'] = 'Создать новый';
+            $builder->add('exist', 'choice', array(
+                    'choices'   => $delivery_addresses,
+                    'required'  => false,
+                    'expanded'  => true,
+            ));
         }
 
         $builder->add('new', 'delivery_address', array('required' => false));
@@ -65,7 +64,7 @@ class OrderDeliveryAddressType extends AbstractType
                 'lastname' => 'new.lastname',
                 'country' => 'new.country',
                 'postcode' => 'new.postcode',
-            	'city' => 'new.city',
+                'city' => 'new.city',
                 'street' => 'new.street'
             )
         );

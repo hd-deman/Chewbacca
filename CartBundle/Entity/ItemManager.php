@@ -8,8 +8,6 @@ use Doctrine\ORM\EntityRepository;
 use Chewbacca\CartBundle\Entity\CartItem;
 use Chewbacca\CartBundle\Model\ItemManager as BaseItemManager;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
 class ItemManager extends BaseItemManager
 {
     /**

@@ -4,11 +4,12 @@ namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  *  @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="search_idx", columns={"product_id", "delivery_type_id", "country_id"})})
  **/
- class DeliveryPrice{
+ class DeliveryPrice
+ {
     /**
      * @var integer $id
      *
@@ -46,7 +47,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -56,19 +57,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set product
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product
      * @return DeliveryPrice
      */
     public function setProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product = null)
     {
         $this->product = $product;
+
         return $this;
     }
 
     /**
      * Get product
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product
      */
     public function getProduct()
     {
@@ -78,19 +80,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set delivery_type
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryType $deliveryType
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryType $deliveryType
      * @return DeliveryPrice
      */
     public function setDeliveryType(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryType $deliveryType = null)
     {
         $this->delivery_type = $deliveryType;
+
         return $this;
     }
 
     /**
      * Get delivery_type
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryType 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryType
      */
     public function getDeliveryType()
     {
@@ -100,19 +103,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set country
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country $country
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country $country
      * @return DeliveryPrice
      */
     public function setCountry(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country $country = null)
     {
         $this->country = $country;
+
         return $this;
     }
 
     /**
      * Get country
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Country
      */
     public function getCountry()
     {
@@ -122,19 +126,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set price
      *
-     * @param decimal $price
+     * @param  decimal       $price
      * @return DeliveryPrice
      */
     public function setPrice($price)
     {
         $this->price = $price;
+
         return $this;
     }
 
     /**
      * Get price
      *
-     * @return decimal 
+     * @return decimal
      */
     public function getPrice()
     {

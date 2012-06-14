@@ -4,14 +4,16 @@ namespace Chewbacca\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
+/**
  *  @ORM\Entity
  */
 
- class Nature{
-	public function __toString(){
-		return $this->title;
-	}
+ class Nature
+ {
+    public function __toString()
+    {
+        return $this->title;
+    }
     /**
      * @var integer $id
      *
@@ -29,17 +31,18 @@ use Doctrine\ORM\Mapping as ORM;
     private $title;
 
     /**
-     * @ORM\OneToMany(targetEntity="\Chewbacca\CoreBundle\Entity\Category", mappedBy="nature") 
+     * @ORM\OneToMany(targetEntity="\Chewbacca\CoreBundle\Entity\Category", mappedBy="nature")
      */
     private $categories;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
-	}
+    }
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -49,31 +52,33 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set id
      *
-     * @param intager $id
+     * @param  intager $id
      * @return Nature
      */
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Nature
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -93,7 +98,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get categories
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getCategories()
     {
@@ -103,12 +108,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Add categories
      *
-     * @param Chewbacca\CoreBundle\Entity\Category $categories
+     * @param  Chewbacca\CoreBundle\Entity\Category $categories
      * @return Nature
      */
     public function addCategorie(\Chewbacca\CoreBundle\Entity\Category $categories)
     {
         $this->categories[] = $categories;
+
         return $this;
     }
 }

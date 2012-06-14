@@ -13,7 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *  @ORM\DiscriminatorColumn(name="discr", type="string")
  *  @ORM\DiscriminatorMap({"product" = "Product", "mltd_product" = "\Lacroco\StoreBundle\Entity\MltdProduct"})
  **/
- class Product{
+ class Product
+ {
     /**
      * @var integer $id
      *
@@ -25,7 +26,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
     /**
      * @var string $title
-	 *
+     *
      * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title;
@@ -69,7 +70,6 @@ use Gedmo\Mapping\Annotation as Gedmo;
      */
     protected $currency;
 
-
     /**
      * @ORM\ManyToMany(targetEntity="\Chewbacca\CoreBundle\Entity\Category", inversedBy="products")
      * @ORM\JoinTable(name="products_categories",
@@ -86,7 +86,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
     /**
      * @ORM\OneToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage", mappedBy="product")
-	 * @ORM\OrderBy({"priority" = "ASC"})
+     * @ORM\OrderBy({"priority" = "ASC"})
      */
     protected $product_images;
 
@@ -101,13 +101,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @ORM\Column(name="created", type="datetime")
      */
     protected $created;
-	/**
-	 * @ORM\prePersist
-	 */
-	public function setCreatedValue()
-	{
-	    $this->created = new \DateTime();
-	}
+    /**
+     * @ORM\prePersist
+     */
+    public function setCreatedValue()
+    {
+        $this->created = new \DateTime();
+    }
 
     /**
      * @var datetime $updated
@@ -115,21 +115,20 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
     protected $updated;
-	/**
-	 * @ORM\preUpdate
-	 */
-	public function setUpdatedValue()
-	{
-	    $this->updated = new \DateTime();
-	}
+    /**
+     * @ORM\preUpdate
+     */
+    public function setUpdatedValue()
+    {
+        $this->updated = new \DateTime();
+    }
      public function __construct()
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->product_sets = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->product_images = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->cart_items = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->product_sets = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->product_images = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->cart_items = new \Doctrine\Common\Collections\ArrayCollection();
     }
-
 
     /**
      * Get id
@@ -144,12 +143,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set price
      *
-     * @param decimal $price
+     * @param  decimal $price
      * @return Product
      */
     public function setPrice($price)
     {
         $this->price = $price;
+
         return $this;
     }
 
@@ -166,12 +166,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set sale_price
      *
-     * @param decimal $salePrice
+     * @param  decimal $salePrice
      * @return Product
      */
     public function setSalePrice($salePrice)
     {
         $this->sale_price = $salePrice;
+
         return $this;
     }
 
@@ -188,12 +189,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string  $slug
      * @return Product
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
@@ -210,12 +212,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set description
      *
-     * @param string $description
+     * @param  string  $description
      * @return Product
      */
     public function setDescription($description)
     {
         $this->description = $description;
+
         return $this;
     }
 
@@ -232,12 +235,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set created
      *
-     * @param datetime $created
+     * @param  datetime $created
      * @return Product
      */
     public function setCreated($created)
     {
         $this->created = $created;
+
         return $this;
     }
 
@@ -254,12 +258,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set updated
      *
-     * @param datetime $updated
+     * @param  datetime $updated
      * @return Product
      */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+
         return $this;
     }
 
@@ -276,12 +281,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set brand
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Brand $brand
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\Brand $brand
      * @return Product
      */
     public function setBrand(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Brand $brand)
     {
         $this->brand = $brand;
+
         return $this;
     }
 
@@ -338,12 +344,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string  $title
      * @return Product
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
@@ -417,39 +424,42 @@ use Gedmo\Mapping\Annotation as Gedmo;
         return $this->delivery_prices;
     }
 
-	public function getStorePrice(){
-		if($this->delivery_prices && $this->currency){
+    public function getStorePrice()
+    {
+        if ($this->delivery_prices && $this->currency) {
             $add1 = 49;
             $add2 = 99;
             $myup = ($this->getPrice()/100)*20;
             $store_price = ceil(($this->getPrice()+$this->delivery_prices[0]->getPrice()+$myup)*$this->currency->getRate());
             $price_o = $store_price%100;
             $price_v = $store_price-$price_o;
-            if($price_o<50){
+            if ($price_o<50) {
                 $price_o = 100+$add1;
-            }else{
+            } else {
                 $price_o = 100+$add2;
             }
             $store_price = $price_v+$price_o;
            # echo 'price: '.$this->getPrice()*$this->currency->getRate().' ('.$this->getPrice().')';
            # echo 'delivery price: '.$this->delivery_prices[0]->getPrice()*$this->currency->getRate().' ('.$this->delivery_prices[0]->getPrice().')';
            # echo 'no extra price: '.($this->delivery_prices[0]->getPrice()+$this->getPrice())*$this->currency->getRate().' ('.$this->getPrice()+$this->delivery_prices[0]->getPrice().')';
+
             return $store_price;
-		}else{
-			//@TODO throw exception
-			return false;
-		}
-	}
+        } else {
+            //@TODO throw exception
+            return false;
+        }
+    }
 
     /**
      * Set currency
      *
-     * @param Chewbacca\ExchangeRatesBundle\Entity\Currency $currency
+     * @param  Chewbacca\ExchangeRatesBundle\Entity\Currency $currency
      * @return Product
      */
     public function setCurrency(\Chewbacca\ExchangeRatesBundle\Entity\Currency $currency = null)
     {
         $this->currency = $currency;
+
         return $this;
     }
 
@@ -466,12 +476,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Add categories
      *
-     * @param Chewbacca\CoreBundle\Entity\Category $categories
+     * @param  Chewbacca\CoreBundle\Entity\Category $categories
      * @return Product
      */
     public function addCategorie(\Chewbacca\CoreBundle\Entity\Category $categories)
     {
         $this->categories[] = $categories;
+
         return $this;
     }
 }

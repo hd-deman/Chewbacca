@@ -5,15 +5,16 @@ namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  *  @ORM\HasLifecycleCallbacks()
- * 
+ *
  *  @ORM\InheritanceType("SINGLE_TABLE")
  *  @ORM\DiscriminatorColumn(name="discr", type="string")
  *  @ORM\DiscriminatorMap({"brand" = "Brand", "mltd_brand" = "Lacroco\StoreBundle\Entity\MltdBrand"})
  **/
- class Brand{
+ class Brand
+ {
     /**
      * @var integer $id
      *
@@ -44,7 +45,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -57,13 +58,13 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @ORM\Column(name="created", type="datetime")
      */
     protected $created;
-	/**
-	 * @ORM\prePersist
-	 */
-	public function setCreatedValue()
-	{
-	    $this->created = new \DateTime();
-	}
+    /**
+     * @ORM\prePersist
+     */
+    public function setCreatedValue()
+    {
+        $this->created = new \DateTime();
+    }
 
     /**
      * @var datetime $updated
@@ -71,31 +72,31 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
     protected $updated;
-	/**
-	 * @ORM\preUpdate
-	 */
-	public function setUpdatedValue()
-	{
-	    $this->updated = new \DateTime();
-	}
-
+    /**
+     * @ORM\preUpdate
+     */
+    public function setUpdatedValue()
+    {
+        $this->updated = new \DateTime();
+    }
 
     /**
      * Set created
      *
-     * @param datetime $created
+     * @param  datetime $created
      * @return Brand
      */
     public function setCreated($created)
     {
         $this->created = $created;
+
         return $this;
     }
 
     /**
      * Get created
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreated()
     {
@@ -105,19 +106,20 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set updated
      *
-     * @param datetime $updated
+     * @param  datetime $updated
      * @return Brand
      */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+
         return $this;
     }
 
     /**
      * Get updated
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdated()
     {
@@ -127,7 +129,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Add products
      *
@@ -141,7 +143,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Get products
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getProducts()
     {
@@ -151,19 +153,20 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Brand
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -173,19 +176,20 @@ use Gedmo\Mapping\Annotation as Gedmo;
     /**
      * Set slug
      *
-     * @param string $slug
+     * @param  string $slug
      * @return Brand
      */
     public function setSlug($slug)
     {
         $this->slug = $slug;
+
         return $this;
     }
 
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {

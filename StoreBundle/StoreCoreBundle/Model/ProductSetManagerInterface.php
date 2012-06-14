@@ -15,21 +15,21 @@ interface ProductSetManagerInterface
      *
      * @return Set
      */
-    function createSet();
+    public function createSet();
 
     /**
      * Persists product set.
      *
      * @param ProductSet $product
      */
-    function persistSet(ProductSet $product);
+    public function persistSet(ProductSet $product);
 
     /**
      * Deletes product.
      *
      * @param ProductSet $product
      */
-    function removeSet(ProductSet $product);
+    public function removeSet(ProductSet $product);
 
     /**
      * Finds product set by id.
@@ -38,7 +38,7 @@ interface ProductSetManagerInterface
      *
      * @return ProductSet
      */
-    function findSet($id);
+    public function findSet($id);
 
     /**
      * Finds product set by criteria.
@@ -47,14 +47,14 @@ interface ProductSetManagerInterface
      *
      * @return ProductSet
      */
-    function findSetBy(array $criteria);
+    public function findSetBy(array $criteria);
 
     /**
      * Finds all product sets.
      *
      * @return array
      */
-    function findSets();
+    public function findSets();
 
     /**
      * Finds product sets by criteria.
@@ -63,12 +63,12 @@ interface ProductSetManagerInterface
      *
      * @return array
      */
-    function findSetsBy(array $criteria);
+    public function findSetsBy(array $criteria);
 
     /**
      * Returns FQCN of product set.
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 }

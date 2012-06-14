@@ -52,18 +52,19 @@ class ItemManager extends BaseItemManager
         $class = $this->getClass();
         $item = new $class;
         $title = $CartItem->getProductSet()->getProduct()->getTitle();
-        if($CartItem->getProductSet()->getProductSize()){
+        if ($CartItem->getProductSet()->getProductSize()) {
             $title.= ' '.$CartItem->getProductSet()->getProductSize()->getTitle();
         }
-        if($CartItem->getProductSet()->getProductOption()){
+        if ($CartItem->getProductSet()->getProductOption()) {
             $title.= '/'.$CartItem->getProductSet()->getProductOption()->getTitle();
         }
 
         $item->setTitle($title);
-		$item->setProductSet($CartItem->getProductSet());
-		$item->setPrice($CartItem->getProductSet()->getProduct()->getStorePrice());
+        $item->setProductSet($CartItem->getProductSet());
+        $item->setPrice($CartItem->getProductSet()->getProduct()->getStorePrice());
         $item->setQuantity($CartItem->getQuantity());
-		return $item;
+
+        return $item;
     }
 
     /**

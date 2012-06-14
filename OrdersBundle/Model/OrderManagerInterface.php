@@ -7,65 +7,65 @@ use Chewbacca\CartBundle\Entity\Cart;
 
 /**
  * Order manager interface.
- * 
+ *
  */
 interface OrderManagerInterface
-{  
+{
     /**
      * Creates new order object.
-     * 
+     *
      * @return Order
      */
-    function createOrder(Cart $cart);
+    public function createOrder(Cart $cart);
     /**
      * Persist order.
-     * 
+     *
      * @param Order
      */
-    function persistOrder(Order $order);
-    
+    public function persistOrder(Order $order);
+
     /**
      * Removes order.
-     * 
+     *
      * @param Order $order
      */
-    function removeOrder(Order $order);
-    
+    public function removeOrder(Order $order);
+
     /**
      * Finds order by id.
-     * 
-     * @param integer $id
+     *
+     * @param  integer $id
      * @return Order
      */
-    function findOrder($id);
-    
+    public function findOrder($id);
+
     /**
      * Finds order by criteria.
-     * 
-     * @param array $criteria
+     *
+     * @param  array $criteria
      * @return Order
      */
-    function findOrderBy(array $criteria);
-    
+    public function findOrderBy(array $criteria);
+
     /**
      * Finds all orders.
-     * 
+     *
      * @return array
      */
-    function findOrders();
-    
+    public function findOrders();
+
     /**
      * Finds orders by criteria.
-     * 
-     * @param array $criteria
+     *
+     * @param  array $criteria
      * @return array
      */
-    function findOrdersBy(array $criteria);
-    
+    public function findOrdersBy(array $criteria);
+
     /**
      * Returns FQCN of order.
-     * 
+     *
      * @return string
      */
-    function getClass();
+    public function getClass();
 }

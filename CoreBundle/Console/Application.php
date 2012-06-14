@@ -1,12 +1,12 @@
 <?php
 namespace Chewbacca\CoreBundle\Console;
 use Symfony\Bundle\FrameworkBundle\Console\Application as BaseApplication;
-use Symfony\Component\Console\Output\OutputInterface;
 
 class Application extends BaseApplication
 {
-    public function renderException($e, $output){
-		parent::renderException($e, $output);
+    public function renderException($e, $output)
+    {
+        parent::renderException($e, $output);
         $strlen = function ($string) {
             if (!function_exists('mb_strlen')) {
                 return strlen($string);
@@ -18,8 +18,8 @@ class Application extends BaseApplication
 
             return mb_strlen($string, $encoding);
         };
-		$log_message = '';
-		do {
+        $log_message = '';
+        do {
             $title = sprintf("Exception occured: [%s]\n", get_class($e));
             $len = $strlen($title);
             $lines = array();
@@ -55,6 +55,6 @@ class Application extends BaseApplication
                     $log_message .= sprintf("    %s%s%s() at %s:%s\n", $class, $type, $function, $file, $line);
                 }
         } while ($e = $e->getPrevious());
-		error_log($log_message);
-	}
+        error_log($log_message);
+    }
 }

@@ -11,14 +11,14 @@ interface PaymentInterface
     /**
      * Create bill.
      *
-     * @return 
+     * @return
      */
-    function createBill($params);
+    public function createBill($params);
 
     /**
      * Create bill.
      *
-     * @return 
+     * @return
      */
-    function cancelBill($params);
+    public function cancelBill($params);
 }

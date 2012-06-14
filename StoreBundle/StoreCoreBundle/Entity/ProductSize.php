@@ -4,10 +4,11 @@ namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  **/
- class ProductSize{
+ class ProductSize
+ {
     /**
      * @var integer $id
      *
@@ -32,11 +33,11 @@ use Doctrine\ORM\Mapping as ORM;
     {
         $this->product_sets = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -46,19 +47,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string      $title
      * @return ProductSize
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -78,7 +80,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get product_sets
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getProductSets()
     {

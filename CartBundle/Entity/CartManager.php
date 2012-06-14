@@ -99,6 +99,7 @@ class CartManager extends BaseCartManager
    public function findCartWithItems($id)
     {
         $qb = $this->repository->createQueryBuilder('cart');
+
         return $qb
             ->select('cart, item, p_set, p', 'img', 'cur', 'delivery_price')
             ->leftJoin('cart.cart_items', 'item')

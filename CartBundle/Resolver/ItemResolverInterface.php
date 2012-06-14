@@ -19,7 +19,7 @@ interface ItemResolverInterface
      *
      * @return ItemInterface
      */
-    function resolveItemToAdd(Request $request);
+    public function resolveItemToAdd(Request $request);
 
     /**
      * Returns item to remove.
@@ -28,5 +28,5 @@ interface ItemResolverInterface
      *
      * @return ItemInterface
      */
-    function resolveItemToRemove(Request $request);
+    public function resolveItemToRemove(Request $request);
 }

@@ -10,21 +10,21 @@ abstract class ItemManager implements ItemManagerInterface
 {
     /**
      * FQCN for order item model.
-     * 
+     *
      * @var string
      */
     protected $class;
-    
+
     /**
      * Constructor.
-     * 
+     *
      * @param string $class The FQCN for order item model
      */
     public function __construct($class)
     {
         $this->class = $class;
     }
-    
+
     /**
      * {@inheritdoc}
      */

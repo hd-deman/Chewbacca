@@ -16,10 +16,10 @@ class NatureType extends AbstractType
         return 'nature';
     }
 
-	public function getDefaultOptions(array $options)
-	{
-		return array(
-			'data_class' => 'Chewbacca\CoreBundle\Entity\Nature',
-		);
-	}
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'data_class' => 'Chewbacca\CoreBundle\Entity\Nature',
+        );
+    }
 }

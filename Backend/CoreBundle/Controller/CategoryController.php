@@ -13,164 +13,171 @@ use Symfony\Component\HttpFoundation\Request;
 
 class CategoryController extends Controller
 {
-	public function indexAction($nature_title)
-	{
-		
-		$em = $this->get('doctrine.orm.entity_manager');
-		$repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
-		$qb = $em->createQueryBuilder();
+    public function indexAction($nature_title)
+    {
 
-		$nature = $this->getDoctrine()
-			->getRepository('ChewbaccaCoreBundle:Nature')
-			->findOneBytitle($nature_title);
-		if (!$nature) {
-			throw $this->createNotFoundException('The nature does not exist');
-		}
+        $em = $this->get('doctrine.orm.entity_manager');
+        $repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
+        $qb = $em->createQueryBuilder();
 
-		$roots = $repo->getRootNodesQueryBuilder()
-			->andWhere($qb->expr()->eq('node.nature', ':nature_id'))
-			->setParameter('nature_id', $nature->getId())
-			->getQuery()
-			->getResult();
+        $nature = $this->getDoctrine()
+            ->getRepository('ChewbaccaCoreBundle:Nature')
+            ->findOneBytitle($nature_title);
+        if (!$nature) {
+            throw $this->createNotFoundException('The nature does not exist');
+        }
 
-		$category = new Category();
-		$category->setNature($nature);
+        $roots = $repo->getRootNodesQueryBuilder()
+            ->andWhere($qb->expr()->eq('node.nature', ':nature_id'))
+            ->setParameter('nature_id', $nature->getId())
+            ->getQuery()
+            ->getResult();
 
-		$category_form = $this->createForm(new CategoryRootType(), $category);
+        $category = new Category();
+        $category->setNature($nature);
 
-		return $this->render('ChewbaccaBackendCoreBundle:Categories:roots.html.twig', array(
-			'roots' => $roots,
-			'form' => $category_form->createView())
-		);
-	}
+        $category_form = $this->createForm(new CategoryRootType(), $category);
 
-	public function newRootAction(Request $request)
-	{
-		$em = $this->get('doctrine.orm.entity_manager');
+        return $this->render('ChewbaccaBackendCoreBundle:Categories:roots.html.twig', array(
+            'roots' => $roots,
+            'form' => $category_form->createView())
+        );
+    }
 
-		$data = $request->request->get('category');
-		$nature = $this->getDoctrine()
-			->getRepository('ChewbaccaCoreBundle:Nature')
-			->findOneById($data['nature.id']);
-		if (!$nature) {
-			throw $this->createNotFoundException('The nature does not exist');
-		}
-		$category = new Category();
-		$category->setNature($em->getReference("ChewbaccaCoreBundle:Nature", $data['nature.id'] ));
-		
-		$form = $this->createForm(new CategoryRootType(), $category);
-		
-		if ($request->getMethod() == 'POST') {
-			$form->bindRequest($request);
-			if ($form->isValid()) {
-				#$category = $form->getData();
-				#$em->persist($category->getNature());
-				$em->persist($category);
-				$em->flush();
-				return $this->redirect($this->generateUrl('categories_roots', array('nature_title' => $nature)));
-			}
-		}
-		return $this->render('ChewbaccaBackendCoreBundle:Categories:roots.html.twig', array(
-			'roots' => array(),
-			'form' => $form->createView())
-		);
-	}
+    public function newRootAction(Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
 
-	public function treeAction($root_slug, Request $request){
-		$em = $this->get('doctrine.orm.entity_manager');
-		$repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
-		$qb = $em->createQueryBuilder();
+        $data = $request->request->get('category');
+        $nature = $this->getDoctrine()
+            ->getRepository('ChewbaccaCoreBundle:Nature')
+            ->findOneById($data['nature.id']);
+        if (!$nature) {
+            throw $this->createNotFoundException('The nature does not exist');
+        }
+        $category = new Category();
+        $category->setNature($em->getReference("ChewbaccaCoreBundle:Nature", $data['nature.id'] ));
 
-		$verify = $repo->verify();
-		if($verify!==true){
-			var_dump($verify);
-			$repo->recover();
-			$em->clear();
-			$em->flush();
-		}
+        $form = $this->createForm(new CategoryRootType(), $category);
 
-		$root = $repo->findOneBySlug($root_slug);
-		if (!$root) {
-			throw $this->createNotFoundException('The root does not exist');
-		}
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                #$category = $form->getData();
+                #$em->persist($category->getNature());
+                $em->persist($category);
+                $em->flush();
 
-		$category = new Category();
+                return $this->redirect($this->generateUrl('categories_roots', array('nature_title' => $nature)));
+            }
+        }
 
-		if ($request->getMethod() == 'POST') {
+        return $this->render('ChewbaccaBackendCoreBundle:Categories:roots.html.twig', array(
+            'roots' => array(),
+            'form' => $form->createView())
+        );
+    }
 
-		}
-		/*$category_form = $this->createFormBuilder($category)
-			->add('title', 'text')
-			->getForm();*/
-		$form = $this->createForm(new CategoryType($root), $category);
+    public function treeAction($root_slug, Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
+        $qb = $em->createQueryBuilder();
 
-		if ($request->getMethod() == 'POST') {
-			$form->bindRequest($request);
-			if ($form->isValid()) {
-				$data = $request->request->get('category');
-				if(!$data['parent']){
-						$category->setParent($root);
-				}
-				$category->setNature($em->getReference("ChewbaccaCoreBundle:Nature", $root->getNature()->getId() ));
-				$em->persist($root);
-				$em->persist($category);
-				$em->flush();
-				return $this->redirect($this->generateUrl('categories', array('root_slug' => $root->getSlug())));
-			}
-		}
+        $verify = $repo->verify();
+        if ($verify!==true) {
+            var_dump($verify);
+            $repo->recover();
+            $em->clear();
+            $em->flush();
+        }
 
-		return $this->render('ChewbaccaBackendCoreBundle:Categories:categories.html.twig', array(
-			'root' => $root,
-			'tree' => $repo->children($root),
-			'form' => $form->createView())
-		);
-	}
+        $root = $repo->findOneBySlug($root_slug);
+        if (!$root) {
+            throw $this->createNotFoundException('The root does not exist');
+        }
 
-	public function treeSaveAction($root_slug, Request $request){
-		$em = $this->get('doctrine.orm.entity_manager');
-		$repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
-		$root = $repo->findOneBySlug($root_slug);
-		if (!$root) {
-			throw $this->createNotFoundException('The root does not exist');
-		}
-		$tree = $request->request->get('list');
-		$nodes = array();
-		var_dump($tree);
-		foreach ($tree as $id => $parent_id) {
-			echo 's';
-			echo $id.":".$parent_id."\n";
-			if(!key_exists($id, $nodes)){
-				$nodes[$id] = $repo->findOneById($id);
-			}
-			if($parent_id == 'root'){
-				$nodes[$id]->setParent($root);
-			}else{
-				if(!key_exists($parent_id, $nodes)){
-					$nodes[$parent_id] = $repo->findOneById($parent_id);
-				}
-				$nodes[$id]->setParent($nodes[$parent_id]);
-			}
-			
-			$repo->moveDown($nodes[$id], true);
-			$em->persist($nodes[$id]);
-		}
-		/*foreach ($nodes as $node) {
-			$em->persist($node);
-		}*/
-		$em->persist($root);
-		$em->flush();
-	}
+        $category = new Category();
 
-	public function nodeDeleteAction($node_id){
-		$em = $this->get('doctrine.orm.entity_manager');
-		$repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
-		$node = $repo->findOneById($node_id);
-		if (!$node) {
-			throw $this->createNotFoundException('The node does not exist');
-		}
-		$root_id = $node->getParent()->getRoot();
-		$repo->removeFromTree($node);
-		return $this->redirect($this->generateUrl('categories', array('root_slug' => $root_id)));
-	}
+        if ($request->getMethod() == 'POST') {
+
+        }
+        /*$category_form = $this->createFormBuilder($category)
+            ->add('title', 'text')
+            ->getForm();*/
+        $form = $this->createForm(new CategoryType($root), $category);
+
+        if ($request->getMethod() == 'POST') {
+            $form->bindRequest($request);
+            if ($form->isValid()) {
+                $data = $request->request->get('category');
+                if (!$data['parent']) {
+                        $category->setParent($root);
+                }
+                $category->setNature($em->getReference("ChewbaccaCoreBundle:Nature", $root->getNature()->getId() ));
+                $em->persist($root);
+                $em->persist($category);
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('categories', array('root_slug' => $root->getSlug())));
+            }
+        }
+
+        return $this->render('ChewbaccaBackendCoreBundle:Categories:categories.html.twig', array(
+            'root' => $root,
+            'tree' => $repo->children($root),
+            'form' => $form->createView())
+        );
+    }
+
+    public function treeSaveAction($root_slug, Request $request)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
+        $root = $repo->findOneBySlug($root_slug);
+        if (!$root) {
+            throw $this->createNotFoundException('The root does not exist');
+        }
+        $tree = $request->request->get('list');
+        $nodes = array();
+        var_dump($tree);
+        foreach ($tree as $id => $parent_id) {
+            echo 's';
+            echo $id.":".$parent_id."\n";
+            if (!key_exists($id, $nodes)) {
+                $nodes[$id] = $repo->findOneById($id);
+            }
+            if ($parent_id == 'root') {
+                $nodes[$id]->setParent($root);
+            } else {
+                if (!key_exists($parent_id, $nodes)) {
+                    $nodes[$parent_id] = $repo->findOneById($parent_id);
+                }
+                $nodes[$id]->setParent($nodes[$parent_id]);
+            }
+
+            $repo->moveDown($nodes[$id], true);
+            $em->persist($nodes[$id]);
+        }
+        /*foreach ($nodes as $node) {
+            $em->persist($node);
+        }*/
+        $em->persist($root);
+        $em->flush();
+    }
+
+    public function nodeDeleteAction($node_id)
+    {
+        $em = $this->get('doctrine.orm.entity_manager');
+        $repo = $em->getRepository('Chewbacca\CoreBundle\Entity\Category');
+        $node = $repo->findOneById($node_id);
+        if (!$node) {
+            throw $this->createNotFoundException('The node does not exist');
+        }
+        $root_id = $node->getParent()->getRoot();
+        $repo->removeFromTree($node);
+
+        return $this->redirect($this->generateUrl('categories', array('root_slug' => $root_id)));
+    }
 }
 

@@ -3,13 +3,14 @@ namespace Chewbacca\OrdersBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  *  @ORM\HasLifecycleCallbacks()
  *  @ORM\Table(name="chewb_order_items")
- * 
+ *
  **/
- class OrderItem{
+ class OrderItem
+ {
     /**
      * @var integer $id
      *
@@ -52,11 +53,10 @@ use Doctrine\ORM\Mapping as ORM;
      */
     protected $quantity;
 
-
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,19 +66,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set quantity
      *
-     * @param integer $quantity
+     * @param  integer   $quantity
      * @return OrderItem
      */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+
         return $this;
     }
 
     /**
      * Get quantity
-     * 
-     * @return integer 
+     *
+     * @return integer
      * @ORM\prePersist
      */
     public function getQuantity()
@@ -89,19 +90,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set order
      *
-     * @param Chewbacca\OrdersBundle\Entity\Order $order
+     * @param  Chewbacca\OrdersBundle\Entity\Order $order
      * @return OrderItem
      */
     public function setOrder(\Chewbacca\OrdersBundle\Entity\Order $order = null)
     {
         $this->order = $order;
+
         return $this;
     }
 
     /**
      * Get order
      *
-     * @return Chewbacca\OrdersBundle\Entity\Order 
+     * @return Chewbacca\OrdersBundle\Entity\Order
      */
     public function getOrder()
     {
@@ -111,19 +113,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set product_set
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSet
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSet
      * @return OrderItem
      */
     public function setProductSet(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSet = null)
     {
         $this->product_set = $productSet;
+
         return $this;
     }
 
     /**
      * Get product_set
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet
      */
     public function getProductSet()
     {
@@ -133,19 +136,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set price
      *
-     * @param decimal $price
+     * @param  decimal   $price
      * @return OrderItem
      */
     public function setPrice($price)
     {
         $this->price = $price;
+
         return $this;
     }
 
     /**
      * Get price
      *
-     * @return decimal 
+     * @return decimal
      */
     public function getPrice()
     {
@@ -155,19 +159,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string    $title
      * @return OrderItem
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {

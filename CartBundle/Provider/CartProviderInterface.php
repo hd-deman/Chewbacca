@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Chewbacca\CartBundle\Provider;
 
 use Chewbacca\CartBundle\Entity\Cart;
@@ -18,7 +17,7 @@ interface CartProviderInterface
      *
      * @return CartInterface
      */
-    function getCart();
+    public function getCart();
 
     /**
      * Sets given cart as current one.
@@ -26,5 +25,5 @@ interface CartProviderInterface
      *
      * @param CartInterface $cart
      */
-    function setCart(Cart $cart);
+    public function setCart(Cart $cart);
 }

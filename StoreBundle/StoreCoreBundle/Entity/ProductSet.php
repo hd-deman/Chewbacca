@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *  @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(name="search_idx", columns={"product_id", "size_id", "option_id"})})
  *
  **/
- class ProductSet{
+ class ProductSet
+ {
     /**
      * @var integer $id
      *
@@ -42,7 +43,7 @@ use Doctrine\ORM\Mapping as ORM;
      *
      * @ORM\Column(name="stock", type="integer")
      */
-	protected $stock;
+    protected $stock;
 
     /**
      * Get id
@@ -54,16 +55,16 @@ use Doctrine\ORM\Mapping as ORM;
         return $this->id;
     }
 
-
     /**
      * Set product
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product
      * @return Set
      */
     public function setProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product)
     {
         $this->product = $product;
+
         return $this;
     }
 
@@ -77,16 +78,16 @@ use Doctrine\ORM\Mapping as ORM;
         return $this->product;
     }
 
-
     /**
      * Set product_size
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSize $productSize
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSize $productSize
      * @return ProductSet
      */
     public function setProductSize(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSize $productSize)
     {
         $this->product_size = $productSize;
+
         return $this;
     }
 
@@ -103,12 +104,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set product_option
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption $productOption
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption $productOption
      * @return ProductSet
      */
     public function setProductOption(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductOption $productOption)
     {
         $this->product_option = $productOption;
+
         return $this;
     }
 
@@ -125,12 +127,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set products
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products
      * @return ProductSet
      */
     public function setProducts(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products)
     {
         $this->products = $products;
+
         return $this;
     }
 
@@ -147,12 +150,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set stock
      *
-     * @param integer $stock
+     * @param  integer    $stock
      * @return ProductSet
      */
     public function setStock($stock)
     {
         $this->stock = $stock;
+
         return $this;
     }
 

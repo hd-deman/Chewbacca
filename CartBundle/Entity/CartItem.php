@@ -3,12 +3,13 @@ namespace Chewbacca\CartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  *  @ORM\HasLifecycleCallbacks()
- * 
+ *
  **/
- class CartItem{
+ class CartItem
+ {
     /**
      * @var integer $id
      *
@@ -40,7 +41,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -50,19 +51,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set cart
      *
-     * @param Chewbacca\CartBundle\Entity\Cart $cart
+     * @param  Chewbacca\CartBundle\Entity\Cart $cart
      * @return CartItem
      */
     public function setCart(\Chewbacca\CartBundle\Entity\Cart $cart = null)
     {
         $this->cart = $cart;
+
         return $this;
     }
 
     /**
      * Get cart
      *
-     * @return Chewbacca\CartBundle\Entity\Cart 
+     * @return Chewbacca\CartBundle\Entity\Cart
      */
     public function getCart()
     {
@@ -72,19 +74,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set product_set
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSet
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSet
      * @return CartItem
      */
     public function setProductSet(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSet)
     {
         $this->product_set = $productSet;
+
         return $this;
     }
 
     /**
      * Get product_set
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet
      */
     public function getProductSet()
     {
@@ -94,19 +97,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set quantity
      *
-     * @param integer $quantity
+     * @param  integer  $quantity
      * @return CartItem
      */
     public function setQuantity($quantity)
     {
         $this->quantity = $quantity;
+
         return $this;
     }
 
     /**
      * Get quantity
      *
-     * @return integer 
+     * @return integer
      */
     public function getQuantity()
     {

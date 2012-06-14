@@ -18,11 +18,11 @@ class CartController extends Controller
      */
     public function showAction()
     {
-    	$cart = $this->container->get('chewbacca_cart.provider')->getCart(true);
+        $cart = $this->container->get('chewbacca_cart.provider')->getCart(true);
         $form = $this->container->get('form.factory')->create('chewbacca_cart');
         $form->setData($cart);
 
-		return $this->render('ChewbaccaCartBundle:Cart:show.html.twig', array(
+        return $this->render('ChewbaccaCartBundle:Cart:show.html.twig', array(
             'cart' => $cart,
             'form' => $form->createView()
         ));
@@ -44,7 +44,6 @@ class CartController extends Controller
             throw new NotFoundHttpException('Requested item could not be added to cart');
         }
 
-
         $cartOperator = $this->container->get('chewbacca_cart.operator');
         $cartOperator->addItem($cart, $item);
         $cartOperator->refresh($cart);
@@ -53,6 +52,7 @@ class CartController extends Controller
         if (0 === count($errors)) {
             $cartOperator->save($cart);
         }
+
         return new Response('');
         #return new RedirectResponse($this->container->get('router')->generate('sylius_cart_show'));
     }

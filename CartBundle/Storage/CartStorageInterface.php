@@ -15,12 +15,12 @@ interface CartStorageInterface
      *
      * @return mixed
      */
-    function getCurrentCartIdentifier();
+    public function getCurrentCartIdentifier();
 
     /**
      * Sets current cart id and persists it.
      *
      * @param CartInterface $cart
      */
-    function setCurrentCartIdentifier(Cart $cart);
+    public function setCurrentCartIdentifier(Cart $cart);
 }

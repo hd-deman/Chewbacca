@@ -3,12 +3,13 @@ namespace Chewbacca\CartBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  *  @ORM\HasLifecycleCallbacks()
- * 
+ *
  **/
- class Cart{
+ class Cart
+ {
     /**
      * @var integer $id
      *
@@ -46,17 +47,16 @@ use Doctrine\ORM\Mapping as ORM;
 
     protected $products;
 
-
     public function __construct()
     {
         $this->cart_items = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->products = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->products = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -66,19 +66,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set total_items
      *
-     * @param integer $totalItems
+     * @param  integer $totalItems
      * @return Cart
      */
     public function setTotalItems($totalItems)
     {
         $this->total_items = $totalItems;
+
         return $this;
     }
 
     /**
      * Get total_items
      *
-     * @return integer 
+     * @return integer
      */
     public function getTotalItems()
     {
@@ -88,16 +89,17 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set expires_at
      * @ORM\prePersist
-     * @param datetime $expiresAt
+     * @param  datetime $expiresAt
      * @return Cart
      */
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
-        if($expiresAt){
+        if ($expiresAt) {
             $this->expires_at = $expiresAt;
-        }else{
+        } else {
              $this->incrementExpiresAt();
         }
+
         return $this;
     }
 
@@ -112,7 +114,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get expires_at
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getExpiresAt()
     {
@@ -122,19 +124,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set value
      *
-     * @param decimal $value
+     * @param  decimal $value
      * @return Cart
      */
     public function setValue($value)
     {
         $this->value = $value;
+
         return $this;
     }
 
     /**
      * Get value
      *
-     * @return decimal 
+     * @return decimal
      */
     public function getValue()
     {
@@ -149,13 +152,13 @@ use Doctrine\ORM\Mapping as ORM;
     public function addCartItem(\Chewbacca\CartBundle\Entity\CartItem $cartItem)
     {
         $this->cart_items[] = $cartItem;
-		$cartItem->setCart($this);
+        $cartItem->setCart($this);
     }
 
     /**
      * Get cart_items
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getCartItems()
     {
@@ -165,7 +168,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Check is cart_item added
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function hasCartItem(\Chewbacca\CartBundle\Entity\CartItem $item)
     {
@@ -190,23 +193,24 @@ use Doctrine\ORM\Mapping as ORM;
      */
     public function addProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product)
     {
-		$this->products[$product->getId()] = $product;
+        $this->products[$product->getId()] = $product;
     }
 
     /**
      * Get product
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getProducts()
     {
-        if(!$this->products && $this->cart_items){
-            foreach($this->getCartItems() as $cartItem){
+        if (!$this->products && $this->cart_items) {
+            foreach ($this->getCartItems() as $cartItem) {
                 $product = $cartItem->getProductSet()->getProduct();
                 $this->addProduct($product);
                 $product->addCartItem($cartItem);
             }
         }
+
         return $this->products;
     }
 
@@ -217,10 +221,11 @@ use Doctrine\ORM\Mapping as ORM;
 
     public function countCartItems()
     {
-    	$count = 0;
-    	foreach ($this->cart_items as $item) {
-			$count+=$item->getQuantity();
-		}
+        $count = 0;
+        foreach ($this->cart_items as $item) {
+            $count+=$item->getQuantity();
+        }
+
         return $count;
     }
 

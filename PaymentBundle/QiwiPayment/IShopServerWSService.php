@@ -1,13 +1,15 @@
 <?php
 namespace Chewbacca\PaymentBundle\QiwiPayment;
 
-class checkBill {
+class checkBill
+{
   public $login; // string
   public $password; // string
   public $txn; // string
 }
 
-class checkBillResponse {
+class checkBillResponse
+{
   public $user; // string
   public $amount; // string
   public $date; // string
@@ -15,7 +17,8 @@ class checkBillResponse {
   public $status; // int
 }
 
-class getBillList {
+class getBillList
+{
   public $login; // string
   public $password; // string
   public $dateFrom; // string
@@ -23,22 +26,26 @@ class getBillList {
   public $status; // int
 }
 
-class getBillListResponse {
+class getBillListResponse
+{
   public $txns; // string
   public $count; // int
 }
 
-class cancelBill {
+class cancelBill
+{
   public $login; // string
   public $password; // string
   public $txn; // string
 }
 
-class cancelBillResponse {
+class cancelBillResponse
+{
   public $cancelBillResult; // int
 }
 
-class createBill {
+class createBill
+{
   public $login; // string
   public $password; // string
   public $user; // string
@@ -58,47 +65,48 @@ class createBill {
   // true - выставлять счет всегда
   public $create = true; // boolean
 
-  public function __construct($params = array()){
-    if(isset($params['login'])){
+  public function __construct($params = array())
+  {
+    if (isset($params['login'])) {
       $this->login = $params['login'];
     }
-    if(isset($params['password'])){
+    if (isset($params['password'])) {
       $this->password = $params['password'];
     }
-    if(isset($params['user'])){
+    if (isset($params['user'])) {
       $this->user = $params['user'];
     }
-    if(isset($params['amount'])){
+    if (isset($params['amount'])) {
       $this->amount = $params['amount'];
     }
-    if(isset($params['comment'])){
+    if (isset($params['comment'])) {
       $this->comment = $params['comment'];
     }
-    if(isset($params['txn'])){
+    if (isset($params['txn'])) {
       $this->txn = $params['txn'];
     }
-    if(isset($params['lifetime'])){
+    if (isset($params['lifetime'])) {
       $this->lifetime = $params['lifetime'];
     }
-    if(isset($params['alarm'])){
+    if (isset($params['alarm'])) {
       $this->alarm = $params['alarm'];
     }
-    if(isset($params['create'])){
+    if (isset($params['create'])) {
       $this->create = $params['create'];
     }
   }
 }
 
-class createBillResponse {
+class createBillResponse
+{
   public $createBillResult; // int
 }
 
-
 /**
  * QiwiServerWSService class
- * 
- *  
- * 
+ *
+ *
+ *
  * @author    {author}
  * @copyright {copyright}
  * @package   {package}
@@ -117,12 +125,12 @@ class IShopServerWSService extends \SoapClient {
                                     'createBillResponse' => 'createBillResponse',
                                    );
 
-  public function __construct($wsdl = "IShopServerWS.wsdl", $options = array()) {
-
+  public function __construct($wsdl = "IShopServerWS.wsdl", $options = array())
+  {
     $this->kernel = $options['kernel'];
 
-    foreach(self::$classmap as $key => $value) {
-      if(!isset($options['classmap'][$key])) {
+    foreach (self::$classmap as $key => $value) {
+      if (!isset($options['classmap'][$key])) {
         $options['classmap'][$key] = 'Chewbacca\PaymentBundle\QiwiPayment\\'.$value;
       }
     }
@@ -134,12 +142,13 @@ class IShopServerWSService extends \SoapClient {
   }
 
   /**
-   *  
+   *
    *
    * @param checkBill $parameters
    * @return checkBillResponse
    */
-  public function checkBill(checkBill $parameters) {
+  public function checkBill(checkBill $parameters)
+  {
     return $this->__soapCall('checkBill', array($parameters),       array(
             'uri' => 'http://server.ishop.mw.ru/',
             'soapaction' => ''
@@ -148,12 +157,13 @@ class IShopServerWSService extends \SoapClient {
   }
 
   /**
-   *  
+   *
    *
    * @param getBillList $parameters
    * @return getBillListResponse
    */
-  public function getBillList(getBillList $parameters) {
+  public function getBillList(getBillList $parameters)
+  {
     return $this->__soapCall('getBillList', array($parameters),       array(
             'uri' => 'http://server.ishop.mw.ru/',
             'soapaction' => ''
@@ -162,12 +172,13 @@ class IShopServerWSService extends \SoapClient {
   }
 
   /**
-   *  
+   *
    *
    * @param cancelBill $parameters
    * @return cancelBillResponse
    */
-  public function cancelBill(cancelBill $parameters) {
+  public function cancelBill(cancelBill $parameters)
+  {
     return $this->__soapCall('cancelBill', array($parameters),       array(
             'uri' => 'http://server.ishop.mw.ru/',
             'soapaction' => ''
@@ -176,12 +187,13 @@ class IShopServerWSService extends \SoapClient {
   }
 
   /**
-   *  
+   *
    *
    * @param createBill $parameters
    * @return createBillResponse
    */
-  public function createBill(createBill $parameters) {
+  public function createBill(createBill $parameters)
+  {
     return $this->__soapCall('createBill', array($parameters),       array(
             'uri' => 'http://server.ishop.mw.ru/',
             'soapaction' => ''

@@ -5,16 +5,17 @@ namespace Chewbacca\CoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/** 
+/**
  *  @ORM\Entity
  *  @ORM\HasLifecycleCallbacks()
- * 
+ *
  *  @ORM\InheritanceType("SINGLE_TABLE")
  *  @ORM\DiscriminatorColumn(name="discr", type="string")
  *  @ORM\DiscriminatorMap({"image" = "Image", "product_image" = "Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage", "mltd_product_image" = "Lacroco\StoreBundle\Entity\MltdProductImage"})
  */
 
- class Image{
+ class Image
+ {
     /**
      * @var integer $id
      *
@@ -34,7 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -44,19 +45,20 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Nature
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -69,13 +71,13 @@ use Symfony\Component\Validator\Constraints as Assert;
      * @ORM\Column(name="created", type="datetime")
      */
     protected $created;
-	/**
-	 * @ORM\prePersist
-	 */
-	public function setCreatedValue()
-	{
-	    $this->created = new \DateTime();
-	}
+    /**
+     * @ORM\prePersist
+     */
+    public function setCreatedValue()
+    {
+        $this->created = new \DateTime();
+    }
 
     /**
      * @var datetime $updated
@@ -83,13 +85,13 @@ use Symfony\Component\Validator\Constraints as Assert;
      * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
     protected $updated;
-	/**
-	 * @ORM\preUpdate
-	 */
-	public function setUpdatedValue()
-	{
-	    $this->updated = new \DateTime();
-	}
+    /**
+     * @ORM\preUpdate
+     */
+    public function setUpdatedValue()
+    {
+        $this->updated = new \DateTime();
+    }
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -126,7 +128,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Get file
      *
-     * @return string 
+     * @return string
      */
     public function getFile()
     {
@@ -136,12 +138,13 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Set file
      *
-     * @param string $file
+     * @param  string $file
      * @return string
      */
     public function setFile($file)
     {
         $this->file = $file;
+
         return $this;
     }
 
@@ -181,7 +184,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     public function removeUpload()
     {
         if ($file = $this->getAbsolutePath()) {
-            if(file_exists($file)){
+            if (file_exists($file)) {
                 unlink($file);
             }
         }
@@ -190,19 +193,20 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Set created
      *
-     * @param datetime $created
+     * @param  datetime $created
      * @return Image
      */
     public function setCreated($created)
     {
         $this->created = $created;
+
         return $this;
     }
 
     /**
      * Get created
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreated()
     {
@@ -212,19 +216,20 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Set updated
      *
-     * @param datetime $updated
+     * @param  datetime $updated
      * @return Image
      */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+
         return $this;
     }
 
     /**
      * Get updated
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdated()
     {
@@ -234,19 +239,20 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Set path
      *
-     * @param string $path
+     * @param  string $path
      * @return Image
      */
     public function setPath($path)
     {
         $this->path = $path;
+
         return $this;
     }
 
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {

@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
  *  @ORM\Table(name="chewb_orders")
  *
  **/
- class Order{
+ class Order
+ {
     /**
      * @var integer $id
      *
@@ -69,13 +70,13 @@ use Doctrine\ORM\Mapping as ORM;
      */
     protected $created;
 
-	/**
-	 * @ORM\prePersist
-	 */
-	public function setCreatedValue()
-	{
-	    $this->created = new \DateTime();
-	}
+    /**
+     * @ORM\prePersist
+     */
+    public function setCreatedValue()
+    {
+        $this->created = new \DateTime();
+    }
 
     /**
      * @var datetime $updated
@@ -84,13 +85,13 @@ use Doctrine\ORM\Mapping as ORM;
      */
     protected $updated;
 
-	/**
-	 * @ORM\preUpdate
-	 */
-	public function setUpdatedValue()
-	{
-	    $this->updated = new \DateTime();
-	}
+    /**
+     * @ORM\preUpdate
+     */
+    public function setUpdatedValue()
+    {
+        $this->updated = new \DateTime();
+    }
 
     /**
      * Get id
@@ -105,12 +106,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set closed
      *
-     * @param boolean $closed
+     * @param  boolean $closed
      * @return Order
      */
     public function setClosed($closed)
     {
         $this->closed = $closed;
+
         return $this;
     }
 
@@ -127,12 +129,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set created
      *
-     * @param datetime $created
+     * @param  datetime $created
      * @return Order
      */
     public function setCreated($created)
     {
         $this->created = $created;
+
         return $this;
     }
 
@@ -149,12 +152,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set updated
      *
-     * @param datetime $updated
+     * @param  datetime $updated
      * @return Order
      */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+
         return $this;
     }
 
@@ -171,12 +175,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set total_items
      *
-     * @param integer $totalItems
+     * @param  integer $totalItems
      * @return Order
      */
     public function setTotalItems($totalItems)
     {
         $this->total_items = $totalItems;
+
         return $this;
     }
 
@@ -193,12 +198,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set amount
      *
-     * @param decimal $amount
+     * @param  decimal $amount
      * @return Order
      */
     public function setAmount($amount)
     {
         $this->amount = $amount;
+
         return $this;
     }
 
@@ -215,12 +221,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set user
      *
-     * @param FOS\UserBundle\Model\User $user
+     * @param  FOS\UserBundle\Model\User $user
      * @return Order
      */
     public function setUser(\FOS\UserBundle\Model\User $user = null)
     {
         $this->user = $user;
+
         return $this;
     }
 
@@ -264,12 +271,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set delivery_address
      *
-     * @param Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddress
+     * @param  Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddress
      * @return Order
      */
     public function setDeliveryAddress(\Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddress = null)
     {
         $this->delivery_address = $deliveryAddress;
+
         return $this;
     }
 
@@ -286,19 +294,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set phone
      *
-     * @param Chewbacca\UserBundle\Entity\UserPhone $phone
+     * @param  Chewbacca\UserBundle\Entity\UserPhone $phone
      * @return Order
      */
     public function setPhone(\Chewbacca\UserBundle\Entity\UserPhone $phone = null)
     {
         $this->phone = $phone;
+
         return $this;
     }
 
     /**
      * Get phone
      *
-     * @return Chewbacca\UserBundle\Entity\UserPhone 
+     * @return Chewbacca\UserBundle\Entity\UserPhone
      */
     public function getPhone()
     {

@@ -4,7 +4,6 @@ namespace Chewbacca\CartBundle\Storage;
 
 use Chewbacca\CartBundle\Entity\Cart;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * Stores current cart id inside the user session.

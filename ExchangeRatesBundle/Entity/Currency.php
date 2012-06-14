@@ -4,11 +4,12 @@ namespace Chewbacca\ExchangeRatesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
- *  @ORM\Entity 
- * 
+/**
+ *  @ORM\Entity
+ *
  **/
- class Currency{
+ class Currency
+ {
     /**
      * @var integer $id
      *
@@ -35,7 +36,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -45,19 +46,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set mnemo
      *
-     * @param string $mnemo
+     * @param  string   $mnemo
      * @return Currency
      */
     public function setMnemo($mnemo)
     {
         $this->mnemo = $mnemo;
+
         return $this;
     }
 
     /**
      * Get mnemo
      *
-     * @return string 
+     * @return string
      */
     public function getMnemo()
     {
@@ -67,19 +69,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set rate
      *
-     * @param decimal $rate
+     * @param  decimal  $rate
      * @return Currency
      */
     public function setRate($rate)
     {
         $this->rate = $rate;
+
         return $this;
     }
 
     /**
      * Get rate
      *
-     * @return decimal 
+     * @return decimal
      */
     public function getRate()
     {

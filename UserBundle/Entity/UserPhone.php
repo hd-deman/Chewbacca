@@ -10,10 +10,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *  @ORM\Table(name="chewb_orders_phones")
  *
  **/
- class UserPhone{
+ class UserPhone
+ {
     /**
      * @var integer $id
-     * 
+     *
      * @Assert\NotBlank(groups={"check_exist"})
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -29,9 +30,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
     /**
      * Phone Number
-     * 
+     *
      * @var string $phone_number
-	 * 
+     *
      * @Assert\NotBlank(groups={"check_new"})
      * @Assert\Regex(
      *     pattern="~\+?[\d\s()-]+~",
@@ -50,7 +51,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -60,7 +61,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Set phone_number
      *
-     * @param string $phoneNumber
+     * @param  string    $phoneNumber
      * @return UserPhone
      */
     public function setPhoneNumber($phoneNumber)
@@ -68,13 +69,14 @@ use Symfony\Component\Validator\Constraints as Assert;
         //@TODO move this to purify phone helper
         $phoneNumber = preg_replace('~^8~', '7', $phoneNumber);
         $this->phone_number = preg_replace('~[^\d]+~', '', $phoneNumber);
+
         return $this;
     }
 
     /**
      * Get phone_number
      *
-     * @return string 
+     * @return string
      */
     public function getPhoneNumber()
     {
@@ -84,19 +86,20 @@ use Symfony\Component\Validator\Constraints as Assert;
     /**
      * Set user
      *
-     * @param Chewbacca\UserBundle\Entity\User $user
+     * @param  Chewbacca\UserBundle\Entity\User $user
      * @return UserPhone
      */
     public function setUser(\Chewbacca\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
+
         return $this;
     }
 
     /**
      * Get user
      *
-     * @return Chewbacca\UserBundle\Entity\User 
+     * @return Chewbacca\UserBundle\Entity\User
      */
     public function getUser()
     {

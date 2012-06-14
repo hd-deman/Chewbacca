@@ -5,11 +5,12 @@ namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Chewbacca\CoreBundle\Entity\Image as Image;
 
-/** 
+/**
  *  @ORM\Entity
- * 
+ *
  **/
- class ProductImage extends Image{
+ class ProductImage extends Image
+ {
     /**
      * @var integer $id
      *
@@ -35,7 +36,7 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -51,19 +52,20 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     /**
      * Set product
      *
-     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product
      * @return Set
      */
     public function setProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $product)
     {
         $this->product = $product;
+
         return $this;
     }
 
     /**
      * Get product
      *
-     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product 
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product
      */
     public function getProduct()
     {
@@ -90,23 +92,23 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
      */
     protected $path;
 
-
     /**
      * Set name
      *
-     * @param string $name
+     * @param  string       $name
      * @return ProductImage
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -116,19 +118,20 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     /**
      * Set created
      *
-     * @param datetime $created
+     * @param  datetime     $created
      * @return ProductImage
      */
     public function setCreated($created)
     {
         $this->created = $created;
+
         return $this;
     }
 
     /**
      * Get created
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getCreated()
     {
@@ -138,19 +141,20 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     /**
      * Set updated
      *
-     * @param datetime $updated
+     * @param  datetime     $updated
      * @return ProductImage
      */
     public function setUpdated($updated)
     {
         $this->updated = $updated;
+
         return $this;
     }
 
     /**
      * Get updated
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getUpdated()
     {
@@ -160,19 +164,20 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     /**
      * Set path
      *
-     * @param string $path
+     * @param  string       $path
      * @return ProductImage
      */
     public function setPath($path)
     {
         $this->path = $path;
+
         return $this;
     }
 
     /**
      * Get path
      *
-     * @return string 
+     * @return string
      */
     public function getPath()
     {
@@ -183,23 +188,23 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
      */
     protected $title;
 
-
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string       $title
      * @return ProductImage
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -209,19 +214,20 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     /**
      * Set priority
      *
-     * @param integer $priority
+     * @param  integer      $priority
      * @return ProductImage
      */
     public function setPriority($priority)
     {
         $this->priority = $priority;
+
         return $this;
     }
 
     /**
      * Get priority
      *
-     * @return integer 
+     * @return integer
      */
     public function getPriority()
     {

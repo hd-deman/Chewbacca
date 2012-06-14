@@ -12,41 +12,41 @@ interface ItemManagerInterface
 {
     /**
      * Returns FQCN of order item model.
-     * 
+     *
      * @return string
      */
-    function getClass();
-    
+    public function getClass();
+
     /**
      * Creates item model object.
      */
-    function createItem(CartItem $cartItem);
-    
+    public function createItem(CartItem $cartItem);
+
     /**
      * Finds item by id.
-     * 
+     *
      * @param integer $id
      */
-    function findItem($id);
-    
+    public function findItem($id);
+
     /**
      * Finds item by criteria.
-     * 
+     *
      * @param array $criteria
      */
-    function findItemBy(array $criteria);
-    
+    public function findItemBy(array $criteria);
+
     /**
      * Finds all items.
-     * 
+     *
      * @return array
      */
-    function findItems();
-    
+    public function findItems();
+
     /**
      * Finds items by criteria.
-     * 
+     *
      * @param array $criteria
      */
-    function findItemsBy(array $criteria);
+    public function findItemsBy(array $criteria);
 }

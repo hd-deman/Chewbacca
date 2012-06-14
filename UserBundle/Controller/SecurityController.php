@@ -34,12 +34,12 @@ class SecurityController extends BaseController
 
         if ($request->attributes->has('login_position')) {
             $login_position = $request->attributes->get('login_position');
-        }else{
+        } else {
             $login_position = 'right';
         }
-        if($layout){
+        if ($layout) {
             $tpl_name = 'FOSUserBundle:Security:login_'.$login_position;
-        }else{
+        } else {
             $tpl_name = 'FOSUserBundle:Security:login_content';
         }
 

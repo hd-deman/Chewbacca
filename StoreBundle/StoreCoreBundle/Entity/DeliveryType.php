@@ -4,10 +4,11 @@ namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  **/
- class DeliveryType{
+ class DeliveryType
+ {
     /**
      * @var integer $id
      *
@@ -27,7 +28,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -37,19 +38,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string       $title
      * @return DeliveryType
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {

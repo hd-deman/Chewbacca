@@ -15,26 +15,26 @@ interface CartManagerInterface
      *
      * @return CartInterface
      */
-    function createCart();
+    public function createCart();
 
     /**
      * Persists cart object.
      *
      * @param CartInterface $cart
      */
-    function persistCart(Cart $cart);
+    public function persistCart(Cart $cart);
 
     /**
      * Removes cart object.
      *
      * @param CartInterface $cart
      */
-    function removeCart(Cart $cart);
+    public function removeCart(Cart $cart);
 
     /**
      * Removes all saved carts that are expired.
      */
-    function flushCarts();
+    public function flushCarts();
 
     /**
      * Finds cart by id.
@@ -43,33 +43,33 @@ interface CartManagerInterface
      *
      * @return CartInterface|null
      */
-    function findCart($id);
+    public function findCart($id);
 
     /**
      * Finds cart by given criteria.
      *
      * @param array $criteria
      */
-    function findCartBy(array $criteria);
+    public function findCartBy(array $criteria);
 
     /**
      * Finds all carts.
      *
      * @return array
      */
-    function findCarts();
+    public function findCarts();
 
     /**
      * Finds carts by criteria.
      *
      * @param array $criteria
      */
-    function findCartsBy(array $criteria);
+    public function findCartsBy(array $criteria);
 
     /**
      * Returns FQCN of cart model.
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 }

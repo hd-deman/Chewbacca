@@ -4,10 +4,11 @@ namespace Chewbacca\StoreBundle\StoreCoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/** 
- *  @ORM\Entity 
+/**
+ *  @ORM\Entity
  **/
- class Country{
+ class Country
+ {
     /**
      * @var integer $id
      *
@@ -31,7 +32,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -41,19 +42,20 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string  $title
      * @return Country
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -63,7 +65,7 @@ use Doctrine\ORM\Mapping as ORM;
     {
         $this->delivery_addresses = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Add delivery_addresses
      *
@@ -77,7 +79,7 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Get delivery_addresses
      *
-     * @return Doctrine\Common\Collections\Collection 
+     * @return Doctrine\Common\Collections\Collection
      */
     public function getDeliveryAddresses()
     {
@@ -87,12 +89,13 @@ use Doctrine\ORM\Mapping as ORM;
     /**
      * Add delivery_addresses
      *
-     * @param Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses
+     * @param  Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses
      * @return Country
      */
     public function addDeliveryAddresse(\Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses)
     {
         $this->delivery_addresses[] = $deliveryAddresses;
+
         return $this;
     }
 }

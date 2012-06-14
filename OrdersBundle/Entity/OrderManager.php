@@ -50,9 +50,10 @@ class OrderManager extends BaseOrderManager
         $this->repository = $this->entityManager->getRepository($this->getClass());
     }
 
-	public function setItemManager(ItemManager $itemManager){
-		$this->itemManager = $itemManager;
-	}
+    public function setItemManager(ItemManager $itemManager)
+    {
+        $this->itemManager = $itemManager;
+    }
 
     /**
      * {@inheritdoc}
@@ -61,10 +62,11 @@ class OrderManager extends BaseOrderManager
     {
         $class = $this->getClass();
         $order = new $class;
-    	foreach($cart->getCartItems() as $cart_item){
-    		$order_item = $this->itemManager->createItem($cart_item);
+        foreach ($cart->getCartItems() as $cart_item) {
+            $order_item = $this->itemManager->createItem($cart_item);
             $order->addOrderItem($order_item);
-    	}
+        }
+
         return $order;
     }
 

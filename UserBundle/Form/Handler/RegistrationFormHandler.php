@@ -13,9 +13,7 @@ namespace Chewbacca\UserBundle\Form\Handler;
 
 use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
-use FOS\UserBundle\Model\UserManagerInterface;
 use FOS\UserBundle\Model\UserInterface;
-use Chewbacca\UserBundle\Mailer\MailerInterface;
 use FOS\UserBundle\Form\Handler\RegistrationFormHandler as BaseRegistrationFormHandler;
 
 class RegistrationFormHandler extends BaseRegistrationFormHandler

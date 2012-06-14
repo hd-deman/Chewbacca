@@ -21,13 +21,12 @@ class Status
      */
     private $id;
 
-
     /**
      * Status title.
      *
      * @var string $title
-	 * 
-	 * @ORM\Column(name="title", type="string", length=255)
+     *
+     * @ORM\Column(name="title", type="string", length=255)
      */
     protected $title;
 
@@ -35,17 +34,15 @@ class Status
      * Position in the status list.
      *
      * @var integer $position
-	 * 
-	 * @ORM\Column(name="position", type="integer")
+     *
+     * @ORM\Column(name="position", type="integer")
      */
     protected $position;
-
-
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -55,19 +52,20 @@ class Status
     /**
      * Set title
      *
-     * @param string $title
+     * @param  string $title
      * @return Status
      */
     public function setTitle($title)
     {
         $this->title = $title;
+
         return $this;
     }
 
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -77,19 +75,20 @@ class Status
     /**
      * Set position
      *
-     * @param integer $position
+     * @param  integer $position
      * @return Status
      */
     public function setPosition($position)
     {
         $this->position = $position;
+
         return $this;
     }
 
     /**
      * Get position
      *
-     * @return integer 
+     * @return integer
      */
     public function getPosition()
     {

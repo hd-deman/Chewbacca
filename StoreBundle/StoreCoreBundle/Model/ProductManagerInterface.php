@@ -16,28 +16,28 @@ interface ProductManagerInterface
      *
      * @return Product
      */
-    function createProduct();
+    public function createProduct();
 
     /**
      * Creates paginator.
      *
      * @param SorterInterface $sorter
      */
-    function createPaginator($queryBuilder = null);
+    public function createPaginator($queryBuilder = null);
 
     /**
      * Persists product.
      *
      * @param Product $product
      */
-    function persistProduct(ProductEntity $product);
+    public function persistProduct(ProductEntity $product);
 
     /**
      * Deletes product.
      *
      * @param Product $product
      */
-    function removeProduct(ProductEntity $product);
+    public function removeProduct(ProductEntity $product);
 
     /**
      * Finds product by id.
@@ -46,7 +46,7 @@ interface ProductManagerInterface
      *
      * @return Product
      */
-    function findProduct($id);
+    public function findProduct($id);
 
     /**
      * Finds product by criteria.
@@ -55,14 +55,14 @@ interface ProductManagerInterface
      *
      * @return Product
      */
-    function findProductBy(array $criteria);
+    public function findProductBy(array $criteria);
 
     /**
      * Finds all products.
      *
      * @return array
      */
-    function findProducts();
+    public function findProducts();
 
     /**
      * Finds products by criteria.
@@ -71,12 +71,12 @@ interface ProductManagerInterface
      *
      * @return array
      */
-    function findProductsBy(array $criteria);
+    public function findProductsBy(array $criteria);
 
     /**
      * Returns FQCN of product.
      *
      * @return string
      */
-    function getClass();
+    public function getClass();
 }

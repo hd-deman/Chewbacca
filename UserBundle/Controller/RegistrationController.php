@@ -27,16 +27,16 @@ class RegistrationController extends BaseController
             }
 
             $this->setFlash('fos_user_success', 'registration.flash.user_created');
-            if(($url = $this->container->get('session')->get('_security.target_path')) == false){
-            	$url = $this->container->get('router')->generate($route);
+            if (($url = $this->container->get('session')->get('_security.target_path')) == false) {
+                $url = $this->container->get('router')->generate($route);
             }
 
             return new RedirectResponse($url);
         }
 
-        if($layout){
+        if ($layout) {
             $tpl_name = 'FOSUserBundle:Registration:register';
-        }else{
+        } else {
             $tpl_name = 'FOSUserBundle:Registration:register_content';
         }
 
