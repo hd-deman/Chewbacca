@@ -180,4 +180,3 @@ class CategoryController extends Controller
         return $this->redirect($this->generateUrl('categories', array('root_slug' => $root_id)));
     }
 }
-

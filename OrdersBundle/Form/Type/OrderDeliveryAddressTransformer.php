@@ -76,4 +76,3 @@ class OrderDeliveryAddressTransformer implements DataTransformerInterface
           return $deliveryAddress;
     }
 }
-
