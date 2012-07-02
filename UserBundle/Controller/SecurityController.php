@@ -50,4 +50,14 @@ class SecurityController extends BaseController
             'login_position' => $login_position,
         ));
     }
+
+    public function loginLogoutAction()
+    {
+        $response = $this->container->get('templating')->renderResponse('ChewbaccaUserBundle:Security:login_or_logout.html.'.$this->container->getParameter('fos_user.template.engine'));
+        $response->setPrivate();
+        $response->setETag(md5($response->getContent()));
+        $response->isNotModified($this->container->get('request'));
+
+        return $response;
+    }
 }
