@@ -1,6 +1,107 @@
 <?php
 namespace Chewbacca\PaymentBundle\QiwiPayment;
 
+/**
+ * QiwiServerWSService class
+ *
+ *
+ *
+ * @author    {author}
+ * @copyright {copyright}
+ * @package   {package}
+ */
+class IShopServerWSService extends \SoapClient
+{
+  private $kernel;
+  private static $classmap = array(
+                                    'checkBill' => 'checkBill',
+                                    'checkBillResponse' => 'checkBillResponse',
+                                    'getBillList' => 'getBillList',
+                                    'getBillListResponse' => 'getBillListResponse',
+                                    'cancelBill' => 'cancelBill',
+                                    'cancelBillResponse' => 'cancelBillResponse',
+                                    'createBill' => 'createBill',
+                                    'createBillResponse' => 'createBillResponse',
+                                   );
+
+  public function __construct($wsdl = "IShopServerWS.wsdl", $options = array())
+  {
+    $this->kernel = $options['kernel'];
+
+    foreach (self::$classmap as $key => $value) {
+      if (!isset($options['classmap'][$key])) {
+        $options['classmap'][$key] = 'Chewbacca\PaymentBundle\QiwiPayment\\'.$value;
+      }
+    }
+    $wsdl = $this->kernel->locateResource('@ChewbaccaPaymentBundle/QiwiPayment/'.$wsdl);
+
+    $options['location'] = 'http://ishop.qiwi.ru/services/ishop';
+
+    parent::__construct($wsdl, $options);
+  }
+
+  /**
+   *
+   *
+   * @param checkBill $parameters
+   * @return checkBillResponse
+   */
+  public function checkBill(checkBill $parameters)
+  {
+    return $this->__soapCall('checkBill', array($parameters),       array(
+            'uri' => 'http://server.ishop.mw.ru/',
+            'soapaction' => ''
+           )
+      );
+  }
+
+  /**
+   *
+   *
+   * @param getBillList $parameters
+   * @return getBillListResponse
+   */
+  public function getBillList(getBillList $parameters)
+  {
+    return $this->__soapCall('getBillList', array($parameters),       array(
+            'uri' => 'http://server.ishop.mw.ru/',
+            'soapaction' => ''
+           )
+      );
+  }
+
+  /**
+   *
+   *
+   * @param cancelBill $parameters
+   * @return cancelBillResponse
+   */
+  public function cancelBill(cancelBill $parameters)
+  {
+    return $this->__soapCall('cancelBill', array($parameters),       array(
+            'uri' => 'http://server.ishop.mw.ru/',
+            'soapaction' => ''
+           )
+      );
+  }
+
+  /**
+   *
+   *
+   * @param createBill $parameters
+   * @return createBillResponse
+   */
+  public function createBill(createBill $parameters)
+  {
+    return $this->__soapCall('createBill', array($parameters),       array(
+            'uri' => 'http://server.ishop.mw.ru/',
+            'soapaction' => ''
+           )
+      );
+  }
+
+}
+
 class checkBill
 {
   public $login; // string
@@ -100,105 +201,4 @@ class createBill
 class createBillResponse
 {
   public $createBillResult; // int
-}
-
-/**
- * QiwiServerWSService class
- *
- *
- *
- * @author    {author}
- * @copyright {copyright}
- * @package   {package}
- */
-class IShopServerWSService extends \SoapClient {
-
-  private $kernel;
-  private static $classmap = array(
-                                    'checkBill' => 'checkBill',
-                                    'checkBillResponse' => 'checkBillResponse',
-                                    'getBillList' => 'getBillList',
-                                    'getBillListResponse' => 'getBillListResponse',
-                                    'cancelBill' => 'cancelBill',
-                                    'cancelBillResponse' => 'cancelBillResponse',
-                                    'createBill' => 'createBill',
-                                    'createBillResponse' => 'createBillResponse',
-                                   );
-
-  public function __construct($wsdl = "IShopServerWS.wsdl", $options = array())
-  {
-    $this->kernel = $options['kernel'];
-
-    foreach (self::$classmap as $key => $value) {
-      if (!isset($options['classmap'][$key])) {
-        $options['classmap'][$key] = 'Chewbacca\PaymentBundle\QiwiPayment\\'.$value;
-      }
-    }
-    $wsdl = $this->kernel->locateResource('@ChewbaccaPaymentBundle/QiwiPayment/'.$wsdl);
-
-    $options['location'] = 'http://ishop.qiwi.ru/services/ishop';
-
-    parent::__construct($wsdl, $options);
-  }
-
-  /**
-   *
-   *
-   * @param checkBill $parameters
-   * @return checkBillResponse
-   */
-  public function checkBill(checkBill $parameters)
-  {
-    return $this->__soapCall('checkBill', array($parameters),       array(
-            'uri' => 'http://server.ishop.mw.ru/',
-            'soapaction' => ''
-           )
-      );
-  }
-
-  /**
-   *
-   *
-   * @param getBillList $parameters
-   * @return getBillListResponse
-   */
-  public function getBillList(getBillList $parameters)
-  {
-    return $this->__soapCall('getBillList', array($parameters),       array(
-            'uri' => 'http://server.ishop.mw.ru/',
-            'soapaction' => ''
-           )
-      );
-  }
-
-  /**
-   *
-   *
-   * @param cancelBill $parameters
-   * @return cancelBillResponse
-   */
-  public function cancelBill(cancelBill $parameters)
-  {
-    return $this->__soapCall('cancelBill', array($parameters),       array(
-            'uri' => 'http://server.ishop.mw.ru/',
-            'soapaction' => ''
-           )
-      );
-  }
-
-  /**
-   *
-   *
-   * @param createBill $parameters
-   * @return createBillResponse
-   */
-  public function createBill(createBill $parameters)
-  {
-    return $this->__soapCall('createBill', array($parameters),       array(
-            'uri' => 'http://server.ishop.mw.ru/',
-            'soapaction' => ''
-           )
-      );
-  }
-
 }
