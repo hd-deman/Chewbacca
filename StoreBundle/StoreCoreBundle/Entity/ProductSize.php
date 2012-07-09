@@ -86,4 +86,14 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->product_sets;
     }
+
+    /**
+     * Remove product_sets
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSets
+     */
+    public function removeProductSet(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSets)
+    {
+        $this->product_sets->removeElement($productSets);
+    }
 }

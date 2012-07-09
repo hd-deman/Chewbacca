@@ -313,4 +313,14 @@ use Doctrine\ORM\Mapping as ORM;
     {
         return $this->phone;
     }
+
+    /**
+     * Remove order_items
+     *
+     * @param Chewbacca\OrdersBundle\Entity\OrderItem $orderItems
+     */
+    public function removeOrderItem(\Chewbacca\OrdersBundle\Entity\OrderItem $orderItems)
+    {
+        $this->order_items->removeElement($orderItems);
+    }
 }

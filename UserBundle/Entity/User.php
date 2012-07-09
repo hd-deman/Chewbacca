@@ -12,7 +12,7 @@ class User extends BaseUser
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
-     * @ORM\generatedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
@@ -137,5 +137,35 @@ class User extends BaseUser
         $this->phone_numbers[] = $phoneNumbers;
 
         return $this;
+    }
+
+    /**
+     * Remove orders
+     *
+     * @param Chewbacca\OrdersBundle\Entity\Order $orders
+     */
+    public function removeOrder(\Chewbacca\OrdersBundle\Entity\Order $orders)
+    {
+        $this->orders->removeElement($orders);
+    }
+
+    /**
+     * Remove delivery_addresses
+     *
+     * @param Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses
+     */
+    public function removeDeliveryAddresse(\Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses)
+    {
+        $this->delivery_addresses->removeElement($deliveryAddresses);
+    }
+
+    /**
+     * Remove phone_numbers
+     *
+     * @param Chewbacca\UserBundle\Entity\UserPhone $phoneNumbers
+     */
+    public function removePhoneNumber(\Chewbacca\UserBundle\Entity\UserPhone $phoneNumbers)
+    {
+        $this->phone_numbers->removeElement($phoneNumbers);
     }
 }

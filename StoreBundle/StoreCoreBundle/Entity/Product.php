@@ -485,4 +485,44 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
         return $this;
     }
+
+    /**
+     * Remove categories
+     *
+     * @param Chewbacca\CoreBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Chewbacca\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Remove product_sets
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSets
+     */
+    public function removeProductSet(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductSet $productSets)
+    {
+        $this->product_sets->removeElement($productSets);
+    }
+
+    /**
+     * Remove product_images
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage $productImages
+     */
+    public function removeProductImage(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage $productImages)
+    {
+        $this->product_images->removeElement($productImages);
+    }
+
+    /**
+     * Remove delivery_prices
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryPrice $deliveryPrices
+     */
+    public function removeDeliveryPrice(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\DeliveryPrice $deliveryPrices)
+    {
+        $this->delivery_prices->removeElement($deliveryPrices);
+    }
 }

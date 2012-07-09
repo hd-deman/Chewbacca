@@ -195,4 +195,14 @@ use Gedmo\Mapping\Annotation as Gedmo;
     {
         return $this->slug;
     }
+
+    /**
+     * Remove products
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products
+     */
+    public function removeProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
 }

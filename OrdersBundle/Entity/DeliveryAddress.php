@@ -333,4 +333,14 @@ class DeliveryAddress
     {
         return $this->user;
     }
+
+    /**
+     * Remove orders
+     *
+     * @param Chewbacca\OrdersBundle\Entity\Order $orders
+     */
+    public function removeOrder(\Chewbacca\OrdersBundle\Entity\Order $orders)
+    {
+        $this->orders->removeElement($orders);
+    }
 }

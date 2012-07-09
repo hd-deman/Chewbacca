@@ -105,4 +105,44 @@ use Symfony\Component\Validator\Constraints as Assert;
     {
         return $this->user;
     }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->orders = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add orders
+     *
+     * @param  Chewbacca\OrdersBundle\Entity\Order $orders
+     * @return UserPhone
+     */
+    public function addOrder(\Chewbacca\OrdersBundle\Entity\Order $orders)
+    {
+        $this->orders[] = $orders;
+
+        return $this;
+    }
+
+    /**
+     * Remove orders
+     *
+     * @param Chewbacca\OrdersBundle\Entity\Order $orders
+     */
+    public function removeOrder(\Chewbacca\OrdersBundle\Entity\Order $orders)
+    {
+        $this->orders->removeElement($orders);
+    }
+
+    /**
+     * Get orders
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getOrders()
+    {
+        return $this->orders;
+    }
 }

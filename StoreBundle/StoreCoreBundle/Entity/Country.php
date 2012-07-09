@@ -98,4 +98,14 @@ use Doctrine\ORM\Mapping as ORM;
 
         return $this;
     }
+
+    /**
+     * Remove delivery_addresses
+     *
+     * @param Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses
+     */
+    public function removeDeliveryAddresse(\Chewbacca\OrdersBundle\Entity\DeliveryAddress $deliveryAddresses)
+    {
+        $this->delivery_addresses->removeElement($deliveryAddresses);
+    }
 }

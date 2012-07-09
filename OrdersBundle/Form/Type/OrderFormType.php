@@ -21,7 +21,7 @@ class OrderFormType extends AbstractType
         $builder->add('phone', 'order_user_phone', array('validation_groups' => array('check_new')));
         //$builder->add('phone', new UserPhoneFormType(), array('error_bubbling' => false));
 
-        $builder->addEventListener(FormEvents::PRE_BIND, function(DataEvent $event) use ($builder){
+        $builder->addEventListener(FormEvents::PRE_BIND, function(DataEvent $event) use ($builder) {
             $data = $event->getData();
             if ($data) {
                 if (key_exists('exist', $data['deliveryAddress']) && $data['deliveryAddress']['exist'] != 'create_new') {
