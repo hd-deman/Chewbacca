@@ -2,7 +2,7 @@
 namespace Chewbacca\Backend\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class CategoryType extends AbstractType
 {
@@ -12,7 +12,7 @@ class CategoryType extends AbstractType
         $this->parents_root = $parents_root;
     }
 
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $parents_root = $this->parents_root;
         $builder->add('title');
@@ -53,7 +53,7 @@ class CategoryType extends AbstractType
 
 class CategoryParentType extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title');
     }

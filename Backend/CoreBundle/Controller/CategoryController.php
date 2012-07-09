@@ -51,12 +51,12 @@ class CategoryController extends Controller
         $data = $request->request->get('category');
         $nature = $this->getDoctrine()
             ->getRepository('ChewbaccaCoreBundle:Nature')
-            ->findOneById($data['nature.id']);
+            ->findOneById($data['nature']);
         if (!$nature) {
             throw $this->createNotFoundException('The nature does not exist');
         }
         $category = new Category();
-        $category->setNature($em->getReference("ChewbaccaCoreBundle:Nature", $data['nature.id'] ));
+        $category->setNature($em->getReference("ChewbaccaCoreBundle:Nature", $data['nature'] ));
 
         $form = $this->createForm(new CategoryRootType(), $category);
 
@@ -140,7 +140,7 @@ class CategoryController extends Controller
         }
         $tree = $request->request->get('list');
         $nodes = array();
-        var_dump($tree);
+        //var_dump($tree);
         foreach ($tree as $id => $parent_id) {
             echo 's';
             echo $id.":".$parent_id."\n";

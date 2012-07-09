@@ -2,14 +2,16 @@
 namespace Chewbacca\Backend\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class CategoryRootType extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title');
-        #$builder->add('nature.id', 'hidden');
+        $builder->add('nature', 'entity', array(
+            'class' => 'ChewbaccaCoreBundle:Nature',
+        ));
     }
 
     public function getName()
@@ -17,7 +19,7 @@ class CategoryRootType extends AbstractType
         return 'category';
     }
 
-    public function getDefaultOptions(array $options)
+    public function getDefaultOptions()
     {
         return array(
             'data_class' => 'Chewbacca\CoreBundle\Entity\Category',
