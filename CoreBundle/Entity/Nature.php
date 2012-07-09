@@ -117,4 +117,14 @@ use Doctrine\ORM\Mapping as ORM;
 
         return $this;
     }
+
+    /**
+     * Remove categories
+     *
+     * @param Chewbacca\CoreBundle\Entity\Category $categories
+     */
+    public function removeCategorie(\Chewbacca\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
 }

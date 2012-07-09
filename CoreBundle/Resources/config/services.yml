@@ -1,0 +1,13 @@
+services:
+    chewbacca_core.menu.menu_builder:
+        class: Chewbacca\CoreBundle\Menu\MenuBuilder
+        arguments: [@knp_menu.factory, @doctrine.orm.entity_manager]
+
+    chewbacca_core.menu.main:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory_service: chewbacca_core.menu.menu_builder
+        factory_method: createMainMenu
+        arguments: [@request]
+        scope: request # needed as we have the request as a dependency here
+        tags:
+            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu

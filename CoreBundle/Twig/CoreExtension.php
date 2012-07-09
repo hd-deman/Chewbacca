@@ -1,8 +1,8 @@
 <?php
 namespace Chewbacca\CoreBundle\Twig;
 
-class CoreExtension extends \Twig_Extension {
-
+class CoreExtension extends \Twig_Extension
+{
     public function getFilters()
     {
         return array(

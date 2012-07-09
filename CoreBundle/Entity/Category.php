@@ -90,6 +90,11 @@ use Symfony\Component\Validator\Constraints as Assert;
     private $nature;
 
     /**
+     * @ORM\OneToOne(targetEntity="\Chewbacca\PagesBundle\Entity\Page", mappedBy="category")
+     */
+    private $page;
+
+    /**
      * @ORM\ManyToMany(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product", mappedBy="categories")
      */
     protected $products;
@@ -98,6 +103,11 @@ use Symfony\Component\Validator\Constraints as Assert;
     {
         $this->products = new \Doctrine\Common\Collections\ArrayCollection();
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->getTitleWithIndent();
     }
 
     public function setParent(Category $parent = null)
@@ -336,7 +346,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 
     public function getTitleWithIndent()
     {
-        return str_repeat('—', $this->getLvl()-1)." ".$this->getTitle();
+        if ($this->getLvl()) {
+            return str_repeat('—', $this->getLvl()-1)." ".$this->getTitle();
+        } else {
+            return $this->getTitle();
+        }
+
     }
 
     /**
@@ -350,5 +365,48 @@ use Symfony\Component\Validator\Constraints as Assert;
         $this->children[] = $children;
 
         return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param Chewbacca\CoreBundle\Entity\Category $children
+     */
+    public function removeChildren(\Chewbacca\CoreBundle\Entity\Category $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Remove products
+     *
+     * @param Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products
+     */
+    public function removeProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products)
+    {
+        $this->products->removeElement($products);
+    }
+
+    /**
+     * Set page
+     *
+     * @param  Chewbacca\PagesBundle\Entity\Page $page
+     * @return Category
+     */
+    public function setPage(\Chewbacca\PagesBundle\Entity\Page $page = null)
+    {
+        $this->page = $page;
+
+        return $this;
+    }
+
+    /**
+     * Get page
+     *
+     * @return Chewbacca\PagesBundle\Entity\Page
+     */
+    public function getPage()
+    {
+        return $this->page;
     }
 }
