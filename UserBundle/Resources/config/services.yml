@@ -11,7 +11,7 @@ services:
     chewbacca_user.registration.form.handler:
         class: %chewbacca_user.registration.form.handler.class%
         scope: request
-        arguments: [@fos_user.registration.form, @request, @fos_user.user_manager, @chewbacca_user.mailer]
+        arguments: [@fos_user.registration.form, @request, @fos_user.user_manager, @chewbacca_user.mailer, @fos_user.util.token_generator]
 
     form.type.user_phone:
         class: %form.type.user_phone.class%
