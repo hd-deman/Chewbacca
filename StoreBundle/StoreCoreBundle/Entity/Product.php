@@ -46,7 +46,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $sale_price = 0;
 
     /**
-     * @Gedmo\Slug(fields={"title", "id"})
+     * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=255, unique=true)
      */
     private $slug;
