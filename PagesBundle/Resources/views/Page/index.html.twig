@@ -1,0 +1,11 @@
+{% extends 'LacrocoStoreBundle:Default:layout.html.twig' %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block h1 %}{{ page.title }}{% endblock %}
+
+{% block content %}
+    {% autoescape false %}
+        {{ page.content }}
+    {% endautoescape %}
+{% endblock %}

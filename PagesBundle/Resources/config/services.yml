@@ -1,0 +1,14 @@
+parameters:
+#    chewbacca_pages.example.class: Chewbacca\PagesBundle\Example
+
+services:
+#    chewbacca_pages.example:
+#        class: %chewbacca_pages.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
+   chewbacca.pages.admin.page:
+      class: Chewbacca\PagesBundle\Admin\PageAdmin
+      tags:
+        - { name: sonata.admin, manager_type: orm, group: chewbacca_page, label: page }
+      arguments: [null, Chewbacca\PagesBundle\Entity\Page, SonataAdminBundle:CRUD]
+      calls:
+        - [ setTranslationDomain, [ ChewbaccaPagesBundle ] ]

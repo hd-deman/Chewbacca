@@ -1,0 +1,6 @@
+ChewbaccaPagesBundle_page_view:
+    pattern:  /pages/{slug}-{id}
+    defaults: { _controller: ChewbaccaPagesBundle:Page:index }
+    requirements:
+        slug:  '[\w-]+'
+        id:    \d+
