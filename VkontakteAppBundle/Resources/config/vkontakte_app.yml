@@ -1,0 +1,18 @@
+parameters:
+    chewbacca_vkontakte_app.oauth2_proxy.class: Oauth2Proxy
+    chewbacca_vkontakte_app.vk_php_sdk.class: VkPhpSdk
+    chewbacca_vkontakte_app.classes_dir: null
+    chewbacca_vkontakte_app.client_id: null
+    chewbacca_vkontakte_app.client_secret: null
+    chewbacca_vkontakte_app.user_id: null
+    chewbacca_vkontakte_app.access_token: null
+
+services:
+    chewbacca_vkontakte_app.oauth2_proxy:
+        class: %chewbacca_vkontakte_app.oauth2_proxy.class%
+        file: %chewbacca_vkontakte_app.classes_dir%/Oauth2Proxy.php
+        arguments: [%chewbacca_vkontakte_app.client_id%, %chewbacca_vkontakte_app.client_secret%, http://api.vk.com/api.php, https://oauth.vk.com/authorize, token, http://oauth.vk.com/blank.html, 'offline,notify,friends,photos,audio,video,wall,groupsnotifications,stats,ads,docs']
+
+    chewbacca_vkontakte_app.vk_php_sdk:
+        class: %chewbacca_vkontakte_app.vk_php_sdk.class%
+        file: %chewbacca_vkontakte_app.classes_dir%/VkPhpSdk.php
