@@ -101,6 +101,12 @@ use Gedmo\Mapping\Annotation as Gedmo;
      * @ORM\Column(name="created", type="datetime")
      */
     protected $created;
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
     /**
      * @ORM\prePersist
      */

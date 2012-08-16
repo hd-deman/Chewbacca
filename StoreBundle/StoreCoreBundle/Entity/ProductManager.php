@@ -116,6 +116,6 @@ class ProductManager extends BaseProductManager
 
     public function findProductsByWithPaginator(array $criteria)
     {
-        return $this->createPaginator($this->findProductsBy($criteria));
+        return $this->createPaginator($this->getProductsQueryBuilderBy($criteria));
     }
 }

@@ -34,6 +34,11 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     protected $priority;
 
     /**
+     * @ORM\OneToOne(targetEntity="Chewbacca\ProductPromoBundle\Entity\VkProductPhoto", mappedBy="product_image")
+     */
+    protected $vk_product_photo;
+
+    /**
      * Get id
      *
      * @return integer
@@ -232,5 +237,28 @@ use Chewbacca\CoreBundle\Entity\Image as Image;
     public function getPriority()
     {
         return $this->priority;
+    }
+
+    /**
+     * Set vk_product_photo
+     *
+     * @param  Chewbacca\ProductPromoBundle\Entity\VkProductPhoto $vkProductPhoto
+     * @return ProductImage
+     */
+    public function setVkProductPhoto(\Chewbacca\ProductPromoBundle\Entity\VkProductPhoto $vkProductPhoto = null)
+    {
+        $this->vk_product_photo = $vkProductPhoto;
+
+        return $this;
+    }
+
+    /**
+     * Get vk_product_photo
+     *
+     * @return Chewbacca\ProductPromoBundle\Entity\VkProductPhoto
+     */
+    public function getVkProductPhoto()
+    {
+        return $this->vk_product_photo;
     }
 }

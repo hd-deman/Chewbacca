@@ -43,6 +43,15 @@ use Gedmo\Mapping\Annotation as Gedmo;
     protected $products;
 
     /**
+     * @ORM\OneToOne(targetEntity="\Chewbacca\ProductPromoBundle\Entity\VkBrandPhotoAlbum", mappedBy="brand")
+     */
+    protected $vk_photo_album;
+
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+    /**
      * Get id
      *
      * @return integer
@@ -204,5 +213,28 @@ use Gedmo\Mapping\Annotation as Gedmo;
     public function removeProduct(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\Product $products)
     {
         $this->products->removeElement($products);
+    }
+
+    /**
+     * Set vk_photo_album
+     *
+     * @param  Chewbacca\ProductPromoBundle\Entity\VkBrandPhotoAlbum $vkPhotoAlbum
+     * @return Brand
+     */
+    public function setVkPhotoAlbum(\Chewbacca\ProductPromoBundle\Entity\VkBrandPhotoAlbum $vkPhotoAlbum = null)
+    {
+        $this->vk_photo_album = $vkPhotoAlbum;
+
+        return $this;
+    }
+
+    /**
+     * Get vk_photo_album
+     *
+     * @return Chewbacca\ProductPromoBundle\Entity\VkBrandPhotoAlbum
+     */
+    public function getVkPhotoAlbum()
+    {
+        return $this->vk_photo_album;
     }
 }

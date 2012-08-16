@@ -33,6 +33,11 @@ use Symfony\Component\Validator\Constraints as Assert;
     protected $title;
 
     /**
+     * @ORM\OneToOne(targetEntity="\Chewbacca\ProductPromoBundle\Entity\VkPhoto", mappedBy="image")
+     */
+    private $vk_photo;
+
+    /**
      * Get id
      *
      * @return integer
@@ -257,5 +262,28 @@ use Symfony\Component\Validator\Constraints as Assert;
     public function getPath()
     {
         return $this->path;
+    }
+
+    /**
+     * Set vk_photo
+     *
+     * @param  Chewbacca\ProductPromoBundle\Entity\VkPhoto $vkPhoto
+     * @return Image
+     */
+    public function setVkPhoto(\Chewbacca\ProductPromoBundle\Entity\VkPhoto $vkPhoto = null)
+    {
+        $this->vk_photo = $vkPhoto;
+
+        return $this;
+    }
+
+    /**
+     * Get vk_photo
+     *
+     * @return Chewbacca\ProductPromoBundle\Entity\VkPhoto
+     */
+    public function getVkPhoto()
+    {
+        return $this->vk_photo;
     }
 }
