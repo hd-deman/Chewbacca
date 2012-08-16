@@ -1,0 +1,9 @@
+services:
+    lacroco_store.chewbacca_product_promo.admin.page:
+        class: Chewbacca\ProductPromoBundle\Admin\ProductPromoAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: chewbacca_promo, label: product }
+        arguments: [null,  Chewbacca\ProductPromoBundle\Entity\ProductPromo, ChewbaccaProductPromoBundle:ProductPromoAdmin]
+        calls:
+            - [ setTranslationDomain, [ ChewbaccaProductPromoBundle ] ]
+            - [ setServiceContainer, [ @service_container ] ]

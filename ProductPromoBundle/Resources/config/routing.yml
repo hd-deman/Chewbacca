@@ -1,0 +1,5 @@
+ChewbaccaProductPromoBundle_get_products:
+    pattern: /chewbadmin/ajax/get-products/{brand_id}
+    defaults: {_controller: ChewbaccaProductPromoBundle:ProductPromoAdmin:getProducts}
+    options:
+        expose: true

@@ -1,0 +1,168 @@
+<?php
+namespace Chewbacca\ProductPromoBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ *  @ORM\Entity
+ *  @ORM\HasLifecycleCallbacks()
+ */
+
+ class VkProductPhoto extends VkPhoto
+ {
+    /**
+     * @ORM\OneToOne(targetEntity="\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage", inversedBy="vk_product_photo")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     */
+    protected $product_image;
+
+    /**
+     * @var integer $id
+     */
+    protected $id;
+
+    /**
+     * @var string $title
+     */
+    protected $title;
+
+    /**
+     * @var string $caption
+     */
+    protected $caption;
+
+    /**
+     * @var Chewbacca\ProductPromoBundle\Entity\VkPhotoAlbum
+     */
+    protected $vk_photo_album;
+
+    /**
+     * @var Chewbacca\CoreBundle\Entity\Image
+     */
+    protected $image;
+
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set title
+     *
+     * @param  string         $title
+     * @return VkProductPhoto
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set caption
+     *
+     * @param  string         $caption
+     * @return VkProductPhoto
+     */
+    public function setCaption($caption)
+    {
+        $this->caption = $caption;
+
+        return $this;
+    }
+
+    /**
+     * Get caption
+     *
+     * @return string
+     */
+    public function getCaption()
+    {
+        return $this->caption;
+    }
+
+    /**
+     * Set product_image
+     *
+     * @param  Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage $productImage
+     * @return VkProductPhoto
+     */
+    public function setProductImage(\Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage $productImage = null)
+    {
+        $this->product_image = $productImage;
+
+        return $this;
+    }
+
+    /**
+     * Get product_image
+     *
+     * @return Chewbacca\StoreBundle\StoreCoreBundle\Entity\ProductImage
+     */
+    public function getProductImage()
+    {
+        return $this->product_image;
+    }
+
+    /**
+     * Set vk_photo_album
+     *
+     * @param  Chewbacca\ProductPromoBundle\Entity\VkPhotoAlbum $vkPhotoAlbum
+     * @return VkProductPhoto
+     */
+    public function setVkPhotoAlbum(\Chewbacca\ProductPromoBundle\Entity\VkPhotoAlbum $vkPhotoAlbum = null)
+    {
+        $this->vk_photo_album = $vkPhotoAlbum;
+
+        return $this;
+    }
+
+    /**
+     * Get vk_photo_album
+     *
+     * @return Chewbacca\ProductPromoBundle\Entity\VkPhotoAlbum
+     */
+    public function getVkPhotoAlbum()
+    {
+        return $this->vk_photo_album;
+    }
+
+    /**
+     * Set image
+     *
+     * @param  Chewbacca\CoreBundle\Entity\Image $image
+     * @return VkProductPhoto
+     */
+    public function setImage(\Chewbacca\CoreBundle\Entity\Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return Chewbacca\CoreBundle\Entity\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+}
