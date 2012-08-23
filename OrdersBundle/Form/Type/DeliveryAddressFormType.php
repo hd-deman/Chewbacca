@@ -27,7 +27,7 @@ class DeliveryAddressFormType extends AbstractType
         $builder->add('street');
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
             'data_class' => 'Chewbacca\OrdersBundle\Entity\DeliveryAddress',

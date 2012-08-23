@@ -56,7 +56,7 @@ class OrderDeliveryAddressType extends AbstractType
         $builder->appendClientTransformer($transformer);
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
             'error_mapping' => array(
@@ -72,6 +72,6 @@ class OrderDeliveryAddressType extends AbstractType
 
     public function getName()
     {
-        return 'create_new_or_select_exists';
+        return 'order_delivery_address';
     }
 }

@@ -56,7 +56,7 @@ class OrderUserPhoneType extends AbstractType
         $builder->appendClientTransformer($transformer);
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
             'error_mapping' => array(
@@ -67,6 +67,6 @@ class OrderUserPhoneType extends AbstractType
 
     public function getName()
     {
-        return 'create_new_or_select_exists';
+        return 'order_user_phone';
     }
 }

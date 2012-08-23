@@ -36,7 +36,7 @@ class OrderFormType extends AbstractType
         });
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
             'csrf_protection' => false,
@@ -47,7 +47,7 @@ class OrderFormType extends AbstractType
 
     public function getName()
     {
-        return 'order';
+        return 'chewbacca_order';
     }
 
 }
