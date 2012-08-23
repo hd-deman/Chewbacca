@@ -15,7 +15,7 @@ class UserPhoneFormType extends AbstractType
         $builder->add('phone_number', null, array('max_length' => 20));
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
             'data_class' => 'Chewbacca\UserBundle\Entity\UserPhone',

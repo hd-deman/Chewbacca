@@ -68,7 +68,7 @@ use Doctrine\ORM\Mapping as ORM;
 
     /**
      * @ORM\OneToOne(targetEntity="\Chewbacca\CoreBundle\Entity\Image", inversedBy="vk_photo")
-     * @ORM\JoinColumn(name="image_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="image_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $image;
 

@@ -33,7 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     protected $title;
 
     /**
-     * @ORM\OneToOne(targetEntity="\Chewbacca\ProductPromoBundle\Entity\VkPhoto", mappedBy="image")
+     * @ORM\OneToOne(targetEntity="\Chewbacca\ProductPromoBundle\Entity\VkPhoto", mappedBy="image", orphanRemoval=false)
      */
     private $vk_photo;
 
