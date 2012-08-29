@@ -1,51 +1,42 @@
 <?php
+namespace Chewbacca\SitemapBundle\Generator;
+use Symfony\Component\Routing\RouterInterface;
 
-namespace OS\SitemapBundle;
-
-use Doctrine\ORM\EntityManager,
-    DOMDocument,
-    DateTime;
-
-/**
- * @author ouardisoft
- */
-class  SitemapGenerator
+abstract class SitemapGenerator implements SitemapGeneratorInterface
 {
+  private $router;
 
-    /**
-     *
-     * @var EntityManager $em
-     */
-    private $em;
+  private $config;
 
-    /**
-     * @var $router
-     */
-    private $router;
+  public function __construct(array $config)
+  {
+      $this->config = $config;
+  }
 
-    /**
-     *
-     * @var array $configs
-     */
-    private $configs;
+  public function setRouter(RouterInterface $router)
+  {
+      $this->router = $router;
+  }
 
-    /**
-     *
-     * @param EntityManager $em
-     * @param Router        $router
-     * @param array         $configs
-     */
-    public function __construct(EntityManager $em, $router, $configs)
-    {
-        $this->em = $em;
-        $this->router = $router;
-        $this->configs = $configs;
-    }
+  public function getRouter()
+  {
+      return $this->router;
+  }
 
-    public function generate($returnString = false)
+  private function getFilePath()
+  {
+      return $this->config['path'].$this->config['file_name'];
+  }
+
+  public function getWebFilePath()
+  {
+      return 'http://'.$this->getRouter()->getContext()->getHost().$this->config['web_path'].$this->config['file_name'];
+  }
+
+  public function generate($returnString = false)
     {
         // Create dom object
-        $dom = new DOMDocument('1.0', 'UTF-8');
+        $dom = new \DOMDocument('1.0', 'UTF-8');
         $dom->formatOutput = true;
         $dom->substituteEntities = false;
 
@@ -58,9 +49,6 @@ class  SitemapGenerator
         $urlset->appendChild($xmlns);
         $xmlns->appendChild($urlsetText);
 
-        // Fetch All entities
-        $entities = $this->em->getRepository($this->configs['entity'])->findAll();
-
         /*
          *  Generate <url> tags and bind them in urlset
          *  <url>
@@ -70,6 +58,7 @@ class  SitemapGenerator
          *  </url>
          */
         $tags = array('loc', 'lastmod', 'priority');
+        $entities = $this->getEntities();
         foreach ($entities as $entity) {
             $url = $dom->createElement('url');
             foreach ($tags as $tag) {
@@ -87,7 +76,7 @@ class  SitemapGenerator
 
         if ($returnString == false)
 
-            return $dom->save($this->configs['path']);
+            return $dom->save($this->getFilePath());
 
         return $dom->saveXML();
     }
@@ -98,25 +87,25 @@ class  SitemapGenerator
      * @param  string $tag
      * @return string
      */
-    public function getTagValue($entity, $tag)
+        private function getTagValue($entity, $tag)
     {
-        if (!is_array($this->configs[$tag])) {
-            $method = 'get' . ucfirst($this->configs[$tag]);
+        if (!is_array($this->config[$tag])) {
+            $method = 'get' . ucfirst($this->config[$tag]);
             if (method_exists($entity, $method)) {
                 $value = $entity->$method();
 
-                if ($value instanceof DateTime) {
+                if ($value instanceof \DateTime) {
                     $value = $value->format('Y-m-d');
                 } else {
                     $value = substr($value, 0, 100);
                 }
             } else {
-                $value = $this->configs[$tag];
+                $value = $this->config[$tag];
             }
 
             return $value;
         } else {
-            extract($this->configs[$tag]);
+            extract($this->config[$tag]);
 
             foreach ($params as $key => $param) {
                 if (is_array($param)) {
@@ -132,5 +121,4 @@ class  SitemapGenerator
             return $this->router->generate($route, $params, true);
         }
     }
-
 }

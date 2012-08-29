@@ -1,7 +1,7 @@
 parameters:
-#    chewbacca_sitemap.example.class: Chewbacca\SitemapBundle\Example
+    chewbacca_sitemap.generator_chain.class: Chewbacca\SitemapBundle\Services\SitemapGeneratorChain
 
 services:
-#    chewbacca_sitemap.example:
-#        class: %chewbacca_sitemap.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    chewbacca_sitemap.generator_chain:
+        class: %chewbacca_sitemap.generator_chain.class%
+        arguments: [ @router, { file_path: %kernel.root_dir%/../web/sitemaps.xml } ]
